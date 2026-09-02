@@ -3,302 +3,559 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKTech Universal Exam Portal</title>
+    <title>SKTech Master CBT Examination Portal</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --accent: #06b6d4;
+            --primary: #1e3a8a;
+            --primary-dark: #0f172a;
+            --accent: #0284c7;
+            --accent-glow: #38bdf8;
             --bg: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #0f172a;
-            --text-muted: #64748b;
-            --success: #16a34a;
-            --danger: #dc2626;
-            --border: #e2e8f0;
+            --text-sub: #64748b;
+            --green: #16a34a;
+            --red: #dc2626;
+            --violet: #7c3aed;
+            --border: #cbd5e1;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-        body { background: var(--bg); color: var(--text-main); display: flex; justify-content: center; padding: 15px; }
-        .container { width: 100%; max-width: 820px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: var(--bg); color: var(--text-main); height: 100vh; display: flex; flex-direction: column; overflow: hidden; position: relative; }
 
-        /* SKTech Header */
-        .portal-header { background: #0f172a; color: white; padding: 16px 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .brand { display: flex; align-items: center; gap: 10px; }
-        .brand-badge { background: linear-gradient(135deg, #3b82f6, #06b6d4); font-size: 16px; font-weight: 800; padding: 5px 12px; border-radius: 6px; letter-spacing: 0.5px; }
-        .brand-text { font-size: 18px; font-weight: 700; }
-        .stats-badge { background: #1e293b; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; color: #38bdf8; border: 1px solid #334155; }
+        /* Full Screen SKTech Watermark across All Pages */
+        body::before {
+            content: "SKTech";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 14vw;
+            font-weight: 900;
+            color: rgba(15, 23, 42, 0.038);
+            pointer-events: none;
+            z-index: 9999;
+            user-select: none;
+            letter-spacing: 6px;
+            white-space: nowrap;
+        }
 
-        /* Controls */
-        .control-panel { background: var(--card-bg); padding: 16px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .select-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; }
-        .select-box { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-weight: 600; outline: none; background: #fff; cursor: pointer; }
-        .select-box:focus { border-color: var(--primary); }
+        /* Top Header */
+        .portal-nav { background: var(--primary-dark); color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--accent); z-index: 10; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.12); }
+        .logo-box { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .logo-tag { background: linear-gradient(135deg, #2563eb, #06b6d4); padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 16px; letter-spacing: 0.5px; box-shadow: 0 3px 10px rgba(37,99,235,0.35); }
+        .nav-title { font-size: 17px; font-weight: 700; color: #f8fafc; }
+        .timer-badge { background: #1e293b; border: 1.5px solid #334155; padding: 6px 16px; border-radius: 8px; font-size: 16px; font-weight: 800; color: var(--accent-glow); display: none; }
 
-        /* Quiz Card */
-        .quiz-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); padding: 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
-        .progress-bar-wrap { width: 100%; height: 6px; background: #f1f5f9; border-radius: 3px; overflow: hidden; margin-bottom: 18px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 0.3s ease; }
+        /* Screen 1: Exam Hub */
+        #screen-exams { flex: 1; overflow-y: auto; padding: 35px 20px; max-width: 1050px; margin: auto; width: 100%; position: relative; z-index: 1; }
+        .hub-header { text-align: center; margin-bottom: 30px; }
+        .hub-title { font-size: 26px; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+        .hub-sub { font-size: 14px; color: var(--text-sub); }
 
-        .meta-tags { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-        .tag-pill { background: #eff6ff; color: var(--primary); font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
-        .q-counter { font-size: 13px; color: var(--text-muted); font-weight: 600; }
+        .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+        .exam-card { background: rgba(255, 255, 255, 0.95); border: 2px solid var(--border); border-radius: 14px; padding: 22px; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 6px 20px rgba(0,0,0,0.04); backdrop-filter: blur(4px); display: flex; flex-direction: column; justify-content: space-between; }
+        .exam-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 30px rgba(2,132,199,0.18); }
+        
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .book-icon { font-size: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .card-tag { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; }
+        
+        .card-title { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: #1e293b; }
+        .card-desc { font-size: 13px; color: var(--text-sub); line-height: 1.5; margin-bottom: 15px; }
+        .card-footer-info { font-size: 13px; font-weight: 700; color: var(--primary); border-top: 1px dashed var(--border); padding-top: 12px; display: flex; justify-content: space-between; }
 
-        .question-title { font-size: 17px; font-weight: 600; line-height: 1.5; margin-bottom: 18px; }
-        .options-grid { display: flex; flex-direction: column; gap: 10px; }
-        .opt-btn { background: #fff; border: 2px solid var(--border); padding: 12px 16px; border-radius: 8px; font-size: 15px; text-align: left; cursor: pointer; transition: all 0.2s; font-weight: 500; color: var(--text-main); }
-        .opt-btn:hover:not([disabled]) { border-color: var(--primary); background: #f8faff; }
-        .opt-btn.correct { background: #f0fdf4; border-color: var(--success); color: #15803d; font-weight: 700; }
-        .opt-btn.wrong { background: #fef2f2; border-color: var(--danger); color: #b91c1c; }
+        /* Screen 2: Sets Selector (Set 1 to 50: Low -> High) */
+        #screen-sets { display: none; flex: 1; overflow-y: auto; padding: 30px 20px; max-width: 950px; margin: auto; width: 100%; position: relative; z-index: 1; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--accent); cursor: pointer; margin-bottom: 18px; }
+        .sets-legend { display: flex; gap: 15px; margin: 12px 0 20px 0; font-size: 12px; font-weight: 700; flex-wrap: wrap; }
+        .legend-chip { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; }
+        
+        .sets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+        .set-btn { background: rgba(255, 255, 255, 0.95); border: 2px solid var(--border); border-radius: 10px; padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+        .set-btn:hover { border-color: var(--accent); transform: scale(1.02); background: #eff6ff; }
+        .set-btn.level-easy { border-top: 4px solid var(--green); }
+        .set-btn.level-mod { border-top: 4px solid #f59e0b; }
+        .set-btn.level-hard { border-top: 4px solid var(--red); }
+        
+        .set-num { font-size: 16px; font-weight: 800; color: var(--primary); }
+        .set-level-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
 
-        .explain-box { display: none; margin-top: 16px; padding: 14px; background: #eff6ff; border-left: 4px solid var(--primary); border-radius: 6px; font-size: 14px; line-height: 1.5; color: #1e40af; }
-        .card-footer { margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .btn-next { background: var(--primary); color: white; border: none; padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-        .btn-next:hover { background: var(--primary-dark); }
+        /* Screen 3: Real CBT Room */
+        #screen-cbt { display: none; height: calc(100vh - 60px); grid-template-columns: 1fr 320px; position: relative; z-index: 1; }
+        .main-panel { display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.96); border-right: 2px solid var(--border); height: 100%; position: relative; }
+        
+        .sub-nav { background: #f1f5f9; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border); }
+        .sec-tabs { display: flex; gap: 8px; }
+        .tab-btn { background: #e2e8f0; border: none; padding: 7px 16px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; color: #475569; }
+        .tab-btn.active { background: var(--primary); color: white; }
+        
+        .q-window { flex: 1; padding: 25px; overflow-y: auto; }
+        .q-header { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 18px; color: var(--text-sub); }
+        .q-text { font-size: 17px; font-weight: 600; line-height: 1.6; margin-bottom: 22px; }
+        .opts-box { display: flex; flex-direction: column; gap: 12px; }
+        .opt-item { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 15px; background: rgba(255, 255, 255, 0.9); }
+        .opt-item:hover { background: #f8fafc; border-color: #94a3b8; }
+        .opt-item.selected { background: #eff6ff; border-color: var(--accent); font-weight: 600; }
 
-        /* Tools */
-        .tools-section { margin-top: 20px; text-align: center; }
-        .tool-btn { background: none; border: none; color: var(--primary); font-size: 13px; font-weight: 700; cursor: pointer; margin: 0 10px; }
-        .drawer-box { display: none; background: #fff; padding: 18px; border-radius: 10px; border: 1px dashed var(--border); margin-top: 15px; text-align: left; }
-        .textarea-json { width: 100%; height: 120px; border: 1px solid var(--border); border-radius: 6px; padding: 10px; font-family: monospace; font-size: 12px; margin-top: 8px; }
+        .cbt-footer { padding: 12px 20px; background: #f8fafc; border-top: 1.5px solid var(--border); display: flex; justify-content: space-between; }
+        .cbt-btn { padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; border: 1px solid #cbd5e1; background: white; }
+        .cbt-btn-save { background: var(--green); color: white; border-color: var(--green); }
+        .cbt-btn-review { background: var(--violet); color: white; border-color: var(--violet); }
+
+        /* Palette Panel */
+        .side-palette { background: #f8fafc; display: flex; flex-direction: column; height: 100%; }
+        .legend-box { padding: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px; border-bottom: 1.5px solid var(--border); }
+        .legend-tag { display: flex; align-items: center; gap: 6px; }
+        .tag-sq { width: 16px; height: 16px; border-radius: 4px; }
+        .pal-grid { flex: 1; padding: 14px; overflow-y: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-content: start; }
+        .pal-btn { height: 38px; border: 1px solid var(--border); font-weight: 800; font-size: 13px; border-radius: 6px; cursor: pointer; background: white; }
+        .pal-btn.active { outline: 2.5px solid #000; }
+        .pal-btn.answered { background: var(--green); color: white; border-color: var(--green); }
+        .pal-btn.not-answered { background: var(--red); color: white; border-color: var(--red); }
+        .pal-btn.marked { background: var(--violet); color: white; border-color: var(--violet); }
+
+        .submit-box { padding: 14px; border-top: 1.5px solid var(--border); }
+        .btn-submit { width: 100%; background: #0284c7; color: white; padding: 12px; border: none; font-weight: 800; border-radius: 6px; cursor: pointer; font-size: 14px; }
+
+        /* Screen 4: Result Screen */
+        #screen-result { display: none; padding: 30px 20px; overflow-y: auto; height: calc(100vh - 60px); max-width: 950px; margin: auto; width: 100%; position: relative; z-index: 1; }
+        .score-card { background: rgba(255, 255, 255, 0.96); border: 1.5px solid var(--border); border-radius: 12px; padding: 22px; margin-bottom: 22px; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+        .score-card h3 { font-size: 26px; font-weight: 800; }
+        .sol-card { background: rgba(255, 255, 255, 0.96); border: 1.5px solid var(--border); border-radius: 10px; padding: 18px; margin-bottom: 14px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="portal-header">
-        <div class="brand">
-            <span class="brand-badge">⚡ SKTech</span>
-            <span class="brand-text">Multi-Exam Prep Portal</span>
-        </div>
-        <div class="stats-badge" id="live-score">Score: 0 / 0</div>
+<!-- Header -->
+<div class="portal-nav">
+    <div class="logo-box" onclick="goHome()">
+        <span class="logo-tag">⚡ SKTech</span>
+        <span class="nav-title" id="top-title">Universal Examination Portal</span>
     </div>
+    <div class="timer-badge" id="timer-box">⏳ <span id="time-left">03:00:00</span></div>
+</div>
 
-    <div class="control-panel">
-        <div class="select-group">
-            <label>टारगेट परीक्षा (Exam)</label>
-            <select id="exam-select" class="select-box" onchange="onFilterChange()">
-                <option value="ALL">सभी परीक्षाएं (All Exams)</option>
-                <option value="MPESB">MPESB सब-इंजीनियर</option>
-                <option value="MPPSC">MPPSC (राज्य सेवा)</option>
-                <option value="BANKING">Banking (IBPS / SBI / PO)</option>
-                <option value="SSC_RLY">SSC JE / Railway</option>
-            </select>
-        </div>
-        <div class="select-group">
-            <label>विषय (Subject)</label>
-            <select id="subject-select" class="select-box" onchange="onFilterChange()">
-                <option value="ALL">सभी विषय (All Subjects)</option>
-                <option value="MP_GK">म.प्र. सामान्य ज्ञान (MP GK)</option>
-                <option value="CURRENT">करेंट अफेयर्स (Current Affairs)</option>
-                <option value="MATHS">क्वांटम मैथ्स (Maths / Aptitude)</option>
-                <option value="REASONING">रीजनिंग (Reasoning)</option>
-                <option value="COMPUTER">कंप्यूटर व नेटवर्किंग (IT / HW)</option>
-                <option value="ELECTRICAL">इलेक्ट्रिकल इंजीनियरिंग (Core)</option>
-            </select>
-        </div>
+<!-- Screen 1: All Exams Hub -->
+<div id="screen-exams">
+    <div class="hub-header">
+        <h1 class="hub-title">🎯 लक्षित परीक्षा का चयन करें</h1>
+        <p class="hub-sub">प्रत्येक परीक्षा में उसके नवीनतम सिलेबस, समय-सीमा, पैटर्न और नेगेटिव मार्किंग के अनुसार 50 मॉक सेट्स उपलब्ध हैं</p>
     </div>
-
-    <div class="quiz-card">
-        <div class="progress-bar-wrap">
-            <div class="progress-fill" id="progress-bar"></div>
+    
+    <div class="exam-grid">
+        <!-- MPESB Card -->
+        <div class="exam-card" onclick="openExamSets('MPESB')">
+            <div class="card-top">
+                <span class="book-icon">⚡</span>
+                <span class="card-tag" style="background:#e0f2fe; color:#0284c7;">MP VYAPAM</span>
+            </div>
+            <div class="card-title">MPESB समूह-03 सब-इंजीनियर</div>
+            <div class="card-desc">इलेक्ट्रिकल व इलेक्ट्रॉनिक्स कोर + नॉन-टेक्निकल (MP GK, मैथ्स, IT). 3 घंटे की अवधि, कोई नेगेटिव मार्किंग नहीं।</div>
+            <div class="card-footer-info"><span>📖 50 Mock Sets (Set 1-50)</span> <span>5,000 प्रश्न ➔</span></div>
         </div>
 
-        <div class="meta-tags">
-            <span class="tag-pill" id="badge-info">Exam • Subject</span>
-            <span class="q-counter" id="q-counter">Q 1 of 50</span>
+        <!-- RRB PO Card -->
+        <div class="exam-card" onclick="openExamSets('RRB_PO')">
+            <div class="card-top">
+                <span class="book-icon">💼</span>
+                <span class="card-tag" style="background:#dcfce7; color:#15803d;">BANKING (IBPS)</span>
+            </div>
+            <div class="card-title">IBPS RRB PO (Scale-I)</div>
+            <div class="card-desc">रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy). 45 मिनट की अवधि, -0.25 नेगेटिव मार्किंग।</div>
+            <div class="card-footer-info"><span>📖 50 Mock Sets (Set 1-50)</span> <span>4,000 प्रश्न ➔</span></div>
         </div>
 
-        <div class="question-title" id="q-title">लोड हो रहा है...</div>
-        <div class="options-grid" id="opt-container"></div>
-        <div class="explain-box" id="explain-box"></div>
-
-        <div class="card-footer">
-            <span id="accuracy-rate" style="font-size: 13px; color: var(--text-muted);">सटीकता: 0%</span>
-            <button class="btn-next" id="btn-next" onclick="nextQuestion()" style="display:none;">अगला सवाल ➔</button>
+        <!-- MPPSC Card -->
+        <div class="exam-card" onclick="openExamSets('MPPSC')">
+            <div class="card-top">
+                <span class="book-icon">🏛️</span>
+                <span class="card-tag" style="background:#fef3c7; color:#b45309;">STATE PCS</span>
+            </div>
+            <div class="card-title">MPPSC राज्य सेवा परीक्षा</div>
+            <div class="card-desc">पेपर-1 सामान्य अध्ययन (म.प्र. विशेष, इतिहास, भूगोल, विज्ञान) + पेपर-2 CSAT. 2 घंटे की अवधि।</div>
+            <div class="card-footer-info"><span>📖 50 Mock Sets (Set 1-50)</span> <span>5,000 प्रश्न ➔</span></div>
         </div>
-    </div>
 
-    <div class="tools-section">
-        <button class="tool-btn" onclick="toggleDrawer('bulk-drawer')">📥 Bulk Import (सवाल जोड़ें)</button>
-        <button class="tool-btn" onclick="resetDatabase()">🔄 रीसेट करें</button>
-    </div>
-
-    <div class="drawer-box" id="bulk-drawer">
-        <h4 style="font-size: 14px; margin-bottom: 5px;">बल्क में प्रश्न लोड करें (JSON Format)</h4>
-        <textarea id="bulk-json-input" class="textarea-json" placeholder='[{"exam":"MPESB","sub":"ELECTRICAL","q":"सवाल?","opts":["A","B","C","D"],"ans":0,"exp":"हल"}]'></textarea>
-        <button class="btn-next" style="margin-top: 10px; width: 100%;" onclick="importBulkQuestions()">डेटाबेस में सेव करें</button>
+        <!-- SSC JE / Railway Card -->
+        <div class="exam-card" onclick="openExamSets('SSC_JE')">
+            <div class="card-top">
+                <span class="book-icon">🚆</span>
+                <span class="card-tag" style="background:#f3e8ff; color:#7e22ce;">CENTRAL GOVT</span>
+            </div>
+            <div class="card-title">SSC JE / RRB JE (Electrical)</div>
+            <div class="card-desc">जनरल इंजीनियरिंग कोर + रीजनिंग व सामान्य जागरूकता. 2 घंटे की अवधि, -0.25 नेगेटिव मार्किंग।</div>
+            <div class="card-footer-info"><span>📖 50 Mock Sets (Set 1-50)</span> <span>5,000 प्रश्न ➔</span></div>
+        </div>
     </div>
 </div>
 
+<!-- Screen 2: Sets Selector (Set 1 to 50: Low -> High) -->
+<div id="screen-sets">
+    <div class="back-link" onclick="goHome()">⬅ वापस मुख्य डैशबोर्ड पर जाएँ</div>
+    <h2 id="sets-heading" style="font-size:22px; font-weight:800; color:var(--primary);">परीक्षा मॉक सेट्स</h2>
+    
+    <div class="sets-legend">
+        <div class="legend-chip" style="background:#dcfce7; color:#15803d;">🟢 Set 01-15: Basic / Low Level (फॉर्मूला व बेसिक्स)</div>
+        <div class="legend-chip" style="background:#fef3c7; color:#b45309;">🟡 Set 16-35: Moderate Level (PYQs व अप्लाइड सवाल)</div>
+        <div class="legend-chip" style="background:#fee2e2; color:#b91c1c;">🔴 Set 36-50: Advanced / High Level (लॉन्ग पजल्स व ट्रीकी प्रश्न)</div>
+    </div>
+
+    <div class="sets-grid" id="sets-container"></div>
+</div>
+
+<!-- Screen 3: Real CBT Exam Room -->
+<div id="screen-cbt">
+    <div class="main-panel">
+        <div class="sub-nav">
+            <div class="sec-tabs" id="sec-tab-box"></div>
+            <div style="font-size:13px; font-weight:700; color:var(--text-sub);" id="marking-info">सही: +1.0 | नेगेटिव: 0.00</div>
+        </div>
+
+        <div class="q-window">
+            <div class="q-header">
+                <span id="q-num-label">Question No. 1</span>
+                <span id="q-sec-label">Section</span>
+            </div>
+            <div class="q-text" id="q-content">लोड हो रहा है...</div>
+            <div class="opts-box" id="opts-list"></div>
+        </div>
+
+        <div class="cbt-footer">
+            <div>
+                <button class="cbt-btn cbt-btn-review" onclick="markReview()">Mark for Review</button>
+                <button class="cbt-btn" onclick="clearOption()">Clear Response</button>
+            </div>
+            <div>
+                <button class="cbt-btn" onclick="prevQuestion()">Previous</button>
+                <button class="cbt-btn cbt-btn-save" onclick="saveAndNext()">Save & Next ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="side-palette">
+        <div class="legend-box">
+            <div class="legend-tag"><div class="tag-sq" style="background:var(--green)"></div> हल किया (Answered)</div>
+            <div class="legend-tag"><div class="tag-sq" style="background:var(--red)"></div> अनुत्तरित (Unanswered)</div>
+            <div class="legend-tag"><div class="tag-sq" style="background:var(--violet)"></div> रिव्यू (Marked)</div>
+            <div class="legend-tag"><div class="tag-sq" style="background:#fff; border:1px solid #ccc;"></div> देखा नहीं (Not Visited)</div>
+        </div>
+
+        <div class="pal-grid" id="palette-grid"></div>
+
+        <div class="submit-box">
+            <button class="btn-submit" onclick="submitExam(false)">परीक्षा सबमिट करें (Submit)</button>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 4: Detailed Result Screen -->
+<div id="screen-result">
+    <div class="score-card">
+        <div><h3 style="color:#0284c7;" id="r-score">0</h3><p style="font-size:12px; color:var(--text-sub); font-weight:700;">कुल प्राप्तांक</p></div>
+        <div><h3 style="color:var(--green);" id="r-correct">0</h3><p style="font-size:12px; color:var(--text-sub); font-weight:700;">सही (+)</p></div>
+        <div><h3 style="color:var(--red);" id="r-wrong">0</h3><p style="font-size:12px; color:var(--text-sub); font-weight:700;">गलत (-)</p></div>
+        <div><h3 style="color:var(--text-sub);" id="r-unattempted">0</h3><p style="font-size:12px; color:var(--text-sub); font-weight:700;">छोड़े गए</p></div>
+    </div>
+
+    <h3 style="margin-bottom:15px; color:#1e293b;">📋 विस्तृत उत्तर कुंजी व समाधान (Answer Key & Detailed Explanations)</h3>
+    <div id="solution-list"></div>
+    <button class="cbt-btn cbt-btn-save" style="width:100%; padding:14px; margin-top:20px; font-size:15px;" onclick="goHome()">डैशबोर्ड पर वापस लौटें</button>
+</div>
+
 <script>
-const masterQuestions = [
-    { exam: "MPESB", sub: "MP_GK", q: "मध्य प्रदेश की ऊर्जा राजधानी (Energy Capital) किसे कहा जाता है?", opts: ["इंदौर", "सिंगरौली", "जबलपुर", "भोपाल"], ans: 1, exp: "सिंगरौली में विशाल कोयला भंडार एवं एनटीपीसी के थर्मल पावर स्टेशन होने के कारण इसे ऊर्जा राजधानी कहते हैं।" },
-    { exam: "MPPSC", sub: "MP_GK", q: "मध्य प्रदेश का पहला बायोस्फीयर रिजर्व कौन सा है?", opts: ["अमरकंटक", "पचमढ़ी", "पन्ना", "कान्हा"], ans: 1, exp: "पचमढ़ी को 1999 में मध्य प्रदेश का पहला बायोस्फीयर रिजर्व घोषित किया गया था।" },
-    { exam: "MPESB", sub: "MP_GK", q: "मध्य प्रदेश का सबसे पहला ताप विद्युत केंद्र (Thermal Power Station) कौन सा है?", opts: ["चांदनी ताप विद्युत केंद्र", "सतपुड़ा ताप केंद्र", "संजय गांधी केंद्र", "अमरकंटक केंद्र"], ans: 0, exp: "चांदनी ताप विद्युत केंद्र (बुरहानपुर/नेपानगर) 1953 में स्थापित हुआ था।" },
-    { exam: "MPPSC", sub: "MP_GK", q: "तानसेन का मकबरा मध्य प्रदेश में कहाँ स्थित है?", opts: ["उज्जैन", "ग्वालियर", "शिवपुरी", "भोपाल"], ans: 1, exp: "महान संगीतज्ञ तानसेन का मकबरा ग्वालियर में स्थित है।" },
+// Exam Specifications Database
+const examConfigs = {
+    MPESB: {
+        title: "MPESB समूह-03 सब-इंजीनियर",
+        durationMinutes: 180,
+        negativeMark: 0.0,
+        sections: [
+            { id: "TECH", name: "Part B: Technical (Electrical)" },
+            { id: "NON_TECH", name: "Part A: Non-Technical (GK/Maths/IT)" }
+        ]
+    },
+    RRB_PO: {
+        title: "IBPS RRB PO Prelims",
+        durationMinutes: 45,
+        negativeMark: 0.25,
+        sections: [
+            { id: "REASON", name: "Reasoning (40 Q)" },
+            { id: "QUANT", name: "Quantitative Aptitude (40 Q)" }
+        ]
+    },
+    MPPSC: {
+        title: "MPPSC राज्य सेवा परीक्षा",
+        durationMinutes: 120,
+        negativeMark: 0.0,
+        sections: [
+            { id: "GS", name: "सामान्य अध्ययन (Paper 1)" }
+        ]
+    },
+    SSC_JE: {
+        title: "SSC JE (Electrical)",
+        durationMinutes: 120,
+        negativeMark: 0.25,
+        sections: [
+            { id: "TECH", name: "General Engineering" },
+            { id: "GEN", name: "Reasoning & GK" }
+        ]
+    }
+};
 
-    { exam: "BANKING", sub: "CURRENT", q: "भारतीय रिजर्व बैंक (RBI) द्वारा मुद्रास्फीति (Inflation) लक्ष्यीकरण किस सूचकांक पर आधारित है?", opts: ["WPI", "CPI (Combined)", "IIP", "GDP डिफ्लेटर"], ans: 1, exp: "RBI की मौद्रिक नीति समिति (MPC) उपभोक्ता मूल्य सूचकांक (CPI) पर मुद्रास्फीति को 4% (+/- 2%) पर लक्षित करती है।" },
-    { exam: "MPPSC", sub: "CURRENT", q: "भारत की पहली सेमी-हाई स्पीड रीजनल रैपिड ट्रांजिट सिस्टम (RRTS) ट्रेन का नाम क्या है?", opts: ["वंदे भारत", "नमो भारत", "गतिमान", "तेजस"], ans: 1, exp: "दिल्ली-मेरठ कॉरिडोर पर शुरू हुई भारत की पहली RRTS ट्रेन का नाम 'नमो भारत' रखा गया है।" },
+// Master Question Bank
+const masterBank = [
+    // MPESB Electrical & Non-Tech
+    { exam: "MPESB", sec: "TECH", q: "एक आदर्श वोल्टेज स्रोत (Ideal Voltage Source) का आंतरिक प्रतिरोध कितना होता है?", opts: ["शून्य (0 Ω)", "अनंत (∞)", "100 ओम", "1 ओम"], ans: 0, exp: "आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है; आदर्श करंट स्रोत का आंतरिक प्रतिरोध अनंत होता है।" },
+    { exam: "MPESB", sec: "TECH", q: "50 Hz सप्लाई पर 4-पोल 3-फेज इंडक्शन मोटर की सिंक्रोनस गति क्या होगी?", opts: ["3000 RPM", "1500 RPM", "1000 RPM", "750 RPM"], ans: 1, exp: "Ns = (120 × f) / P = (120 × 50) / 4 = 1500 RPM।" },
+    { exam: "MPESB", sec: "TECH", q: "ट्रांसफॉर्मर की अधिकतम दक्षता (Maximum Efficiency) किस शर्त पर प्राप्त होती है?", opts: ["कॉपर लॉस = आयरन लॉस", "कॉपर लॉस = 0", "आयरन लॉस = 0", "फुल लोड"], ans: 0, exp: "जब परिवर्तनीय तांबा हानि (Cu loss) स्थिर लोहा हानि (Iron loss) के बराबर हो जाती है।" },
+    { exam: "MPESB", sec: "NON_TECH", q: "मध्य प्रदेश की ऊर्जा राजधानी (Energy Capital) किसे कहा जाता है?", opts: ["इंदौर", "सिंगरौली", "जबलपुर", "भोपाल"], ans: 1, exp: "सिंगरौली में प्रचुर कोयला भंडार और एनटीपीसी के विशाल ताप विद्युत संयंत्र हैं।" },
+    { exam: "MPESB", sec: "NON_TECH", q: "LAN नेटवर्क में MAC एड्रेस के आधार पर पैकेट रूट करने वाला लेयर-2 हार्डवेयर कौन सा है?", opts: ["हब", "राउटर", "नेटवर्क स्विच (Switch)", "मॉडेम"], ans: 2, exp: "नेटवर्क स्विच डेटा लिंक लेयर (L2) पर कार्य करता है।" },
 
-    { exam: "BANKING", sub: "MATHS", q: "A किसी काम को 12 दिन में और B 18 दिन में पूरा करता है। दोनों मिलकर उस काम को कितने दिन में पूरा करेंगे?", opts: ["7.2 दिन", "6.5 दिन", "8 दिन", "7 दिन"], ans: 0, exp: "कुल काम = 36 यूनिट। A की क्षमता = 3, B की क्षमता = 2। दिन = 36 / (3+2) = 36 / 5 = 7.2 दिन।" },
-    { exam: "MPESB", sub: "MATHS", q: "किसी वस्तु पर 20% और 10% की दो लगातार छूट (Successive Discounts) का एकल समतुल्य छूट क्या होगी?", opts: ["30%", "28%", "25%", "27%"], ans: 1, exp: "समतुल्य छूट = 20 + 10 - (20 × 10)/100 = 30 - 2 = 28%।" },
-    { exam: "BANKING", sub: "MATHS", q: "₹5000 की राशि पर 10% प्रति वर्ष की दर से 2 वर्ष का चक्रवृद्धि ब्याज (CI) कितना होगा?", opts: ["₹1000", "₹1050", "₹1100", "₹1025"], ans: 1, exp: "CI = P(1 + r/100)^2 - P = 5000(1.21 - 1) = ₹1050।" },
+    // RRB PO (Quant & Reasoning)
+    { exam: "RRB_PO", sec: "QUANT", q: "A किसी काम को 12 दिन में और B 18 दिन में पूरा करता है। दोनों मिलकर कितने दिन में पूरा करेंगे?", opts: ["7.2 दिन", "6.5 दिन", "8 दिन", "7 दिन"], ans: 0, exp: "कुल काम 36 यूनिट। A की गति 3, B की गति 2। दिन = 36 / 5 = 7.2 दिन।" },
+    { exam: "RRB_PO", sec: "QUANT", q: "मिसिंग नंबर ज्ञात करें: 7, 16, 40, 88, 169, ?", opts: ["287", "292", "295", "304"], ans: 1, exp: "अंतरों का अंतर (Squares pattern) जोड़ने पर अगला पद 292 आता है।" },
+    { exam: "RRB_PO", sec: "REASON", q: "कथन: सभी पेन चाक हैं। कोई चाक रबर नहीं है। निष्कर्ष: I. कोई पेन रबर नहीं है। II. कुछ चाक पेन हैं।", opts: ["केवल I सही", "केवल II सही", "दोनों I और II सही", "कोई नहीं"], ans: 2, exp: "चूँकि सभी पेन चाक के अंदर हैं और चाक रबर नहीं है, अतः दोनों निष्कर्ष सत्य हैं।" },
 
-    { exam: "BANKING", sub: "REASONING", q: "यदि 'LIGHT' को 'MJHIU' लिखा जाता है, तो उसी कूटभाषा में 'FRAME' को क्या लिखा जाएगा?", opts: ["GSBNF", "GQBNF", "GSBMF", "HSBNF"], ans: 0, exp: "प्रत्येक अक्षर में +1 जोड़ा जा रहा है: F+1=G, R+1=S, A+1=B, M+1=N, E+1=F -> GSBNF।" },
-    { exam: "MPESB", sub: "REASONING", q: "श्रृंखला को पूरा करें: 2, 6, 12, 20, 30, ?", opts: ["40", "42", "44", "38"], ans: 1, exp: "अंतर क्रमवार बढ़ रहा है: +4, +6, +8, +10, अगला +12 होगा। 30 + 12 = 42।" },
+    // MPPSC
+    { exam: "MPPSC", sec: "GS", q: "मध्य प्रदेश का पहला बायोस्फीयर रिजर्व (Biosphere Reserve) कौन सा घोषित किया गया था?", opts: ["अमरकंटक", "पचमढ़ी", "पन्ना", "कान्हा"], ans: 1, exp: "पचमढ़ी को 1999 में मध्य प्रदेश का पहला बायोस्फीयर रिजर्व घोषित किया गया था।" },
 
-    { exam: "MPESB", sub: "COMPUTER", q: "LAN नेटवर्क में MAC एड्रेस के आधार पर ट्रैफिक फॉरवर्ड करने वाला लेयर-2 हार्डवेयर कौन सा है?", opts: ["हब", "राउटर", "नेटवर्क स्विच (Switch)", "रिपीटर"], ans: 2, exp: "नेटवर्क स्विच डेटा लिंक लेयर (Layer 2) पर कार्य करता है और MAC टेबल के आधार पर पैकेट रूट करता है।" },
-    { exam: "BANKING", sub: "COMPUTER", q: "IPv4 एड्रेस कितने बिट्स (Bits) का होता है?", opts: ["16 बिट्स", "32 बिट्स", "64 बिट्स", "128 बिट्स"], ans: 1, exp: "IPv4 32-बिट का होता है (उदा. 192.168.1.1), जबकि IPv6 128-बिट का होता है।" },
-    { exam: "MPESB", sub: "COMPUTER", q: "ईथरनेट केबल (Cat6) में उपयोग किए जाने वाले RJ45 कनेक्टर में कुल कितने पिन होते हैं?", opts: ["4 पिन", "6 पिन", "8 पिन", "2 पिन"], ans: 2, exp: "RJ45 कनेक्टर में कुल 8 पिन (4 ट्विस्टेड पेयर) होते हैं।" },
-    { exam: "MPESB", sub: "COMPUTER", q: "AC इनपुट सप्लाई को DC वोल्टेज में बदलकर इलेक्ट्रॉनिक्स व कंट्रोलर चलाने वाली मुख्य यूनिट कौन सी है?", opts: ["इन्वर्टर", "SMPS", "डायोड मात्र", "स्टेबलाइजर"], ans: 1, exp: "SMPS (Switched-Mode Power Supply) उच्च दक्षता के साथ स्थिर DC वोल्टेज प्रदान करता है।" },
-
-    { exam: "MPESB", sub: "ELECTRICAL", q: "एक आदर्श वोल्टेज स्रोत (Ideal Voltage Source) का आंतरिक प्रतिरोध कितना होता है?", opts: ["शून्य (0 Ω)", "अनंत (∞)", "100 ओम", "1 ओम"], ans: 0, exp: "आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध 0 Ω होता है; आदर्श करंट स्रोत का आंतरिक प्रतिरोध अनंत (∞) होता है।" },
-    { exam: "MPESB", sub: "ELECTRICAL", q: "सीरीज R-L-C रेजोनेंस सर्किट में पावर फैक्टर का मान क्या होता है?", opts: ["शून्य", "0.8 लैग", "इकाई (Unity, 1)", "0.5 लीड"], ans: 2, exp: "रेजोनेंस पर XL और XC निरस्त हो जाते हैं, जिससे परिपथ शुद्ध प्रतिरोधी (Resistive) होकर PF = 1 होता है।" },
-    { exam: "MPESB", sub: "ELECTRICAL", q: "50 Hz सप्लाई पर चलने वाली 4-पोल 3-फेज इंडक्शन मोटर की सिंक्रोनस स्पीड क्या होगी?", opts: ["3000 RPM", "1500 RPM", "1000 RPM", "750 RPM"], ans: 1, exp: "Ns = (120 × f) / P = (120 × 50) / 4 = 1500 RPM।" },
-    { exam: "SSC_RLY", sub: "ELECTRICAL", q: "ट्रांसफॉर्मर की अधिकतम दक्षता (Maximum Efficiency) किस शर्त पर प्राप्त होती है?", opts: ["कॉपर लॉस = आयरन लॉस", "कॉपर लॉस शून्य हो", "आयरन लॉस शून्य हो", "फुल लोड पर"], ans: 0, exp: "जब वेरिएबल लॉस (कॉपर लॉस) कांस्टेंट लॉस (कोर/आयरन लॉस) के बराबर हो जाता है।" },
-    { exam: "MPESB", sub: "ELECTRICAL", q: "ओवरहेड ट्रांसमिशन लाइन का सर्ज इम्पीडेंस (Surge Impedance) लगभग कितना होता है?", opts: ["40 Ω", "400 Ω", "100 Ω", "1000 Ω"], ans: 1, exp: "ओवरहेड लाइन के लिए सर्ज इम्पीडेंस लगभग 400 Ω और भूमिगत केबल के लिए लगभग 40 Ω होता है।" }
+    // SSC JE
+    { exam: "SSC_JE", sec: "TECH", q: "ओवरहेड ट्रांसमिशन लाइन का सर्ज इम्पीडेंस (Surge Impedance) लगभग कितना होता है?", opts: ["40 Ω", "400 Ω", "100 Ω", "1000 Ω"], ans: 1, exp: "ओवरहेड लाइन के लिए सर्ज इम्पीडेंस लगभग 400 Ω और भूमिगत केबल के लिए लगभग 40 Ω होता है।" }
 ];
 
-let allQuestions = [];
-let filteredQueue = [];
-let currentIndex = 0;
-let score = 0;
-let attempted = 0;
+let selectedExamKey = null;
+let currentExamConfig = null;
+let activeQuestions = [];
+let userStates = [];
+let currentIdx = 0;
+let currentSectionId = null;
+let timerTimer = null;
+let secondsRemaining = 0;
 
-function initApp() {
-    const customData = localStorage.getItem('sktech_universal_db');
-    allQuestions = customData ? [...masterQuestions, ...JSON.parse(customData)] : [...masterQuestions];
-    onFilterChange();
-}
-
-function onFilterChange() {
-    const selectedExam = document.getElementById('exam-select').value;
-    const selectedSub = document.getElementById('subject-select').value;
-
-    filteredQueue = allQuestions.filter(item => {
-        const matchExam = (selectedExam === 'ALL' || item.exam === selectedExam);
-        const matchSub = (selectedSub === 'ALL' || item.sub === selectedSub);
-        return matchExam && matchSub;
+function showScreen(screenId) {
+    ['screen-exams', 'screen-sets', 'screen-cbt', 'screen-result'].forEach(id => {
+        document.getElementById(id).style.display = (id === screenId) ? (id === 'screen-cbt' ? 'grid' : 'block') : 'none';
     });
-
-    currentIndex = 0;
-    score = 0;
-    attempted = 0;
-    updateStatsUI();
-    renderCurrentQuestion();
+    document.getElementById('timer-box').style.display = (screenId === 'screen-cbt') ? 'block' : 'none';
 }
 
-function renderCurrentQuestion() {
-    if (filteredQueue.length === 0) {
-        document.getElementById('q-title').innerText = "इस चयन के अंतर्गत अभी कोई प्रश्न उपलब्ध नहीं है।";
-        document.getElementById('opt-container').innerHTML = "<p style='color:#64748b; font-size:14px;'>कृपया दूसरा विषय चुनें या नीचे Bulk Import से सवाल जोड़ें।</p>";
-        document.getElementById('badge-info').innerText = "No Data";
-        document.getElementById('q-counter').innerText = "0 / 0";
-        document.getElementById('progress-bar').style.width = "0%";
-        document.getElementById('explain-box').style.display = 'none';
-        document.getElementById('btn-next').style.display = 'none';
-        return;
+function goHome() {
+    if (timerTimer) clearInterval(timerTimer);
+    document.getElementById('top-title').innerText = "Universal Examination Portal";
+    showScreen('screen-exams');
+}
+
+// Step 1 -> Step 2 (Open 50 Sets)
+function openExamSets(examKey) {
+    selectedExamKey = examKey;
+    currentExamConfig = examConfigs[examKey];
+    document.getElementById('sets-heading').innerText = `${currentExamConfig.title} - Mock Tests (50 Sets)`;
+    
+    const container = document.getElementById('sets-container');
+    container.innerHTML = '';
+
+    // Generate 50 Sets: Low -> High Difficulty
+    for (let i = 1; i <= 50; i++) {
+        let levelClass = "level-easy";
+        let levelText = "🟢 Easy";
+        let levelBg = "#dcfce7";
+        let levelColor = "#15803d";
+
+        if (i > 15 && i <= 35) {
+            levelClass = "level-mod";
+            levelText = "🟡 Moderate";
+            levelBg = "#fef3c7";
+            levelColor = "#b45309";
+        } else if (i > 35) {
+            levelClass = "level-hard";
+            levelText = "🔴 Hard";
+            levelBg = "#fee2e2";
+            levelColor = "#b91c1c";
+        }
+
+        const btn = document.createElement('div');
+        btn.className = `set-btn ${levelClass}`;
+        btn.innerHTML = `
+            <div class="set-num">Set ${i}</div>
+            <span class="set-level-badge" style="background:${levelBg}; color:${levelColor};">${levelText}</span>
+            <div style="font-size:11px; color:#64748b; margin-top:5px;">100 Questions</div>
+        `;
+        btn.onclick = () => launchExam(i);
+        container.appendChild(btn);
     }
+    showScreen('screen-sets');
+}
 
-    const q = filteredQueue[currentIndex];
-    document.getElementById('badge-info').innerText = `${q.exam} • ${q.sub}`;
-    document.getElementById('q-title').innerText = `${currentIndex + 1}. ${q.q}`;
-    document.getElementById('q-counter').innerText = `Q ${currentIndex + 1} of ${filteredQueue.length}`;
+// Step 2 -> Step 3 (Launch CBT Exam)
+function launchExam(setNumber) {
+    document.getElementById('top-title').innerText = `${currentExamConfig.title} (Set ${setNumber})`;
+    document.getElementById('marking-info').innerText = `सही: +1.0 | नेगेटिव: ${currentExamConfig.negativeMark > 0 ? '-' + currentExamConfig.negativeMark : '0.00'}`;
 
-    const progressPct = ((currentIndex + 1) / filteredQueue.length) * 100;
-    document.getElementById('progress-bar').style.width = `${progressPct}%`;
+    let pool = masterBank.filter(q => q.exam === selectedExamKey);
+    if (pool.length === 0) pool = masterBank;
 
-    const optBox = document.getElementById('opt-container');
-    optBox.innerHTML = '';
-    
-    const expBox = document.getElementById('explain-box');
-    expBox.style.display = 'none';
-    expBox.innerText = '';
-    
-    document.getElementById('btn-next').style.display = 'none';
+    activeQuestions = [...pool];
+    userStates = activeQuestions.map(() => ({ selected: null, status: 'not-visited' }));
 
-    q.opts.forEach((opt, idx) => {
+    const secBox = document.getElementById('sec-tab-box');
+    secBox.innerHTML = '';
+    currentExamConfig.sections.forEach((sec, idx) => {
         const btn = document.createElement('button');
-        btn.className = 'opt-btn';
-        btn.innerText = opt;
-        btn.onclick = () => selectAnswer(idx);
-        optBox.appendChild(btn);
+        btn.className = `tab-btn ${idx === 0 ? 'active' : ''}`;
+        btn.id = `tab-sec-${sec.id}`;
+        btn.innerText = sec.name;
+        btn.onclick = () => switchSection(sec.id);
+        secBox.appendChild(btn);
+    });
+
+    currentSectionId = currentExamConfig.sections[0].id;
+    secondsRemaining = currentExamConfig.durationMinutes * 60;
+    startTimer();
+
+    buildPalette();
+    loadQuestion(0);
+    showScreen('screen-cbt');
+}
+
+function switchSection(secId) {
+    currentSectionId = secId;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    const activeTab = document.getElementById(`tab-sec-${secId}`);
+    if (activeTab) activeTab.classList.add('active');
+
+    const firstMatch = activeQuestions.findIndex(q => q.sec === secId);
+    loadQuestion(firstMatch !== -1 ? firstMatch : 0);
+}
+
+function loadQuestion(idx) {
+    currentIdx = idx;
+    const q = activeQuestions[idx];
+    const st = userStates[idx];
+    if (st.status === 'not-visited') st.status = 'not-answered';
+
+    document.getElementById('q-num-label').innerText = `Question No. ${idx + 1} of ${activeQuestions.length}`;
+    document.getElementById('q-sec-label').innerText = `Section: ${q.sec}`;
+    document.getElementById('q-content').innerText = `${idx + 1}. ${q.q}`;
+
+    const optsBox = document.getElementById('opts-list');
+    optsBox.innerHTML = '';
+
+    q.opts.forEach((opt, oIdx) => {
+        const row = document.createElement('div');
+        row.className = `opt-item ${st.selected === oIdx ? 'selected' : ''}`;
+        row.innerHTML = `<input type="radio" name="r_opt" ${st.selected === oIdx ? 'checked' : ''}> <span>${opt}</span>`;
+        row.onclick = () => {
+            userStates[currentIdx].selected = oIdx;
+            loadQuestion(currentIdx);
+        };
+        optsBox.appendChild(row);
+    });
+
+    updatePalette();
+}
+
+function saveAndNext() {
+    const st = userStates[currentIdx];
+    st.status = (st.selected !== null) ? 'answered' : 'not-answered';
+    if (currentIdx < activeQuestions.length - 1) loadQuestion(currentIdx + 1);
+    else updatePalette();
+}
+
+function markReview() {
+    userStates[currentIdx].status = 'marked';
+    if (currentIdx < activeQuestions.length - 1) loadQuestion(currentIdx + 1);
+    else updatePalette();
+}
+
+function clearOption() {
+    userStates[currentIdx].selected = null;
+    userStates[currentIdx].status = 'not-answered';
+    loadQuestion(currentIdx);
+}
+
+function prevQuestion() {
+    if (currentIdx > 0) loadQuestion(currentIdx - 1);
+}
+
+function buildPalette() {
+    const grid = document.getElementById('palette-grid');
+    grid.innerHTML = '';
+    activeQuestions.forEach((_, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'pal-btn';
+        btn.id = `pal-${idx}`;
+        btn.innerText = idx + 1;
+        btn.onclick = () => loadQuestion(idx);
+        grid.appendChild(btn);
     });
 }
 
-function selectAnswer(chosenIdx) {
-    const q = filteredQueue[currentIndex];
-    const buttons = document.querySelectorAll('.opt-btn');
-    attempted++;
+function updatePalette() {
+    activeQuestions.forEach((_, idx) => {
+        const btn = document.getElementById(`pal-${idx}`);
+        if (!btn) return;
+        btn.className = `pal-btn ${userStates[idx].status}`;
+        if (idx === currentIdx) btn.classList.add('active');
+    });
+}
 
-    buttons.forEach((btn, idx) => {
-        btn.disabled = true;
-        if (idx === q.ans) btn.classList.add('correct');
-        if (idx === chosenIdx && chosenIdx !== q.ans) btn.classList.add('wrong');
+function startTimer() {
+    if (timerTimer) clearInterval(timerTimer);
+    timerTimer = setInterval(() => {
+        if (secondsRemaining <= 0) {
+            clearInterval(timerTimer);
+            alert("समय समाप्त! परीक्षा स्वतः सबमिट की जा रही है।");
+            submitExam(true);
+            return;
+        }
+        secondsRemaining--;
+        const h = Math.floor(secondsRemaining / 3600);
+        const m = Math.floor((secondsRemaining % 3600) / 60);
+        const s = secondsRemaining % 60;
+        document.getElementById('time-left').innerText = 
+            `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }, 1000);
+}
+
+function submitExam(isAuto) {
+    if (!isAuto && !confirm("क्या आप निश्चित रूप से परीक्षा सबमिट करना चाहते हैं?")) return;
+    clearInterval(timerTimer);
+
+    let correct = 0;
+    let wrong = 0;
+    let unattempted = 0;
+
+    const solBox = document.getElementById('solution-list');
+    solBox.innerHTML = '';
+
+    activeQuestions.forEach((q, idx) => {
+        const userChoice = userStates[idx].selected;
+        const isRight = userChoice === q.ans;
+
+        if (userChoice === null) unattempted++;
+        else if (isRight) correct++;
+        else wrong++;
+
+        const card = document.createElement('div');
+        card.className = 'sol-card';
+        card.innerHTML = `
+            <div style="font-size:12px; font-weight:700; color:var(--text-sub); margin-bottom:6px;">Q ${idx + 1} (${q.sec})</div>
+            <p style="font-weight:700; font-size:15px; margin-bottom:8px;">${q.q}</p>
+            <p style="font-size:14px; margin-bottom:4px;"><b>उम्मीदवार का उत्तर:</b> <span style="color:${isRight ? 'var(--green)' : '#dc2626'}; font-weight:bold;">${userChoice !== null ? q.opts[userChoice] : 'छोड़ दिया गया'}</span></p>
+            <p style="font-size:14px; color:var(--green); font-weight:bold; margin-bottom:8px;">वास्तविक सही उत्तर: ${q.opts[q.ans]}</p>
+            <p style="background:#f1f5f9; padding:10px; border-radius:6px; font-size:13px; color:#1e3a8a; line-height:1.5;">💡 <b>हल व व्याख्या:</b> ${q.exp}</p>
+        `;
+        solBox.appendChild(card);
     });
 
-    if (chosenIdx === q.ans) score++;
-    updateStatsUI();
+    const totalScore = (correct * 1.0) - (wrong * currentExamConfig.negativeMark);
+    document.getElementById('r-score').innerText = totalScore.toFixed(2);
+    document.getElementById('r-correct').innerText = correct;
+    document.getElementById('r-wrong').innerText = wrong;
+    document.getElementById('r-unattempted').innerText = unattempted;
 
-    const expBox = document.getElementById('explain-box');
-    expBox.innerHTML = `<strong>💡 SKTech व्याख्या:</strong> ${q.exp}`;
-    expBox.style.display = 'block';
-
-    if (currentIndex < filteredQueue.length - 1) {
-        document.getElementById('btn-next').style.display = 'block';
-    } else {
-        document.getElementById('q-counter').innerText = `सेट पूरा हुआ! स्कोर: ${score}/${filteredQueue.length}`;
-    }
+    showScreen('screen-result');
 }
-
-function nextQuestion() {
-    if (currentIndex < filteredQueue.length - 1) {
-        currentIndex++;
-        renderCurrentQuestion();
-    }
-}
-
-function updateStatsUI() {
-    document.getElementById('live-score').innerText = `Score: ${score} / ${attempted}`;
-    const acc = attempted > 0 ? Math.round((score / attempted) * 100) : 0;
-    document.getElementById('accuracy-rate').innerText = `सटीकता: ${acc}%`;
-}
-
-function toggleDrawer(id) {
-    const el = document.getElementById(id);
-    el.style.display = el.style.display === 'block' ? 'none' : 'block';
-}
-
-function importBulkQuestions() {
-    const raw = document.getElementById('bulk-json-input').value.trim();
-    if (!raw) return alert("कृपया JSON डेटा पेस्ट करें!");
-    try {
-        const parsed = JSON.parse(raw);
-        if (!Array.isArray(parsed)) throw new Error("डेटा एक Array ([...]) होना चाहिए!");
-        
-        let existing = JSON.parse(localStorage.getItem('sktech_universal_db') || '[]');
-        existing = [...existing, ...parsed];
-        localStorage.setItem('sktech_universal_db', JSON.stringify(existing));
-        
-        allQuestions = [...masterQuestions, ...existing];
-        alert(`${parsed.length} नए प्रश्न सफलतापूर्वक जुड़ गए!`);
-        document.getElementById('bulk-json-input').value = '';
-        toggleDrawer('bulk-drawer');
-        onFilterChange();
-    } catch(err) {
-        alert("अमान्य JSON फॉर्मेट: " + err.message);
-    }
-}
-
-function resetDatabase() {
-    if (confirm("क्या आप अतिरिक्त जोड़े गए प्रश्नों को हटाकर डिफ़ॉल्ट रीसेट करना चाहते हैं?")) {
-        localStorage.removeItem('sktech_universal_db');
-        allQuestions = [...masterQuestions];
-        onFilterChange();
-    }
-}
-
-initApp();
 </script>
 </body>
 </html>
