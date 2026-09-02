@@ -378,7 +378,7 @@
         <div><h3 style="color:#0284c7;" id="r-score">0</h3><p style="font-size:12px; color:#64748b;">Score</p></div>
         <div><h3 style="color:#16a34a;" id="r-correct">0</h3><p style="font-size:12px; color:#64748b;">Correct</p></div>
         <div><h3 style="color:#dc2626;" id="r-wrong">0</h3><p style="font-size:12px; color:#64748b;">Wrong</p></div>
-        <div><h3 style="color:#64748b;" id="r-unattempted">0</h3><p style="font-size:12px; color:#64748b;">Skipped</p></div>
+        <div><h3 style="font-size:12px; color:#64748b;" id="r-unattempted">0</h3><p style="font-size:12px; color:#64748b;">Skipped</p></div>
     </div>
     <h3 style="margin-bottom:15px; color:#0f172a;">Solutions & Answer Key</h3>
     <div id="solution-list"></div>
@@ -409,83 +409,101 @@ function handleDemandSubmit(e) {
     e.target.reset();
 }
 
-// Master Generator to automatically expand robust question pools across all 50 sets
-function generateRichQuestionPool(baseTitle, coreSection) {
-    let pool = [];
-    for(let i=1; i<=25; i++) {
-        pool.push({
-            section: coreSection,
-            q_hi: `${baseTitle} - सेट का महत्वपूर्ण प्रश्न क्र. ${i}: इस अवधारणा का सही तकनीकी और वैचारिक विश्लेषण क्या होगा?`,
-            q_en: `${baseTitle} - Important Question No. ${i}: What is the correct technical and conceptual analysis of this topic?`,
-            opts_hi: [`विकल्प A: मूल और सटीक मान (${i} यूनिट)`, `विकल्प बी: द्वितीयक वैकल्पिक गणना`, `विकल्प सी: मानक सीमा से बाहर`, `विकल्प डी: इनमें से कोई नहीं`],
-            opts_en: [`Option A: Primary exact value (${i} units)`, `Option B: Secondary alternative calculation`, `Option C: Out of standard limits`, `Option D: None of the above`],
-            ans: 0,
-            exp: `व्याख्या: यह प्रश्न ${baseTitle} परीक्षा के पाठ्यक्रम पर आधारित है, जिसका सही उत्तर विकल्प A है क्योंकि यह मानक नियमों का पालन करता है।`
-        });
-    }
-    return pool;
-}
-
+// Dedicated Unique Question Banks for each exam category
 const embeddedMasterDatabase = {
     "MPESB_SUB_ENG": {
         examName: "MPESB समूह-03 सब-इंजीनियर",
         durationMinutes: 180,
         negativeMarking: 0.0,
-        questions: generateRichQuestionPool("MPESB सब-इंजीनियर इलेक्ट्रिकल", "Technical Core")
+        questions: [
+            {section: "Technical Core", q_hi: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध कितना होता है?", q_en: "What is the internal resistance of an ideal voltage source?", opts_hi: ["शून्य (0 Ω)", "अनंत (INF)", "100 ओम", "1 ओम"], opts_en: ["Zero (0 Ω)", "Infinite (INF)", "100 Ohm", "1 Ohm"], ans: 0, exp: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है।"},
+            {section: "Technical Core", q_hi: "एक 4-पोल, 50 Hz इंडक्शन मोटर की तुल्यकालिक गति कितनी होगी?", q_en: "What is the synchronous speed of a 4-pole, 50 Hz induction motor?", opts_hi: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"], opts_en: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"], ans: 1, exp: "Ns = (120 * 50) / 4 = 1500 RPM."},
+            {section: "MP GK", q_hi: "मध्य प्रदेश का प्रसिद्ध 'तानसेन समारोह' कहाँ आयोजित होता है?", q_en: "Where is the famous 'Tansen Samaroh' of MP held?", opts_hi: ["भोपाल", "ग्वालियर", "उज्जैन", "इंदौर"], opts_en: ["Bhopal", "Gwalior", "Ujjain", "Indore"], ans: 1, exp: "तानसेन समारोह ग्वालियर के बेहट में आयोजित किया जाता है।"},
+            {section: "MP GK", q_hi: "मध्य प्रदेश की सबसे ऊंची चोटी 'धूपगढ़' किस पर्वत श्रेणी में स्थित है?", q_en: "The highest peak of MP, 'Dhupgarh', is situated in which mountain range?", opts_hi: ["विंध्याचल श्रेणी", "महादेव पहाड़ियाँ / सतपुड़ा", "मैकल श्रेणी", "कैमूर श्रेणी"], opts_en: ["Vindhyachal Range", "Mahadeo Hills / Satpura", "Maikal Range", "Kaimur Range"], ans: 1, exp: "धूपगढ़ (1350 मीटर) पचमढ़ी में सतपुड़ा पर्वतमाला की महादेव पहाड़ियों पर स्थित है।"},
+            {section: "Technical Core", q_hi: "ट्रांसफॉर्मर में भंवर धारा हानियों को कम करने के लिए किसका उपयोग होता है?", q_en: "What is used to reduce eddy current losses in a transformer?", opts_hi: ["लैमिनेटेड कोर", "ठोस लोहा", "वायु कोर", "तांबे की छड़ें"], opts_en: ["Laminated core", "Solid iron", "Air core", "Copper rods"], ans: 0, exp: "लैमिनेटेड सिलिकॉन स्टील कोर का उपयोग किया जाता है।"}
+        ]
     },
     "MP_POLICE": {
         examName: "MP पुलिस भर्ती परीक्षा",
         durationMinutes: 120,
         negativeMarking: 0.0,
-        questions: generateRichQuestionPool("MP पुलिस कांस्टेबल व SI", "MP GK & Reasoning")
+        questions: [
+            {section: "MP GK & Science", q_hi: "मध्य प्रदेश का राज्य खेल कौन सा है?", q_en: "Which is the state sport of Madhya Pradesh?", opts_hi: ["मलखंभ", "हॉकी", "क्रिकेट", "कबड्डी"], opts_en: ["Mallakhamba", "Hockey", "Cricket", "Kabaddi"], ans: 0, exp: "मलखंभ को 2013 में मध्य प्रदेश का राज्य खेल घोषित किया गया था।"},
+            {section: "MP GK & Science", q_hi: "मध्य प्रदेश में निवेशकों को आकर्षित करने के लिए 'ग्लोबल इन्वेस्टर्स समिट' कहाँ आयोजित की जाती है?", q_en: "Where is the 'Global Investors Summit' held in MP?", opts_hi: ["इंदौर", "भोपाल", "जबलपुर", "ग्वालियर"], opts_en: ["Indore", "Bhopal", "Jabalpur", "Gwalior"], ans: 0, exp: "यह प्रमुख रूप से इंदौर में आयोजित की जाती है।"},
+            {section: "Reasoning & Maths", q_hi: "यदि 'RED' = 27, तो 'CAT' = ?", q_en: "If 'RED' = 27, then 'CAT' = ?", opts_hi: ["20", "24", "26", "28"], opts_en: ["20", "24", "26", "28"], ans: 1, exp: "अक्षरों के मान का योग (C=3, A=1, T=20) = 24।"},
+            {section: "Reasoning & Maths", q_hi: "श्रृंखला पूरी करें: 5, 10, 20, 40, ?", q_en: "Complete the series: 5, 10, 20, 40, ?", opts_hi: ["60", "70", "80", "100"], opts_en: ["60", "70", "80", "100"], ans: 2, exp: "प्रत्येक संख्या दोगुनी हो रही है, अत: 40 * 2 = 80।"},
+            {section: "MP GK & Science", q_hi: "मानव शरीर की सबसे बड़ी ग्रंथि कौन सी है?", q_en: "Which is the largest gland in the human body?", opts_hi: ["यकृत (Liver)", "अग्न्याशय", "थायराइड", "पीयूष ग्रंथि"], opts_en: ["Liver", "Pancreas", "Thyroid", "Pituitary gland"], ans: 0, exp: "यकृत मानव शरीर की सबसे बड़ी ग्रंथि है।"}
+        ]
     },
     "MP_ITI_TO": {
         examName: "MP ITI प्रशिक्षण अधिकारी (TO)",
         durationMinutes: 120,
         negativeMarking: 0.0,
-        questions: generateRichQuestionPool("MP ITI ट्रेड थ्योरी", "Trade Theory")
+        questions: [
+            {section: "Trade Theory", q_hi: "इलेक्ट्रिक वायरिंग में अर्थिंग का मुख्य उद्देश्य क्या है?", q_en: "What is the main purpose of earthing in electrical wiring?", opts_hi: ["उपकरण की सुरक्षा", "झटके से सुरक्षा (Safety from shock)", "वोल्टेज बढ़ाना", "बिल कम करना"], opts_en: ["Equipment protection", "Safety from shock", "Increase voltage", "Reduce bill"], ans: 1, exp: "उपयोगकर्ता को विद्युत झटके से बचाना अर्थिंग का मुख्य कार्य है।"},
+            {section: "Trade Theory", q_hi: "फ्यूज का चयन करते समय मुख्य रूप से क्या देखा जाता है?", q_en: "What is primarily considered when selecting a fuse?", opts_hi: ["करंट रेटिंग", "लंबाई", "रंग", "वजन"], opts_en: ["Current rating", "Length", "Color", "Weight"], ans: 0, exp: "फ्यूज हमेशा लोड करंट रेटिंग के आधार पर चुना जाता है।"},
+            {section: "General Knowledge", q_hi: "मध्य प्रदेश में 'इलेक्ट्रिक वाहन नीति' कब लागू की गई?", q_en: "When was the 'Electric Vehicle Policy' implemented in MP?", opts_hi: ["2019", "2021", "2023", "2024"], opts_en: ["2019", "2021", "2023", "2024"], ans: 1, exp: "MP में EV नीति 2021 में आई थी।"}
+        ]
     },
     "IBPS_RRB_PO": {
         examName: "IBPS RRB PO / Clerk (Prelims)",
         durationMinutes: 45,
         negativeMarking: 0.25,
-        questions: generateRichQuestionPool("IBPS RRB Prelims", "Quantitative Aptitude")
+        questions: [
+            {section: "Quantitative Aptitude", q_hi: "A किसी कार्य को 12 दिनों में और B 18 दिनों में करता है। दोनों मिलकर कितने दिनों में करेंगे?", q_en: "A completes work in 12 days, B in 18 days. Together they complete in?", opts_hi: ["7.2 दिन", "6.5 दिन", "8 दिन", "9 दिन"], opts_en: ["7.2 days", "6.5 days", "8 days", "9 days"], ans: 0, exp: "36 / 5 = 7.2 दिन।"},
+            {section: "Quantitative Aptitude", q_hi: "एक वस्तु को 800 रुपये में बेचने पर 20% लाभ होता है, क्रय मूल्य क्या है?", q_en: "An article sold for Rs. 800 at 20% profit. What is cost price?", opts_hi: ["600 रुपये", "666.67 रुपये", "700 रुपये", "750 रुपये"], opts_en: ["Rs. 600", "Rs. 666.67", "Rs. 700", "Rs. 750"], ans: 1, exp: "CP = 800 * 100/120 = 666.67 रुपये।"},
+            {section: "Reasoning Ability", q_hi: "कूट भाषा में 'BANK' को 'CDOL' लिखा जाता है, 'POOL' को क्या लिखेंगे?", q_en: "If 'BANK' is coded as 'CDOL', how will 'POOL' be coded?", opts_hi: ["RQPM", "QPPM", "RPPM", "SQQN"], opts_en: ["RQPM", "QPPM", "RPPM", "SQQN"], ans: 0, exp: "क्रमशः +1, +2, +3, +4 का नियम है।"}
+        ]
     },
     "IBPS_MAINS": {
         examName: "IBPS RRB PO (Mains Full Mock)",
         durationMinutes: 120,
         negativeMarking: 0.25,
-        questions: generateRichQuestionPool("IBPS RRB Mains", "Banking Awareness")
+        questions: [
+            {section: "Banking Awareness", q_hi: "भारतीय रिजर्व बैंक (RBI) की स्थापना किस वर्ष हुई थी?", q_en: "In which year was the Reserve Bank of India (RBI) established?", opts_hi: ["1932", "1935", "1947", "1950"], opts_en: ["1932", "1935", "1947", "1950"], ans: 1, exp: "RBI की स्थापना 1 अप्रैल 1935 को हुई थी।"},
+            {section: "Banking Awareness", q_hi: "नाबार्ड (NABARD) की स्थापना किस समिति की सिफारिश पर हुई थी?", q_en: "NABARD was established on whose recommendation?", opts_hi: ["शिवरामन समिति", "नरसिंहम समिति", "केलकर समिति", "रेड्डी समिति"], opts_en: ["Sivaraman Committee", "Narasimham Committee", "Kelkar Committee", "Reddy Committee"], ans: 0, exp: "शिवरामन समिति की सिफारिश पर 12 जुलाई 1982 को।"}
+        ]
     },
     "MPPSC_PRE": {
         examName: "MPPSC राज्य सेवा प्रारंभिक",
         durationMinutes: 120,
         negativeMarking: 0.0,
-        questions: generateRichQuestionPool("MPPSC प्रारंभिक परीक्षा", "General Studies")
+        questions: [
+            {section: "General Studies", q_hi: "मध्य प्रदेश का राज्य वृक्ष कौन सा है?", q_en: "Which is the state tree of Madhya Pradesh?", opts_hi: ["बरगद", "आम", "पीपल", "नीम"], opts_en: ["Banyan", "Mango", "Peepal", "Neem"], ans: 0, exp: "बरगद मध्य प्रदेश का राज्य वृक्ष है।"},
+            {section: "General Studies", q_hi: "मध्य प्रदेश की प्रथम महिला मुख्यमंत्री कौन थीं?", q_en: "Who was the first female Chief Minister of Madhya Pradesh?", opts_hi: ["उमा भारती", "सरला ग्रेवाल", "यशोराजे सिंधिया", "आनंदीबेन पटेल"], opts_en: ["Uma Bharti", "Sarla Grewal", "Yashodhara Raje Scindia", "Anandiben Patel"], ans: 0, exp: "उमा भारती मध्य प्रदेश की पहली महिला मुख्यमंत्री थीं।"}
+        ]
     },
     "SUB_ENG_CORE": {
         examName: "इंजीनियरिंग कोर (Technical)",
         durationMinutes: 60,
         negativeMarking: 0.0,
-        questions: generateRichQuestionPool("इंजीनियरिंग कोर विषय", "Electrical Engineering")
+        questions: [
+            {section: "Electrical Engineering", q_hi: "किरचॉफ का करंट नियम (KCL) किस पर आधारित है?", q_en: "Kirchhoff's Current Law (KCL) is based on conservation of?", opts_hi: ["ऊर्जा", "आवेश (Charge)", "संवेग", "द्रव्यमान"], opts_en: ["Energy", "Charge", "Momentum", "Mass"], ans: 1, exp: "KCL आवेश संरक्षण के नियम पर कार्य करता है।"}
+        ]
     },
     "SUB_BANKING": {
         examName: "बैंकिंग एवं वित्तीय अवेयरनेस",
         durationMinutes: 60,
         negativeMarking: 0.25,
-        questions: generateRichQuestionPool("बैंकिंग अवेयरनेस", "Financial Awareness")
+        questions: [
+            {section: "Financial Awareness", q_hi: "भारत का केंद्रीय बैंक कौन सा है?", q_en: "Which is the central bank of India?", opts_hi: ["SBI", "RBI", "PNB", "NABARD"], opts_en: ["SBI", "RBI", "PNB", "NABARD"], ans: 1, exp: "भारतीय रिजर्व बैंक (RBI) भारत का केंद्रीय बैंक है।"}
+        ]
     },
     "SUB_LANG": {
         examName: "भाषा एवं व्याकरण (Languages)",
         durationMinutes: 60,
         negativeMarking: 0.0,
-        questions: generateRichQuestionPool("हिंदी एवं अंग्रेजी व्याकरण", "Hindi Grammar")
+        questions: [
+            {section: "Hindi Grammar", q_hi: "'सूर्योदय' शब्द में कौन सी संधि है?", q_en: "Which sandhi is in the word 'Suryoday'?", opts_hi: ["दीर्घ संधि", "गुण स्वर संधि", "वृद्धि संधि", "यण संधि"], opts_en: ["Dirgh Sandhi", "Gun Swar Sandhi", "Vriddhi Sandhi", "Yan Sandhi"], ans: 1, exp: "सूर्य + उदय (अ + उ = ओ), गुण स्वर संधि।"}
+        ]
     },
     "SUB_MPGK": {
         examName: "मध्य प्रदेश सामान्य ज्ञान",
         durationMinutes: 60,
         negativeMarking: 0.0,
-        questions: generateRichQuestionPool("मध्य प्रदेश सामान्य ज्ञान", "MP GK")
+        questions: [
+            {section: "MP GK", q_hi: "नर्मदा नदी का उद्गम स्थल कहाँ है?", q_en: "Where is the origin point of Narmada river?", opts_hi: ["अमरकंटक", "पचमढ़ी", "मईकल", "बैतूल"], opts_en: ["Amarkantak", "Pachmarhi", "Maikal", "Betul"], ans: 0, exp: "नर्मदा नदी अमरकंटक से निकलती है।"}
+        ]
     }
 };
 
@@ -624,7 +642,6 @@ function buildPalette() {
     });
 }
 
-let lastActiveCount = -1;
 function updatePalette() {
     activeQuestions.forEach((_, idx) => {
         const btn = document.getElementById(`pal-${idx}`);
@@ -632,11 +649,6 @@ function updatePalette() {
         btn.className = `p-num ${userStates[idx].status}`;
         if (idx === currentIdx) btn.classList.add('active');
     });
-    
-    // Safety check: if palette length changes or needs dynamic sync
-    if(lastActiveCount !== activeQuestions.length) {
-        lastActiveCount = activeQuestions.length;
-    }
 }
 
 function startTimer() {
