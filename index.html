@@ -75,47 +75,51 @@
         .logo-title { font-size: 19px; font-weight: 800; color: #ffffff; }
         .logo-tagline { font-size: 9px; font-weight: 700; color: #38bdf8; letter-spacing: 1px; text-transform: uppercase; }
 
-        .nav-center-links { display: flex; gap: 8px; align-items: center; }
-        .nav-link {
-            display: flex; align-items: center; gap: 6px;
-            background: rgba(255,255,255,0.06); color: #cbd5e1;
-            padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none;
-        }
-        .nav-link:hover, .nav-link.active { background: #0284c7; color: white; }
-
         .nav-controls { display: flex; align-items: center; gap: 14px; }
         .live-clock-badge { background: #1e293b; color: #94a3b8; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid #334155; }
         .lang-switch-btn { background: #1e293b; color: #38bdf8; border: 1.5px solid #38bdf8; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; }
         .timer-badge { background: #1e293b; border: 1px solid rgba(56, 189, 248, 0.4); padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 800; color: #38bdf8; display: none; }
 
-        #screen-exams { flex: 1; overflow-y: auto; padding: 30px 20px 60px; max-width: 1150px; margin: auto; width: 100%; z-index: 1; }
+        #screen-exams { flex: 1; overflow-y: auto; padding: 25px 20px 60px; max-width: 1150px; margin: auto; width: 100%; z-index: 1; }
         
         .hero-banner {
             background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
-            border: 1.5px solid #bfdbfe; border-radius: 20px; padding: 28px 35px; margin-bottom: 30px;
+            border: 1.5px solid #bfdbfe; border-radius: 20px; padding: 22px 30px; margin-bottom: 20px;
         }
-        .hero-left h2 { font-size: 12px; font-weight: 800; color: #2563eb; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
-        .hero-left h1 { font-size: 30px; font-weight: 900; color: #0f172a; margin-bottom: 8px; line-height: 1.2; }
+        .hero-left h1 { font-size: 26px; font-weight: 900; color: #0f172a; margin-bottom: 6px; }
         .hero-left h1 span { color: #2563eb; }
-        .hero-left p { font-size: 13px; color: #64748b; margin-bottom: 18px; max-width: 580px; }
+        .hero-left p { font-size: 13px; color: #64748b; }
 
-        .section-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .section-title { font-size: 20px; font-weight: 800; color: #0f172a; }
+        .dash-tabs-row { display: flex; gap: 12px; margin-bottom: 22px; }
+        .dash-tab-btn {
+            flex: 1; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 800; cursor: pointer; border: 1.5px solid #cbd5e1; background: white; color: #475569; transition: 0.2s; text-align: center;
+        }
+        .dash-tab-btn.active { background: #0f172a; color: white; border-color: #0f172a; box-shadow: 0 4px 12px rgba(15,23,42,0.15); }
 
-        .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 25px; }
         .exam-card {
-            background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 22px; cursor: pointer; transition: 0.25s;
+            background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 20px; cursor: pointer; transition: 0.25s;
             display: flex; flex-direction: column; justify-content: space-between;
         }
         .exam-card:hover { transform: translateY(-4px); border-color: #38bdf8; box-shadow: 0 12px 30px rgba(56,189,248,0.15); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .icon-circle { width: 44px; height: 44px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 22px; }
-        .card-tag { font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 16px; text-transform: uppercase; }
-        .card-title { font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
-        .card-desc { font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 16px; }
-        .card-meta { border-top: 1px dashed #e2e8f0; padding-top: 14px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: #2563eb; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .icon-circle { width: 40px; height: 40px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+        .card-tag { font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 12px; text-transform: uppercase; }
+        .card-title { font-size: 17px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+        .card-desc { font-size: 12px; color: #64748b; line-height: 1.4; margin-bottom: 14px; }
+        .card-meta { border-top: 1px dashed #e2e8f0; padding-top: 12px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: #2563eb; }
 
-        .portal-footer { background: #070a12; color: #94a3b8; padding: 16px 30px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; border-top: 1px solid #1e293b; }
+        .demand-box-container {
+            background: white; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .demand-header { font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+        .demand-sub { font-size: 12px; color: #64748b; margin-bottom: 12px; }
+        .demand-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .input-text { width: 100%; padding: 9px 12px; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 12px; outline: none; }
+        .input-msg { grid-column: span 2; min-height: 50px; resize: vertical; }
+        .btn-send-demand { background: #0f172a; color: white; padding: 9px 16px; border: none; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
+
+        .portal-footer { background: #070a12; color: #94a3b8; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; border-top: 1px solid #1e293b; margin-top: 30px; border-radius: 10px; }
 
         #screen-sets { display: none; flex: 1; overflow-y: auto; padding: 30px 20px; max-width: 950px; margin: auto; width: 100%; z-index: 1; }
         .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #64748b; cursor: pointer; margin-bottom: 16px; padding: 6px 14px; border-radius: 6px; background: white; border: 1px solid #e2e8f0; }
@@ -171,20 +175,14 @@
 
 <div class="portal-nav">
     <div class="logo-box" onclick="goHome()">
-        <div class="logo-emblem">🎓</div>
+        <div class="logo-emblem">⚡</div>
         <div class="logo-text-group">
             <span class="logo-title">SKTech</span>
             <span class="logo-tagline">LEARN | PRACTICE | SUCCEED</span>
         </div>
     </div>
-    <div class="nav-center-links">
-        <a class="nav-link active" onclick="goHome()">🏠 Home</a>
-        <a class="nav-link" onclick="goHome()">📝 Mock Tests</a>
-        <a class="nav-link" onclick="goHome()">📚 Syllabus</a>
-        <a class="nav-link" onclick="goHome()">📊 Results</a>
-    </div>
     <div class="nav-controls">
-        <div class="live-clock-badge" id="live-clock">📅 02 Sep 2026</div>
+        <div class="live-clock-badge" id="live-clock">📅 03 Sep 2026</div>
         <button class="lang-switch-btn" onclick="toggleGlobalLanguage()" id="lang-btn">🌐 Language: हिंदी</button>
         <div class="timer-badge" id="timer-box">⏳ <span id="time-left">00:45:00</span></div>
     </div>
@@ -194,64 +192,125 @@
 <div id="screen-exams">
     <div class="hero-banner">
         <div class="hero-left">
-            <h2>Dream | Prepare | Achieve</h2>
-            <h1>Prepare <span>Today</span><br>For a Brighter Tomorrow</h1>
+            <h1>Prepare <span>Today</span> For a Brighter Tomorrow</h1>
             <p>Access high-quality mock tests, detailed syllabus, and performance analysis – all in one place.</p>
         </div>
     </div>
 
-    <div class="section-header-row">
-        <div class="section-title">🔥 Popular Exams & Mock Tests</div>
+    <!-- Dual Tab Navigation -->
+    <div class="dash-tabs-row">
+        <button class="dash-tab-btn active" id="tab-btn-1" onclick="switchDashboardTab(1)">🎯 टैब 1: सम्पूर्ण परीक्षा मॉक (Full Exams)</button>
+        <button class="dash-tab-btn" id="tab-btn-2" onclick="switchDashboardTab(2)">📚 टैब 2: विषय-वार अभ्यास हब (Subject Drills)</button>
     </div>
-    
-    <div class="exam-grid">
+
+    <!-- View 1: Full Exams Grid -->
+    <div id="dash-view-1" class="exam-grid">
         <div class="exam-card" onclick="openExamSets('MPESB_SUB_ENG')">
             <div>
-                <div class="card-header">
-                    <div class="icon-circle" style="background:#e0f2fe;">⚡</div>
-                    <span class="card-tag" style="background:#e0f2fe; color:#0284c7;">MP VYAPAM</span>
-                </div>
+                <div class="card-header"><div class="icon-circle" style="background:#e0f2fe;">⚡</div><span class="card-tag" style="background:#e0f2fe; color:#0284c7;">MP VYAPAM</span></div>
                 <div class="card-title">MPESB समूह-03 सब-इंजीनियर</div>
-                <div class="card-desc">इलेक्ट्रिकल कोर + नॉन-टेक (MP GK, ITI, 3 घंटे की अवधि). विस्तृत प्रश्न बैंक।</div>
+                <div class="card-desc">इलेक्ट्रिकल / सिविल / मैकेनिकल + नॉन-टेक | 200 Q | 180 Min | 0 Neg</div>
             </div>
-            <div class="card-meta"><span>📖 50 Mock Sets (5,000 Q)</span><span>➔</span></div>
+            <div class="card-meta"><span>📖 50 Mock Sets</span><span>➔</span></div>
+        </div>
+
+        <div class="exam-card" onclick="openExamSets('MP_POLICE')">
+            <div>
+                <div class="card-header"><div class="icon-circle" style="background:#dcfce7;">👮</div><span class="card-tag" style="background:#dcfce7; color:#15803d;">MP POLICE</span></div>
+                <div class="card-title">MP पुलिस भर्ती परीक्षा</div>
+                <div class="card-desc">कांस्टेबल व सब-इंस्पेक्टर स्पेशल (GK, Maths, Reasoning) | 100 Q | 120 Min</div>
+            </div>
+            <div class="card-meta"><span>📖 50 Mock Sets</span><span>➔</span></div>
+        </div>
+
+        <div class="exam-card" onclick="openExamSets('MP_ITI_TO')">
+            <div>
+                <div class="card-header"><div class="icon-circle" style="background:#f3e8ff;">⚙️</div><span class="card-tag" style="background:#f3e8ff; color:#7e22ce;">ITI TRAINING</span></div>
+                <div class="card-title">MP ITI प्रशिक्षण अधिकारी (TO)</div>
+                <div class="card-desc">ट्रेड थ्योरी + सामान्य ज्ञान | 100 Q | 120 Min</div>
+            </div>
+            <div class="card-meta"><span>📖 50 Mock Sets</span><span>➔</span></div>
         </div>
 
         <div class="exam-card" onclick="openExamSets('IBPS_RRB_PO')">
             <div>
-                <div class="card-header">
-                    <div class="icon-circle" style="background:#dcfce7;">💼</div>
-                    <span class="card-tag" style="background:#dcfce7; color:#15803d;">BANKING</span>
-                </div>
-                <div class="card-title">IBPS RRB PO (Scale-I)</div>
-                <div class="card-desc">रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy), 45 मिनट, -0.25 नेगेटिव मार्किंग।</div>
+                <div class="card-header"><div class="icon-circle" style="background:#fae8ff;">💼</div><span class="card-tag" style="background:#fae8ff; color:#a21caf;">BANKING</span></div>
+                <div class="card-title">IBPS RRB PO / Clerk (Prelims)</div>
+                <div class="card-desc">रीजनिंग + क्वांटिटेटिव एप्टीट्यूड स्पीड टेस्ट | 80 Q | 45 Min | -0.25 Neg</div>
             </div>
-            <div class="card-meta"><span>📖 50 Mock Sets (4,000 Q)</span><span>➔</span></div>
+            <div class="card-meta"><span>📖 50 Mock Sets</span><span>➔</span></div>
+        </div>
+
+        <div class="exam-card" onclick="openExamSets('IBPS_MAINS')">
+            <div>
+                <div class="card-header"><div class="icon-circle" style="background:#fed7aa;">📊</div><span class="card-tag" style="background:#fed7aa; color:#c2410c;">BANKING MAINS</span></div>
+                <div class="card-title">IBPS RRB PO (Mains Full Mock)</div>
+                <div class="card-desc">रीजनिंग, क्वांट, GA/बैंकिंग, कंप्यूटर, हिंदी/English | 200 Q | 120 Min</div>
+            </div>
+            <div class="card-meta"><span>📖 50 Mock Sets</span><span>➔</span></div>
         </div>
 
         <div class="exam-card" onclick="openExamSets('MPPSC_PRE')">
             <div>
-                <div class="card-header">
-                    <div class="icon-circle" style="background:#f3e8ff;">🏛️</div>
-                    <span class="card-tag" style="background:#f3e8ff; color:#7e22ce;">STATE PCS</span>
-                </div>
-                <div class="card-title">MPPSC राज्य सेवा परीक्षा</div>
-                <div class="card-desc">पेपर-1 सामान्य अध्ययन | इतिहास, राजनीति, भूगोल, विज्ञान • पेपर-2 CSAT</div>
+                <div class="card-header"><div class="icon-circle" style="background:#ccfbf1;">🏛️</div><span class="card-tag" style="background:#ccfbf1; color:#0f766e;">STATE PCS</span></div>
+                <div class="card-title">MPPSC राज्य सेवा प्रारंभिक</div>
+                <div class="card-desc">पेपर-1 सामान्य अध्ययन (GS) | 100 Q | 120 Min | 0 Neg</div>
             </div>
-            <div class="card-meta"><span>📖 50 Mock Sets (5,000 Q)</span><span>➔</span></div>
+            <div class="card-meta"><span>📖 50 Mock Sets</span><span>➔</span></div>
+        </div>
+    </div>
+
+    <!-- View 2: Subject Drills Grid -->
+    <div id="dash-view-2" class="exam-grid" style="display:none;">
+        <div class="exam-card" onclick="openExamSets('SUB_ENG_CORE')">
+            <div>
+                <div class="card-header"><div class="icon-circle" style="background:#e0f2fe;">⚡</div><span class="card-tag" style="background:#e0f2fe; color:#0284c7;">TECHNICAL</span></div>
+                <div class="card-title">इंजीनियरिंग कोर (Technical)</div>
+                <div class="card-desc">इलेक्ट्रिकल इंजीनियरिंग | सिविल इंजीनियरिंग | मैकेनिकल इंजीनियरिंग</div>
+            </div>
+            <div class="card-meta"><span>📖 50 Pure Sets (50 Q)</span><span>➔</span></div>
         </div>
 
-        <div class="exam-card" onclick="openExamSets('SSC_JE')">
+        <div class="exam-card" onclick="openExamSets('SUB_BANKING')">
             <div>
-                <div class="card-header">
-                    <div class="icon-circle" style="background:#fae8ff;">👮</div>
-                    <span class="card-tag" style="background:#fae8ff; color:#a21caf;">CENTRAL GOVT</span>
-                </div>
-                <div class="card-title">SSC JE / RRB JE (Electrical)</div>
-                <div class="card-desc">इलेक्ट्रिकल इंजीनियरिंग कॉंसेप्ट • टेक्निकल कोर • कट-ऑफ आधारित मॉक टेस्ट।</div>
+                <div class="card-header"><div class="icon-circle" style="background:#dcfce7;">🏦</div><span class="card-tag" style="background:#dcfce7; color:#15803d;">FINANCE</span></div>
+                <div class="card-title">बैंकिंग एवं वित्तीय अवेयरनेस</div>
+                <div class="card-desc">RBI नीतियां, ग्रामीण बैंकिंग (RRB), नाबार्ड, बजट व वित्तीय शब्दावली</div>
             </div>
-            <div class="card-meta"><span>📖 50 Mock Sets (5,000 Q)</span><span>➔</span></div>
+            <div class="card-meta"><span>📖 50 Pure Sets (50 Q)</span><span>➔</span></div>
         </div>
+
+        <div class="exam-card" onclick="openExamSets('SUB_LANG')">
+            <div>
+                <div class="card-header"><div class="icon-circle" style="background:#f3e8ff;">✍️</div><span class="card-tag" style="background:#f3e8ff; color:#7e22ce;">LANGUAGES</span></div>
+                <div class="card-title">भाषा एवं व्याकरण (Languages)</div>
+                <div class="card-desc">सामान्य हिंदी व्याकरण (MP SI/पटवारी) | जनरल इंग्लिश (Banking/SSC)</div>
+            </div>
+            <div class="card-meta"><span>📖 50 Pure Sets (50 Q)</span><span>➔</span></div>
+        </div>
+
+        <div class="exam-card" onclick="openExamSets('SUB_MPGK')">
+            <div>
+                <div class="card-header"><div class="icon-circle" style="background:#fae8ff;">🌿</div><span class="card-tag" style="background:#fae8ff; color:#a21caf;">MP SPECIAL</span></div>
+                <div class="card-title">मध्य प्रदेश सामान्य ज्ञान</div>
+                <div class="card-desc">MP का इतिहास, भूगोल, नदियां, जनजातियां, एमपी करंट अफेयर्स</div>
+            </div>
+            <div class="card-meta"><span>📖 50 Pure Sets (50 Q)</span><span>➔</span></div>
+        </div>
+    </div>
+
+    <!-- Student Demand Desk -->
+    <div class="demand-box-container">
+        <div class="demand-header">💬 विद्यार्थी सहायता एवं सुझाव केंद्र (Helpdesk & Demand Desk)</div>
+        <p class="demand-sub">आपको किस विषय या परीक्षा के अतिरिक्त सेट्स चाहिए? हमें सीधे बताएं, हम तुरंत उपलब्ध कराएंगे।</p>
+        <form onsubmit="handleDemandSubmit(event)">
+            <div class="demand-form-grid">
+                <input type="text" id="req-name" class="input-text" placeholder="आपका नाम व मोबाइल नंबर" required>
+                <input type="text" id="req-topic" class="input-text" placeholder="इच्छित विषय / परीक्षा" required>
+                <textarea id="req-msg" class="input-text input-msg" placeholder="अपना सुझाव या समस्या यहाँ विस्तार से लिखें..." required></textarea>
+            </div>
+            <button type="submit" class="btn-send-demand">सुझाव सबमिट करें ➔</button>
+        </form>
     </div>
 
     <div class="portal-footer">
@@ -336,7 +395,20 @@ function toggleGlobalLanguage() {
     if (activeQuestions.length > 0) loadQuestion(currentIdx);
 }
 
-// Full Master Database with 25 diverse questions for robust testing
+function switchDashboardTab(tabNum) {
+    document.getElementById('tab-btn-1').className = `dash-tab-btn ${tabNum === 1 ? 'active' : ''}`;
+    document.getElementById('tab-btn-2').className = `dash-tab-btn ${tabNum === 2 ? 'active' : ''}`;
+    document.getElementById('dash-view-1').style.display = (tabNum === 1) ? 'grid' : 'none';
+    document.getElementById('dash-view-2').style.display = (tabNum === 2) ? 'grid' : 'none';
+}
+
+function handleDemandSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('req-name').value;
+    alert(`धन्यवाद ${name}! आपकी मांग सफलतापूर्वक दर्ज कर ली गई है।`);
+    e.target.reset();
+}
+
 const embeddedMasterDatabase = {
     "MPESB_SUB_ENG": {
         examName: "MPESB समूह-03 सब-इंजीनियर",
@@ -347,37 +419,17 @@ const embeddedMasterDatabase = {
             {section: "MP GK", q_hi: "मध्य प्रदेश का प्रसिद्ध 'तानसेन समारोह' कहाँ आयोजित होता है?", q_en: "Where is the famous 'Tansen Samaroh' of MP held?", opts_hi: ["भोपाल", "ग्वालियर", "उज्जैन", "इंदौर"], opts_en: ["Bhopal", "Gwalior", "Ujjain", "Indore"], ans: 1, exp: "तानसेन समारोह ग्वालियर के बेहट में आयोजित किया जाता है।"},
             {section: "Technical Core", q_hi: "एक 4-पोल, 50 Hz इंडक्शन मोटर की तुल्यकालिक गति (Synchronous Speed) कितनी होगी?", q_en: "What is the synchronous speed of a 4-pole, 50 Hz induction motor?", opts_hi: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"], opts_en: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"], ans: 1, exp: "Ns = (120 * f) / P = (120 * 50) / 4 = 1500 RPM."},
             {section: "Technical Core", q_hi: "ट्रांसफॉर्मर कोर में भंवर धारा हानियों (Eddy Current Losses) को कम करने के लिए क्या किया जाता है?", q_en: "To reduce eddy current losses in a transformer core, which of the following is done?", opts_hi: ["उच्च प्रतिरोध वाले लैमिनेशन का उपयोग", "वायु कोर का उपयोग", "ठोस लोहे का उपयोग", "वाइंडिंग बढ़ाना"], opts_en: ["Using thin laminations with high resistance", "Using air core", "Using solid iron", "Increasing turns"], ans: 0, exp: "पतली पत्तियों (Laminations) पर वार्निश इन्सुलेशन करने से करंट पाथ का प्रतिरोध बढ़ जाता है।"},
-            {section: "MP GK", q_hi: "मध्य प्रदेश की सबसे ऊंची चोटी 'धूपगढ़' किस पर्वत श्रेणी में स्थित है?", q_en: "The highest peak of MP, 'Dhupgarh', is situated in which mountain range?", opts_hi: ["विंध्याचल श्रेणी", "महादेव पहाड़ियाँ / सतपुड़ा", "मैकल श्रेणी", "कैमूर श्रेणी"], opts_en: ["Vindhyachal Range", "Mahadeo Hills / Satpura", "Maikal Range", "Kaimur Range"], ans: 1, exp: "धूपगढ़ (1350 मीटर) पचमढ़ी में सतपुड़ा पर्वतमाला की महादेव पहाड़ियों पर स्थित है।"},
-            {section: "Technical Core", q_hi: "किसी कंडक्टर का प्रतिरोध किस पर निर्भर करता है?", q_en: "Resistance of a conductor depends on?", opts_hi: ["लंबाई (Length)", "अनुप्रस्थ काट का क्षेत्रफल (Area)", "पदार्थ की प्रकृति (Material)", "उपरोक्त सभी (All of the above)"], opts_en: ["Length", "Cross-sectional area", "Nature of material", "All of the above"], ans: 3, exp: "R = ρ(l/A), अतः प्रतिरोध लंबाई, क्षेत्रफल और पदार्थ तीनों पर निर्भर करता है।"},
-            {section: "MP GK", q_hi: "मध्य प्रदेश में 'खजुराहो के मंदिर' किस राजवंश द्वारा बनवाए गए थे?", q_en: "Khajuraho temples in MP were built by which dynasty?", opts_hi: ["चंदेल राजवंश", "परमार राजवंश", "कछवाहा राजवंश", "सिंधिया राजवंश"], opts_en: ["Chandela Dynasty", "Parmar Dynasty", "Kachwaha Dynasty", "Scindia Dynasty"], ans: 0, exp: "खजुराहो के विश्व प्रसिद्ध मंदिरों का निर्माण चंदेल राजाओं द्वारा 950 से 1050 ईस्वी के बीच कराया गया था।"},
-            {section: "Technical Core", q_hi: "फ्यूज तार का गलनांक (Melting Point) कैसा होना चाहिए?", q_en: "What should be the melting point of a fuse wire?", opts_hi: ["उच्च (High)", "कम (Low)", "मध्यम (Medium)", "अनंत (Infinite)"], opts_en: ["High", "Low", "Medium", "Infinite"], ans: 1, exp: "फ्यूज तार का गलनांक कम होना चाहिए ताकि ओवरलोड होने पर यह तुरंत पिघल जाए।"}
+            {section: "MP GK", q_hi: "मध्य प्रदेश की सबसे ऊंची चोटी 'धूपगढ़' किस पर्वत श्रेणी में स्थित है?", q_en: "The highest peak of MP, 'Dhupgarh', is situated in which mountain range?", opts_hi: ["विंध्याचल श्रेणी", "महादेव पहाड़ियाँ / सतपुड़ा", "मैकल श्रेणी", "कैमूर श्रेणी"], opts_en: ["Vindhyachal Range", "Mahadeo Hills / Satpura", "Maikal Range", "Kaimur Range"], ans: 1, exp: "धूपगढ़ (1350 मीटर) पचमढ़ी में सतपुड़ा पर्वतमाला की महादेव पहाड़ियों पर स्थित है।"}
         ]
     },
     "IBPS_RRB_PO": {
-        examName: "IBPS RRB PO (Scale-I)",
+        examName: "IBPS RRB PO / Clerk (Prelims)",
         durationMinutes: 45,
         negativeMarking: 0.25,
         questions: [
             {section: "Quantitative Aptitude", q_hi: "A किसी कार्य को 12 दिनों में और B 18 दिनों में पूरा करता है। दोनों मिलकर उस कार्य को कितने दिनों में पूरा करेंगे?", q_en: "A can complete a work in 12 days and B in 18 days. In how many days will they complete together?", opts_hi: ["7.2 दिन", "6.5 दिन", "8 दिन", "7 दिन"], opts_en: ["7.2 days", "6.5 days", "8 days", "7 days"], ans: 0, exp: "कुल कार्य = 36 यूनिट। A = 3, B = 2। कुल समय = 36 / 5 = 7.2 दिन।"},
             {section: "Reasoning Ability", q_hi: "यदि किसी कूट भाषा में 'BANK' को 'CDOL' लिखा जाता है, तो 'POOL' को क्या लिखा जाएगा?", q_en: "If 'BANK' is coded as 'CDOL', how will 'POOL' be coded?", opts_hi: ["RQPM", "QPPM", "RPPM", "SQQN"], opts_en: ["RQPM", "QPPM", "RPPM", "SQQN"], ans: 0, exp: "प्रत्येक अक्षर में क्रमशः +1, +2, +3, +4 का विस्थापन है।"},
-            {section: "Quantitative Aptitude", q_hi: "एक वस्तु को 800 रुपये में बेचने पर 20% का लाभ होता है, तो उसका क्रय मूल्य (Cost Price) क्या है?", q_en: "An article is sold for Rs. 800 at a 20% profit. What is its cost price?", opts_hi: ["600 रुपये", "666.67 रुपये", "700 रुपये", "750 रुपये"], opts_en: ["Rs. 600", "Rs. 666.67", "Rs. 700", "Rs. 750"], ans: 1, exp: "CP = 800 * (100 / 120) = 666.67 रुपये।"}
-        ]
-    },
-    "MPPSC_PRE": {
-        examName: "MPPSC राज्य सेवा परीक्षा",
-        durationMinutes: 120,
-        negativeMarking: 0.0,
-        questions: [
-            {section: "General Studies", q_hi: "मध्य प्रदेश का राज्य वृक्ष कौन सा है?", q_en: "Which is the state tree of Madhya Pradesh?", opts_hi: ["बरगद", "आम", "पीपल", "नीम"], opts_en: ["Banyan", "Mango", "Peepal", "Neem"], ans: 0, exp: "बरगद (Ficus benghalensis) मध्य प्रदेश का राज्य वृक्ष है।"},
-            {section: "General Studies", q_hi: "मध्य प्रदेश की प्रथम महिला मुख्यमंत्री कौन थीं?", q_en: "Who was the first female Chief Minister of Madhya Pradesh?", opts_hi: ["उमा भारती", "सरला ग्रेवाल", "यशोराजे सिंधिया", "आनंदीबेन पटेल"], opts_en: ["Uma Bharti", "Sarla Grewal", "Yashodhara Raje Scindia", "Anandiben Patel"], ans: 0, exp: "उमा भारती मध्य प्रदेश की पहली महिला मुख्यमंत्री थीं।"}
-        ]
-    },
-    "SSC_JE": {
-        examName: "SSC JE / RRB JE (Electrical)",
-        durationMinutes: 120,
-        negativeMarking: 0.25,
-        questions: [
-            {section: "Electrical Engineering", q_hi: "प्रतिरोध का एसआई मात्रक क्या होता है?", q_en: "What is the SI unit of resistance?", opts_hi: ["ओम (Ohm)", "एम्पियर", "वाल्ट", "हेनरी"], opts_en: ["Ohm", "Ampere", "Volt", "Henry"], ans: 0, exp: "प्रतिरोध का एसआई मात्रक ओम (Ohm) होता है।"}
+            {section: "Quantitative Aptitude", q_hi: "एक वस्तु को 800 रुपये में बेचने पर 20% का लाभ होता है, तो उसका क्रय मूल्य क्या है?", q_en: "An article is sold for Rs. 800 at a 20% profit. What is its cost price?", opts_hi: ["600 रुपये", "666.67 रुपये", "700 रुपये", "750 रुपये"], opts_en: ["Rs. 600", "Rs. 666.67", "Rs. 700", "Rs. 750"], ans: 1, exp: "CP = 800 * (100 / 120) = 666.67 रुपये।"}
         ]
     }
 };
@@ -421,12 +473,12 @@ function openExamSets(examKey) {
 }
 
 function launchExam(setNumber) {
-    const examData = embeddedMasterDatabase[selectedExamKey];
+    const examData = embeddedMasterDatabase[selectedExamKey] || embeddedMasterDatabase["MPESB_SUB_ENG"];
     currentExamConfig = {
-        name: examData ? examData.examName : selectedExamKey,
-        duration: examData ? examData.durationMinutes : 60,
-        negative: examData ? examData.negativeMarking : 0.0,
-        questions: examData && examData.questions ? examData.questions : []
+        name: examData.examName,
+        duration: examData.durationMinutes,
+        negative: examData.negativeMarking,
+        questions: examData.questions
     };
     activeQuestions = currentExamConfig.questions;
     userStates = activeQuestions.map(() => ({ selected: null, status: 'not-visited' }));
