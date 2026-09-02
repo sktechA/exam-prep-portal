@@ -3,35 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKTech Master CBT Examination Portal</title>
+    <title>SKTech Universal Examination Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a8a;
-            --primary-dark: #0f172a;
-            --accent: #0284c7;
-            --accent-glow: #38bdf8;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-sub: #64748b;
-            --green: #16a34a;
-            --red: #dc2626;
-            --violet: #7c3aed;
-            --border: #cbd5e1;
+            --primary: #0f172a;
+            --accent-blue: #38bdf8;
+            --accent-indigo: #6366f1;
+            --accent-emerald: #10b981;
+            --card-bg: rgba(255, 255, 255, 0.96);
+            --card-border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background: var(--bg); color: var(--text-main); height: 100vh; display: flex; flex-direction: column; overflow: hidden; position: relative; }
 
-        /* Full Screen SKTech Watermark across All Pages */
+        /* Anti-Copy & Anti-Select Protection */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background: #f8fafc;
+            color: var(--text-dark);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Global Anti-Piracy Watermark */
         body::before {
-            content: "SKTech";
+            content: "SKTech • LEARN | PRACTICE | SUCCEED";
             position: fixed;
-            top: 50%;
+            top: 52%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 14vw;
-            font-weight: 900;
-            color: rgba(15, 23, 42, 0.038);
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 4.5vw;
+            font-weight: 800;
+            color: rgba(15, 23, 42, 0.04);
             pointer-events: none;
             z-index: 9999;
             user-select: none;
@@ -39,296 +56,620 @@
             white-space: nowrap;
         }
 
-        /* Top Header */
-        .portal-nav { background: var(--primary-dark); color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--accent); z-index: 10; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.12); }
+        /* Top Bar */
+        .portal-nav {
+            background: #0b0f19;
+            color: white;
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #1e293b;
+            z-index: 10;
+        }
         .logo-box { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-        .logo-tag { background: linear-gradient(135deg, #2563eb, #06b6d4); padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 16px; letter-spacing: 0.5px; box-shadow: 0 3px 10px rgba(37,99,235,0.35); }
-        .nav-title { font-size: 17px; font-weight: 700; color: #f8fafc; }
-        .timer-badge { background: #1e293b; border: 1.5px solid #334155; padding: 6px 16px; border-radius: 8px; font-size: 16px; font-weight: 800; color: var(--accent-glow); display: none; }
+        .logo-emblem {
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            width: 42px; height: 42px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 12px rgba(56,189,248,0.3);
+        }
+        .logo-text-group { display: flex; flex-direction: column; }
+        .logo-title { font-size: 19px; font-weight: 800; letter-spacing: 0.5px; color: #ffffff; }
+        .logo-tagline { font-size: 9px; font-weight: 700; color: #38bdf8; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* Screen 1: Exam Hub */
-        #screen-exams { flex: 1; overflow-y: auto; padding: 35px 20px; max-width: 1050px; margin: auto; width: 100%; position: relative; z-index: 1; }
-        .hub-header { text-align: center; margin-bottom: 30px; }
-        .hub-title { font-size: 26px; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
-        .hub-sub { font-size: 14px; color: var(--text-sub); }
+        .nav-center-links { display: flex; gap: 8px; align-items: center; }
+        .nav-link {
+            display: flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.06);
+            color: #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .nav-link:hover, .nav-link.active { background: #0284c7; color: white; }
 
-        .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
-        .exam-card { background: rgba(255, 255, 255, 0.95); border: 2px solid var(--border); border-radius: 14px; padding: 22px; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 6px 20px rgba(0,0,0,0.04); backdrop-filter: blur(4px); display: flex; flex-direction: column; justify-content: space-between; }
-        .exam-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 30px rgba(2,132,199,0.18); }
+        .nav-controls { display: flex; align-items: center; gap: 14px; }
+        .live-clock-badge {
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid #334155;
+        }
+        .lang-switch-btn {
+            background: #1e293b;
+            color: #38bdf8;
+            border: 1.5px solid #38bdf8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-switch-btn:hover { background: #38bdf8; color: #0b0f19; }
+        .timer-badge {
+            background: #1e293b;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #38bdf8;
+            display: none;
+        }
+
+        /* Screen 1: Dashboard */
+        #screen-exams { flex: 1; overflow-y: auto; padding: 30px 20px 60px; max-width: 1150px; margin: auto; width: 100%; z-index: 1; }
         
-        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .book-icon { font-size: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
-        .card-tag { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; }
-        
-        .card-title { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: #1e293b; }
-        .card-desc { font-size: 13px; color: var(--text-sub); line-height: 1.5; margin-bottom: 15px; }
-        .card-footer-info { font-size: 13px; font-weight: 700; color: var(--primary); border-top: 1px dashed var(--border); padding-top: 12px; display: flex; justify-content: space-between; }
+        .hero-banner {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+            border: 1.5px solid #bfdbfe;
+            border-radius: 20px;
+            padding: 28px 35px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        }
+        .hero-left h2 { font-size: 12px; font-weight: 800; color: #2563eb; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+        .hero-left h1 { font-size: 30px; font-weight: 900; color: #0f172a; margin-bottom: 8px; line-height: 1.2; }
+        .hero-left h1 span { color: #2563eb; }
+        .hero-left p { font-size: 13px; color: #64748b; margin-bottom: 18px; max-width: 580px; line-height: 1.5; }
+        .hero-features { display: flex; gap: 20px; flex-wrap: wrap; }
+        .hero-feat-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #1e293b; }
+        .hero-feat-item span { width: 22px; height: 22px; border-radius: 50%; background: #dbeafe; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 11px; }
 
-        /* Screen 2: Sets Selector (Set 1 to 50: Low -> High) */
-        #screen-sets { display: none; flex: 1; overflow-y: auto; padding: 30px 20px; max-width: 950px; margin: auto; width: 100%; position: relative; z-index: 1; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--accent); cursor: pointer; margin-bottom: 18px; }
-        .sets-legend { display: flex; gap: 15px; margin: 12px 0 20px 0; font-size: 12px; font-weight: 700; flex-wrap: wrap; }
-        .legend-chip { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; }
-        
-        .sets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
-        .set-btn { background: rgba(255, 255, 255, 0.95); border: 2px solid var(--border); border-radius: 10px; padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
-        .set-btn:hover { border-color: var(--accent); transform: scale(1.02); background: #eff6ff; }
-        .set-btn.level-easy { border-top: 4px solid var(--green); }
-        .set-btn.level-mod { border-top: 4px solid #f59e0b; }
-        .set-btn.level-hard { border-top: 4px solid var(--red); }
-        
-        .set-num { font-size: 16px; font-weight: 800; color: var(--primary); }
-        .set-level-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+        .section-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .section-title { font-size: 20px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px; }
+        .view-all-link { font-size: 13px; font-weight: 700; color: #2563eb; text-decoration: none; cursor: pointer; }
 
-        /* Screen 3: Real CBT Room */
-        #screen-cbt { display: none; height: calc(100vh - 60px); grid-template-columns: 1fr 320px; position: relative; z-index: 1; }
-        .main-panel { display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.96); border-right: 2px solid var(--border); height: 100%; position: relative; }
-        
-        .sub-nav { background: #f1f5f9; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border); }
-        .sec-tabs { display: flex; gap: 8px; }
-        .tab-btn { background: #e2e8f0; border: none; padding: 7px 16px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; color: #475569; }
-        .tab-btn.active { background: var(--primary); color: white; }
-        
-        .q-window { flex: 1; padding: 25px; overflow-y: auto; }
-        .q-header { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 18px; color: var(--text-sub); }
-        .q-text { font-size: 17px; font-weight: 600; line-height: 1.6; margin-bottom: 22px; }
-        .opts-box { display: flex; flex-direction: column; gap: 12px; }
-        .opt-item { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 15px; background: rgba(255, 255, 255, 0.9); }
-        .opt-item:hover { background: #f8fafc; border-color: #94a3b8; }
-        .opt-item.selected { background: #eff6ff; border-color: var(--accent); font-weight: 600; }
+        .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .exam-card {
+            background: var(--card-bg);
+            border: 1.5px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .exam-card:hover { transform: translateY(-4px); border-color: #38bdf8; box-shadow: 0 12px 30px rgba(56,189,248,0.15); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .icon-circle { width: 44px; height: 44px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 22px; }
+        .card-tag { font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 16px; text-transform: uppercase; }
+        .card-title { font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+        .card-desc { font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 16px; }
+        .card-meta { border-top: 1px dashed #e2e8f0; padding-top: 14px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: #2563eb; }
 
-        .cbt-footer { padding: 12px 20px; background: #f8fafc; border-top: 1.5px solid var(--border); display: flex; justify-content: space-between; }
-        .cbt-btn { padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; border: 1px solid #cbd5e1; background: white; }
-        .cbt-btn-save { background: var(--green); color: white; border-color: var(--green); }
-        .cbt-btn-review { background: var(--violet); color: white; border-color: var(--violet); }
+        /* Features Strip */
+        .features-strip {
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 16px 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .feat-box { display: flex; align-items: center; gap: 12px; }
+        .feat-icon { width: 36px; height: 36px; border-radius: 10px; background: #eff6ff; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .feat-text h4 { font-size: 13px; font-weight: 800; color: #0f172a; }
+        .feat-text p { font-size: 11px; color: #64748b; }
 
-        /* Palette Panel */
-        .side-palette { background: #f8fafc; display: flex; flex-direction: column; height: 100%; }
-        .legend-box { padding: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px; border-bottom: 1.5px solid var(--border); }
-        .legend-tag { display: flex; align-items: center; gap: 6px; }
-        .tag-sq { width: 16px; height: 16px; border-radius: 4px; }
-        .pal-grid { flex: 1; padding: 14px; overflow-y: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-content: start; }
-        .pal-btn { height: 38px; border: 1px solid var(--border); font-weight: 800; font-size: 13px; border-radius: 6px; cursor: pointer; background: white; }
-        .pal-btn.active { outline: 2.5px solid #000; }
-        .pal-btn.answered { background: var(--green); color: white; border-color: var(--green); }
-        .pal-btn.not-answered { background: var(--red); color: white; border-color: var(--red); }
-        .pal-btn.marked { background: var(--violet); color: white; border-color: var(--violet); }
+        /* Student Request Desk */
+        .demand-box-container {
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+        }
+        .demand-header { font-size: 17px; font-weight: 800; color: #0f172a; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .demand-sub { font-size: 12px; color: #64748b; margin-bottom: 14px; }
+        .demand-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+        .input-text {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            outline: none;
+            transition: 0.2s;
+            -webkit-user-select: text;
+            user-select: text;
+        }
+        .input-text:focus { border-color: #38bdf8; }
+        .input-msg { grid-column: span 2; resize: vertical; min-height: 60px; }
+        .btn-send-demand {
+            background: #0f172a;
+            color: white;
+            padding: 9px 18px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-send-demand:hover { background: #2563eb; }
 
-        .submit-box { padding: 14px; border-top: 1.5px solid var(--border); }
-        .btn-submit { width: 100%; background: #0284c7; color: white; padding: 12px; border: none; font-weight: 800; border-radius: 6px; cursor: pointer; font-size: 14px; }
+        /* Footer */
+        .portal-footer {
+            background: #070a12;
+            color: #94a3b8;
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            border-top: 1px solid #1e293b;
+        }
+        .footer-quote { font-style: italic; color: #cbd5e1; font-weight: 500; }
+        .footer-links { display: flex; gap: 16px; align-items: center; }
+        .footer-links a { color: #94a3b8; text-decoration: none; transition: 0.2s; }
+        .footer-links a:hover { color: #38bdf8; }
 
-        /* Screen 4: Result Screen */
-        #screen-result { display: none; padding: 30px 20px; overflow-y: auto; height: calc(100vh - 60px); max-width: 950px; margin: auto; width: 100%; position: relative; z-index: 1; }
-        .score-card { background: rgba(255, 255, 255, 0.96); border: 1.5px solid var(--border); border-radius: 12px; padding: 22px; margin-bottom: 22px; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
-        .score-card h3 { font-size: 26px; font-weight: 800; }
-        .sol-card { background: rgba(255, 255, 255, 0.96); border: 1.5px solid var(--border); border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        /* Screen 2: Sets Selector */
+        #screen-sets { display: none; flex: 1; overflow-y: auto; padding: 30px 20px; max-width: 950px; margin: auto; width: 100%; z-index: 1; }
+        .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #64748b; cursor: pointer; margin-bottom: 16px; padding: 6px 14px; border-radius: 6px; background: white; border: 1px solid #e2e8f0; }
+        .sets-legend { display: flex; gap: 10px; margin: 12px 0 20px 0; flex-wrap: wrap; }
+        .legend-tag { font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 6px; }
+        .sets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+        .set-btn { background: white; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 10px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .set-btn:hover { border-color: #38bdf8; transform: scale(1.02); }
+        .set-num { font-size: 16px; font-weight: 800; color: #0f172a; }
+        .set-pill { font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 5px; }
+
+        /* Screen 3: CBT Room */
+        #screen-cbt { display: none; height: calc(100vh - 105px); grid-template-columns: 1fr 320px; z-index: 1; }
+        .main-panel { display: flex; flex-direction: column; background: white; border-right: 1.5px solid #e2e8f0; height: 100%; z-index: 2; }
+        .cbt-subbar { background: #f8fafc; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #e2e8f0; }
+        .sec-tabs { display: flex; gap: 6px; }
+        .tab-pill { background: #e2e8f0; border: none; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; color: #475569; }
+        .tab-pill.active { background: #0f172a; color: white; }
+
+        .q-scroll { flex: 1; padding: 25px; overflow-y: auto; }
+        .q-tagline { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 14px; }
+        .q-dual-box { margin-bottom: 20px; border-left: 3px solid #38bdf8; padding-left: 12px; }
+        .q-text-hi { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px; line-height: 1.5; }
+        .q-text-en { font-size: 15px; font-weight: 600; color: #475569; line-height: 1.5; font-style: italic; }
+
+        .options-wrap { display: flex; flex-direction: column; gap: 10px; }
+        .opt-box {
+            display: flex; flex-direction: column; padding: 12px 16px;
+            border: 1.5px solid #e2e8f0; border-radius: 10px; cursor: pointer;
+            background: #f8fafc; transition: 0.2s;
+        }
+        .opt-box:hover { border-color: #94a3b8; }
+        .opt-box.selected { background: #eff6ff; border-color: #2563eb; font-weight: 700; }
+        .opt-hi { font-size: 14px; color: #0f172a; font-weight: 600; }
+        .opt-en { font-size: 13px; color: #64748b; margin-top: 2px; }
+
+        .cbt-footer { padding: 12px 20px; background: #f8fafc; border-top: 1.5px solid #e2e8f0; display: flex; justify-content: space-between; }
+        .btn-act { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; border: 1px solid #cbd5e1; background: white; }
+        .btn-act-primary { background: #16a34a; color: white; border-color: #16a34a; }
+        .btn-act-review { background: #7c3aed; color: white; border-color: #7c3aed; }
+
+        /* Palette */
+        .side-palette { background: #f8fafc; display: flex; flex-direction: column; height: 100%; z-index: 2; }
+        .palette-legend { padding: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11px; font-weight: 600; border-bottom: 1.5px solid #e2e8f0; }
+        .p-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+        .p-grid { flex: 1; padding: 14px; overflow-y: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-content: start; }
+        .p-num { height: 38px; border: 1px solid #e2e8f0; font-weight: 800; font-size: 13px; border-radius: 6px; cursor: pointer; background: white; }
+        .p-num.active { outline: 2.5px solid #0f172a; }
+        .p-num.answered { background: #16a34a; color: white; border-color: #16a34a; }
+        .p-num.not-answered { background: #dc2626; color: white; border-color: #dc2626; }
+        .p-num.marked { background: #7c3aed; color: white; border-color: #7c3aed; }
+        .palette-bottom { padding: 12px; border-top: 1.5px solid #e2e8f0; background: white; }
+        .btn-submit-main { width: 100%; background: #0284c7; color: white; padding: 11px; border: none; font-weight: 800; border-radius: 6px; cursor: pointer; font-size: 14px; }
+
+        /* Screen 4: Result */
+        #screen-result { display: none; padding: 30px 20px; overflow-y: auto; height: calc(100vh - 105px); max-width: 900px; margin: auto; width: 100%; z-index: 1; }
+        .score-box-wrap { background: white; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 10px; }
+        .score-box-wrap h3 { font-size: 26px; font-weight: 800; margin-bottom: 2px; }
+        .sol-tile { background: white; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 18px; margin-bottom: 12px; }
+
+        @media print { body { display: none !important; } }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
-<!-- Header -->
 <div class="portal-nav">
     <div class="logo-box" onclick="goHome()">
-        <span class="logo-tag">⚡ SKTech</span>
-        <span class="nav-title" id="top-title">Universal Examination Portal</span>
+        <div class="logo-emblem">🎓</div>
+        <div class="logo-text-group">
+            <span class="logo-title">SKTech</span>
+            <span class="logo-tagline">LEARN | PRACTICE | SUCCEED</span>
+        </div>
     </div>
-    <div class="timer-badge" id="timer-box">⏳ <span id="time-left">03:00:00</span></div>
+    <div class="nav-center-links">
+        <a class="nav-link active" onclick="goHome()">🏠 Home</a>
+        <a class="nav-link" onclick="goHome()">📝 Mock Tests</a>
+        <a class="nav-link" onclick="goHome()">📚 Syllabus</a>
+        <a class="nav-link" onclick="goHome()">📊 Results</a>
+        <a class="nav-link" onclick="goHome()">⚙️ Study Tools</a>
+    </div>
+    <div class="nav-controls">
+        <div class="live-clock-badge" id="live-clock">📅 02 Sep 2026 | ⏰ 11:35 PM</div>
+        <button class="lang-switch-btn" onclick="toggleGlobalLanguage()" id="lang-btn">🌐 Language: हिंदी</button>
+        <div class="timer-badge" id="timer-box">⏳ <span id="time-left">00:45:00</span></div>
+    </div>
 </div>
 
-<!-- Screen 1: All Exams Hub -->
+<!-- Screen 1: Dashboard -->
 <div id="screen-exams">
-    <div class="hub-header">
-        <h1 class="hub-title">🎯 लक्षित परीक्षा का चयन करें</h1>
-        <p class="hub-sub">प्रत्येक परीक्षा में उसके नवीनतम सिलेबस, समय-सीमा, पैटर्न और नेगेटिव मार्किंग के अनुसार 50 मॉक सेट्स उपलब्ध हैं</p>
+    <div class="hero-banner">
+        <div class="hero-left">
+            <h2>Dream | Prepare | Achieve</h2>
+            <h1>Prepare <span>Today</span><br>For a Brighter Tomorrow</h1>
+            <p>Access high-quality mock tests, detailed syllabus, performance analysis and smart study tools – all in one place.</p>
+            <div class="hero-features">
+                <div class="hero-feat-item"><span>✓</span> Latest Pattern</div>
+                <div class="hero-feat-item"><span>✓</span> Detailed Analysis</div>
+                <div class="hero-feat-item"><span>✓</span> Trusted Content</div>
+                <div class="hero-feat-item"><span>✓</span> Learn Together</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-header-row">
+        <div class="section-title">🔥 Popular Exams</div>
+        <span class="view-all-link">View All Exams ➔</span>
     </div>
     
     <div class="exam-grid">
-        <!-- MPESB Card -->
-        <div class="exam-card" onclick="openExamSets('MPESB')">
-            <div class="card-top">
-                <span class="book-icon">⚡</span>
-                <span class="card-tag" style="background:#e0f2fe; color:#0284c7;">MP VYAPAM</span>
+        <!-- MPESB Sub-Engineer -->
+        <div class="exam-card" onclick="openExamSets('MPESB_SUB_ENG')">
+            <div>
+                <div class="card-header">
+                    <div class="icon-circle" style="background:#e0f2fe;">⚡</div>
+                    <span class="card-tag" style="background:#e0f2fe; color:#0284c7;">MP VYAPAM</span>
+                </div>
+                <div class="card-title">MPESB समूह-03 सब-इंजीनियर</div>
+                <div class="card-desc" id="desc-mpesb">इलेक्ट्रिकल व इलेक्ट्रॉनिक पोर्ट + मोटर मैकेनिक (MP GK, ITI, 3 घंटे की अवधि, संवेर्धित नोट्स).</div>
             </div>
-            <div class="card-title">MPESB समूह-03 सब-इंजीनियर</div>
-            <div class="card-desc">इलेक्ट्रिकल व इलेक्ट्रॉनिक्स कोर + नॉन-टेक्निकल (MP GK, मैथ्स, IT). 3 घंटे की अवधि, कोई नेगेटिव मार्किंग नहीं।</div>
-            <div class="card-footer-info"><span>📖 50 Mock Sets (Set 1-50)</span> <span>5,000 प्रश्न ➔</span></div>
+            <div class="card-meta">
+                <span id="meta-mpesb">📖 50 Mock Sets (5,000 Q)</span>
+                <span>➔</span>
+            </div>
         </div>
 
-        <!-- RRB PO Card -->
-        <div class="exam-card" onclick="openExamSets('RRB_PO')">
-            <div class="card-top">
-                <span class="book-icon">💼</span>
-                <span class="card-tag" style="background:#dcfce7; color:#15803d;">BANKING (IBPS)</span>
+        <!-- IBPS RRB PO -->
+        <div class="exam-card" onclick="openExamSets('IBPS_RRB_PO')">
+            <div>
+                <div class="card-header">
+                    <div class="icon-circle" style="background:#dcfce7;">💼</div>
+                    <span class="card-tag" style="background:#dcfce7; color:#15803d;">BANKING (IBPS)</span>
+                </div>
+                <div class="card-title">IBPS RRB PO (Scale-I)</div>
+                <div class="card-desc" id="desc-rrb">रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy), 45 मिनट की अवधि, -0.25 नेगेटिव मार्किंग।</div>
             </div>
-            <div class="card-title">IBPS RRB PO (Scale-I)</div>
-            <div class="card-desc">रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy). 45 मिनट की अवधि, -0.25 नेगेटिव मार्किंग।</div>
-            <div class="card-footer-info"><span>📖 50 Mock Sets (Set 1-50)</span> <span>4,000 प्रश्न ➔</span></div>
+            <div class="card-meta">
+                <span id="meta-rrb">📖 50 Mock Sets (4,000 Q)</span>
+                <span>➔</span>
+            </div>
         </div>
 
-        <!-- MPPSC Card -->
-        <div class="exam-card" onclick="openExamSets('MPPSC')">
-            <div class="card-top">
-                <span class="book-icon">🏛️</span>
-                <span class="card-tag" style="background:#fef3c7; color:#b45309;">STATE PCS</span>
+        <!-- MPPSC State Service -->
+        <div class="exam-card" onclick="openExamSets('MPPSC_PRE')">
+            <div>
+                <div class="card-header">
+                    <div class="icon-circle" style="background:#f3e8ff;">🏛️</div>
+                    <span class="card-tag" style="background:#f3e8ff; color:#7e22ce;">STATE PCS</span>
+                </div>
+                <div class="card-title">MPPSC राज्य सेवा परीक्षा</div>
+                <div class="card-desc" id="desc-mppsc">पेपर-1 सामान्य अध्ययन | इतिहास, राजनीति, भूगोल, विज्ञान • पेपर-2 CSAT • करेंट अफेयर्स</div>
             </div>
-            <div class="card-title">MPPSC राज्य सेवा परीक्षा</div>
-            <div class="card-desc">पेपर-1 सामान्य अध्ययन (म.प्र. विशेष, इतिहास, भूगोल, विज्ञान) + पेपर-2 CSAT. 2 घंटे की अवधि।</div>
-            <div class="card-footer-info"><span>📖 50 Mock Sets (Set 1-50)</span> <span>5,000 प्रश्न ➔</span></div>
+            <div class="card-meta">
+                <span id="meta-mppsc">📖 50 Mock Sets (5,000 Q)</span>
+                <span>➔</span>
+            </div>
         </div>
 
-        <!-- SSC JE / Railway Card -->
+        <!-- SSC JE / RRB JE -->
         <div class="exam-card" onclick="openExamSets('SSC_JE')">
-            <div class="card-top">
-                <span class="book-icon">🚆</span>
-                <span class="card-tag" style="background:#f3e8ff; color:#7e22ce;">CENTRAL GOVT</span>
+            <div>
+                <div class="card-header">
+                    <div class="icon-circle" style="background:#fae8ff;">👮</div>
+                    <span class="card-tag" style="background:#fae8ff; color:#a21caf;">CENTRAL GOVT</span>
+                </div>
+                <div class="card-title">SSC JE / RRB JE (Electrical)</div>
+                <div class="card-desc" id="desc-ssc">इलेक्ट्रिकल इंजीनियरिंग कॉंसेप्ट • टेक्निकल सामान्य जानकारी-2 • कट-ऑफ आधारित, -0.25 नेगेटिव मार्किंग।</div>
             </div>
-            <div class="card-title">SSC JE / RRB JE (Electrical)</div>
-            <div class="card-desc">जनरल इंजीनियरिंग कोर + रीजनिंग व सामान्य जागरूकता. 2 घंटे की अवधि, -0.25 नेगेटिव मार्किंग।</div>
-            <div class="card-footer-info"><span>📖 50 Mock Sets (Set 1-50)</span> <span>5,000 प्रश्न ➔</span></div>
+            <div class="card-meta">
+                <span id="meta-ssc">📖 50 Mock Sets (5,000 Q)</span>
+                <span>➔</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Bottom Strip -->
+    <div class="features-strip">
+        <div class="feat-box">
+            <div class="feat-icon">📖</div>
+            <div class="feat-text">
+                <h4>Topic-wise Practice</h4>
+                <p>Concepts to Confidence</p>
+            </div>
+        </div>
+        <div class="feat-box">
+            <div class="feat-icon">📊</div>
+            <div class="feat-text">
+                <h4>Performance Analysis</h4>
+                <p>Track Your Progress</p>
+            </div>
+        </div>
+        <div class="feat-box">
+            <div class="feat-icon">⚡</div>
+            <div class="feat-text">
+                <h4>Latest Pattern</h4>
+                <p>Always Updated</p>
+            </div>
+        </div>
+        <div class="feat-box">
+            <div class="feat-icon">🛡️</div>
+            <div class="feat-text">
+                <h4>Secure & Reliable</h4>
+                <p>Your Data is Safe</p>
+            </div>
+        </div>
+        <div class="feat-box">
+            <div class="feat-icon">👥</div>
+            <div class="feat-text">
+                <h4>Student Community</h4>
+                <p>Learn Together</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Request / Review Desk -->
+    <div class="demand-box-container">
+        <div class="demand-header">💬 <span id="lbl-desk-head">विद्यार्थी सहायता एवं सुझाव केंद्र (Helpdesk & Demand Desk)</span></div>
+        <p class="demand-sub" id="lbl-desk-sub">आपको किस विषय या परीक्षा के अतिरिक्त सेट्स चाहिए? हमें सीधे बताएं, हम तुरंत उपलब्ध कराएंगे।</p>
+        <form onsubmit="handleDemandSubmit(event)">
+            <div class="demand-form-grid">
+                <input type="text" id="req-name" class="input-text" placeholder="आपका नाम व मोबाइल नंबर" required>
+                <input type="text" id="req-topic" class="input-text" placeholder="इच्छित विषय / परीक्षा (जैसे: MP GK, Electrical Machine)" required>
+                <textarea id="req-msg" class="input-text input-msg" placeholder="अपना सुझाव या समस्या यहाँ विस्तार से लिखें..." required></textarea>
+            </div>
+            <button type="submit" class="btn-send-demand" id="btn-desk-send">सुझाव सबमिट करें ➔</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="portal-footer">
+        <div>© 2026 SKTech. All Rights Reserved.</div>
+        <div class="footer-quote">“Education is the Most Powerful Weapon to Change the World”</div>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms</a>
         </div>
     </div>
 </div>
 
-<!-- Screen 2: Sets Selector (Set 1 to 50: Low -> High) -->
+<!-- Screen 2: Sets Selector -->
 <div id="screen-sets">
-    <div class="back-link" onclick="goHome()">⬅ वापस मुख्य डैशबोर्ड पर जाएँ</div>
-    <h2 id="sets-heading" style="font-size:22px; font-weight:800; color:var(--primary);">परीक्षा मॉक सेट्स</h2>
+    <button class="back-btn" onclick="goHome()" id="btn-back">⬅ वापस मुख्य डैशबोर्ड पर जाएँ</button>
+    <h2 id="sets-heading" style="font-size:22px; font-weight:800; color:#0f172a;">Mock Test Sets</h2>
     
     <div class="sets-legend">
-        <div class="legend-chip" style="background:#dcfce7; color:#15803d;">🟢 Set 01-15: Basic / Low Level (फॉर्मूला व बेसिक्स)</div>
-        <div class="legend-chip" style="background:#fef3c7; color:#b45309;">🟡 Set 16-35: Moderate Level (PYQs व अप्लाइड सवाल)</div>
-        <div class="legend-chip" style="background:#fee2e2; color:#b91c1c;">🔴 Set 36-50: Advanced / High Level (लॉन्ग पजल्स व ट्रीकी प्रश्न)</div>
+        <div class="legend-tag" style="background:#dcfce7; color:#15803d;">🟢 Set 01-15: Basic / Easy</div>
+        <div class="legend-tag" style="background:#fef3c7; color:#b45309;">🟡 Set 16-35: Moderate (PYQs)</div>
+        <div class="legend-tag" style="background:#fee2e2; color:#b91c1c;">🔴 Set 36-50: Advanced / High</div>
     </div>
 
     <div class="sets-grid" id="sets-container"></div>
 </div>
 
-<!-- Screen 3: Real CBT Exam Room -->
+<!-- Screen 3: CBT Room -->
 <div id="screen-cbt">
     <div class="main-panel">
-        <div class="sub-nav">
+        <div class="cbt-subbar">
             <div class="sec-tabs" id="sec-tab-box"></div>
-            <div style="font-size:13px; font-weight:700; color:var(--text-sub);" id="marking-info">सही: +1.0 | नेगेटिव: 0.00</div>
+            <div style="font-size:12px; font-weight:700; color:#64748b;" id="marking-info">+1.0 | 0.00</div>
         </div>
 
-        <div class="q-window">
-            <div class="q-header">
-                <span id="q-num-label">Question No. 1</span>
+        <div class="q-scroll">
+            <div class="q-tagline">
+                <span id="q-num-label">Question 1</span>
                 <span id="q-sec-label">Section</span>
             </div>
-            <div class="q-text" id="q-content">लोड हो रहा है...</div>
-            <div class="opts-box" id="opts-list"></div>
+            <div class="q-dual-box">
+                <div class="q-text-hi" id="q-content-hi">लोड हो रहा है...</div>
+                <div class="q-text-en" id="q-content-en">Loading question...</div>
+            </div>
+            <div class="options-wrap" id="opts-list"></div>
         </div>
 
         <div class="cbt-footer">
             <div>
-                <button class="cbt-btn cbt-btn-review" onclick="markReview()">Mark for Review</button>
-                <button class="cbt-btn" onclick="clearOption()">Clear Response</button>
+                <button class="btn-act btn-act-review" onclick="markReview()" id="btn-review">Mark Review</button>
+                <button class="btn-act" onclick="clearOption()" id="btn-clear">Clear</button>
             </div>
             <div>
-                <button class="cbt-btn" onclick="prevQuestion()">Previous</button>
-                <button class="cbt-btn cbt-btn-save" onclick="saveAndNext()">Save & Next ➔</button>
+                <button class="btn-act" onclick="prevQuestion()" id="btn-prev">Previous</button>
+                <button class="btn-act btn-act-primary" onclick="saveAndNext()" id="btn-next">Save & Next ➔</button>
             </div>
         </div>
     </div>
 
     <div class="side-palette">
-        <div class="legend-box">
-            <div class="legend-tag"><div class="tag-sq" style="background:var(--green)"></div> हल किया (Answered)</div>
-            <div class="legend-tag"><div class="tag-sq" style="background:var(--red)"></div> अनुत्तरित (Unanswered)</div>
-            <div class="legend-tag"><div class="tag-sq" style="background:var(--violet)"></div> रिव्यू (Marked)</div>
-            <div class="legend-tag"><div class="tag-sq" style="background:#fff; border:1px solid #ccc;"></div> देखा नहीं (Not Visited)</div>
+        <div class="palette-legend">
+            <div><span class="p-dot" style="background:#16a34a;"></span> Answered</div>
+            <div><span class="p-dot" style="background:#dc2626;"></span> Unanswered</div>
+            <div><span class="p-dot" style="background:#7c3aed;"></span> Marked</div>
+            <div><span class="p-dot" style="background:#fff; border:1px solid #cbd5e1;"></span> Not Visited</div>
         </div>
 
-        <div class="pal-grid" id="palette-grid"></div>
+        <div class="p-grid" id="palette-grid"></div>
 
-        <div class="submit-box">
-            <button class="btn-submit" onclick="submitExam(false)">परीक्षा सबमिट करें (Submit)</button>
+        <div class="palette-bottom">
+            <button class="btn-submit-main" onclick="submitExam(false)" id="btn-submit">Submit Exam</button>
         </div>
     </div>
 </div>
 
-<!-- Screen 4: Detailed Result Screen -->
+<!-- Screen 4: Result -->
 <div id="screen-result">
-    <div class="score-card">
-        <div><h3 style="color:#0284c7;" id="r-score">0</h3><p style="font-size:12px; color:var(--text-sub); font-weight:700;">कुल प्राप्तांक</p></div>
-        <div><h3 style="color:var(--green);" id="r-correct">0</h3><p style="font-size:12px; color:var(--text-sub); font-weight:700;">सही (+)</p></div>
-        <div><h3 style="color:var(--red);" id="r-wrong">0</h3><p style="font-size:12px; color:var(--text-sub); font-weight:700;">गलत (-)</p></div>
-        <div><h3 style="color:var(--text-sub);" id="r-unattempted">0</h3><p style="font-size:12px; color:var(--text-sub); font-weight:700;">छोड़े गए</p></div>
+    <div class="score-box-wrap">
+        <div><h3 style="color:#0284c7;" id="r-score">0</h3><p style="font-size:12px; color:#64748b; font-weight:700;">Score</p></div>
+        <div><h3 style="color:#16a34a;" id="r-correct">0</h3><p style="font-size:12px; color:#64748b; font-weight:700;">Correct (+)</p></div>
+        <div><h3 style="color:#dc2626;" id="r-wrong">0</h3><p style="font-size:12px; color:#64748b; font-weight:700;">Wrong (-)</p></div>
+        <div><h3 style="color:#64748b;" id="r-unattempted">0</h3><p style="font-size:12px; color:#64748b; font-weight:700;">Skipped</p></div>
     </div>
 
-    <h3 style="margin-bottom:15px; color:#1e293b;">📋 विस्तृत उत्तर कुंजी व समाधान (Answer Key & Detailed Explanations)</h3>
+    <h3 style="margin-bottom:15px; color:#0f172a;" id="lbl-sol-title">Solutions & Answer Key</h3>
     <div id="solution-list"></div>
-    <button class="cbt-btn cbt-btn-save" style="width:100%; padding:14px; margin-top:20px; font-size:15px;" onclick="goHome()">डैशबोर्ड पर वापस लौटें</button>
+    <button class="btn-act btn-act-primary" style="width:100%; padding:12px; margin-top:15px;" onclick="goHome()">Back to Home</button>
 </div>
 
 <script>
-// Exam Specifications Database
-const examConfigs = {
-    MPESB: {
-        title: "MPESB समूह-03 सब-इंजीनियर",
-        durationMinutes: 180,
-        negativeMark: 0.0,
-        sections: [
-            { id: "TECH", name: "Part B: Technical (Electrical)" },
-            { id: "NON_TECH", name: "Part A: Non-Technical (GK/Maths/IT)" }
-        ]
+// Anti-Hack & Code Inspection Blockers
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
+        (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'p' || e.key === 'P'))) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Anti-Tab Switching Monitor
+let tabWarnings = 0;
+let isExamActive = false;
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden && isExamActive) {
+        tabWarnings++;
+        if (tabWarnings < 3) {
+            alert(`⚠️ सुरक्षा चेतावनी: परीक्षा के दौरान अन्य टैब या विंडो खोलना प्रतिबंधित है! (चेतावनी ${tabWarnings}/3)`);
+        } else {
+            alert("⚠️ सुरक्षा उल्लंघन: अत्यधिक टैब बदलने के कारण परीक्षा स्वतः सबमिट की जा रही है।");
+            submitExam(true);
+        }
+    }
+});
+
+// Live Clock in Header
+function updateLiveClock() {
+    const now = new Date();
+    const options = { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+    document.getElementById('live-clock').innerText = "🕒 " + now.toLocaleString('en-IN', options);
+}
+setInterval(updateLiveClock, 1000);
+updateLiveClock();
+
+// Language State
+let currentLang = 'HI';
+let cachedMasterData = null;
+
+const uiDict = {
+    HI: {
+        langBtn: "🌐 Language: हिंदी",
+        descRRB: "रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy), 45 मिनट की अवधि, -0.25 नेगेटिव मार्किंग।",
+        descMPESB: "इलेक्ट्रिकल व इलेक्ट्रॉनिक पोर्ट + मोटर मैकेनिक (MP GK, ITI, 3 घंटे की अवधि, संवेर्धित नोट्स).",
+        descMPPSC: "पेपर-1 सामान्य अध्ययन | इतिहास, राजनीति, भूगोल, विज्ञान • पेपर-2 CSAT • करेंट अफेयर्स",
+        descSSC: "इलेक्ट्रिकल इंजीनियरिंग कॉंसेप्ट • टेक्निकल सामान्य जानकारी-2 • कट-ऑफ आधारित, -0.25 नेगेटिव मार्किंग।",
+        deskHead: "विद्यार्थी सहायता एवं सुझाव केंद्र (Helpdesk & Demand Desk)",
+        deskSub: "आपको किस विषय या परीक्षा के अतिरिक्त सेट्स चाहिए? हमें सीधे बताएं, हम तुरंत उपलब्ध कराएंगे।",
+        deskSend: "सुझाव सबमिट करें ➔",
+        back: "⬅ वापस मुख्य डैशबोर्ड पर जाएँ",
+        saveNext: "Save & Next ➔",
+        review: "Mark Review",
+        clear: "Clear",
+        prev: "Previous",
+        submit: "परीक्षा सबमिट करें (Submit)",
+        solTitle: "विस्तृत उत्तर कुंजी व समाधान (Solutions)"
     },
-    RRB_PO: {
-        title: "IBPS RRB PO Prelims",
-        durationMinutes: 45,
-        negativeMark: 0.25,
-        sections: [
-            { id: "REASON", name: "Reasoning (40 Q)" },
-            { id: "QUANT", name: "Quantitative Aptitude (40 Q)" }
-        ]
-    },
-    MPPSC: {
-        title: "MPPSC राज्य सेवा परीक्षा",
-        durationMinutes: 120,
-        negativeMark: 0.0,
-        sections: [
-            { id: "GS", name: "सामान्य अध्ययन (Paper 1)" }
-        ]
-    },
-    SSC_JE: {
-        title: "SSC JE (Electrical)",
-        durationMinutes: 120,
-        negativeMark: 0.25,
-        sections: [
-            { id: "TECH", name: "General Engineering" },
-            { id: "GEN", name: "Reasoning & GK" }
-        ]
+    EN: {
+        langBtn: "🌐 Language: English",
+        descRRB: "Reasoning + Quantitative Aptitude Speed Test, 45 Mins, -0.25 Negative.",
+        descMPESB: "Electrical Core + Non-Tech (MP GK, Maths, IT). 3 Hours, No Negative.",
+        descMPPSC: "Paper 1 General Studies (MP Special, History, Geography) + CSAT. 2 Hours.",
+        descSSC: "Electrical Engineering Concepts • Technical Core • Cut-off Based, -0.25 Negative.",
+        deskHead: "Student Helpdesk & Demand Desk",
+        deskSub: "Need more mock sets or specific topics? Submit your request directly to us.",
+        deskSend: "Submit Request ➔",
+        back: "⬅ Back to Main Dashboard",
+        saveNext: "Save & Next ➔",
+        review: "Mark Review",
+        clear: "Clear",
+        prev: "Previous",
+        submit: "Submit Exam",
+        solTitle: "Detailed Solutions & Answer Key"
     }
 };
 
-// Master Question Bank
-const masterBank = [
-    // MPESB Electrical & Non-Tech
-    { exam: "MPESB", sec: "TECH", q: "एक आदर्श वोल्टेज स्रोत (Ideal Voltage Source) का आंतरिक प्रतिरोध कितना होता है?", opts: ["शून्य (0 Ω)", "अनंत (∞)", "100 ओम", "1 ओम"], ans: 0, exp: "आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है; आदर्श करंट स्रोत का आंतरिक प्रतिरोध अनंत होता है।" },
-    { exam: "MPESB", sec: "TECH", q: "50 Hz सप्लाई पर 4-पोल 3-फेज इंडक्शन मोटर की सिंक्रोनस गति क्या होगी?", opts: ["3000 RPM", "1500 RPM", "1000 RPM", "750 RPM"], ans: 1, exp: "Ns = (120 × f) / P = (120 × 50) / 4 = 1500 RPM।" },
-    { exam: "MPESB", sec: "TECH", q: "ट्रांसफॉर्मर की अधिकतम दक्षता (Maximum Efficiency) किस शर्त पर प्राप्त होती है?", opts: ["कॉपर लॉस = आयरन लॉस", "कॉपर लॉस = 0", "आयरन लॉस = 0", "फुल लोड"], ans: 0, exp: "जब परिवर्तनीय तांबा हानि (Cu loss) स्थिर लोहा हानि (Iron loss) के बराबर हो जाती है।" },
-    { exam: "MPESB", sec: "NON_TECH", q: "मध्य प्रदेश की ऊर्जा राजधानी (Energy Capital) किसे कहा जाता है?", opts: ["इंदौर", "सिंगरौली", "जबलपुर", "भोपाल"], ans: 1, exp: "सिंगरौली में प्रचुर कोयला भंडार और एनटीपीसी के विशाल ताप विद्युत संयंत्र हैं।" },
-    { exam: "MPESB", sec: "NON_TECH", q: "LAN नेटवर्क में MAC एड्रेस के आधार पर पैकेट रूट करने वाला लेयर-2 हार्डवेयर कौन सा है?", opts: ["हब", "राउटर", "नेटवर्क स्विच (Switch)", "मॉडेम"], ans: 2, exp: "नेटवर्क स्विच डेटा लिंक लेयर (L2) पर कार्य करता है।" },
+function toggleGlobalLanguage() {
+    currentLang = (currentLang === 'HI') ? 'EN' : 'HI';
+    applyLanguageUI();
+    if (activeQuestions.length > 0) loadQuestion(currentIdx);
+}
 
-    // RRB PO (Quant & Reasoning)
-    { exam: "RRB_PO", sec: "QUANT", q: "A किसी काम को 12 दिन में और B 18 दिन में पूरा करता है। दोनों मिलकर कितने दिन में पूरा करेंगे?", opts: ["7.2 दिन", "6.5 दिन", "8 दिन", "7 दिन"], ans: 0, exp: "कुल काम 36 यूनिट। A की गति 3, B की गति 2। दिन = 36 / 5 = 7.2 दिन।" },
-    { exam: "RRB_PO", sec: "QUANT", q: "मिसिंग नंबर ज्ञात करें: 7, 16, 40, 88, 169, ?", opts: ["287", "292", "295", "304"], ans: 1, exp: "अंतरों का अंतर (Squares pattern) जोड़ने पर अगला पद 292 आता है।" },
-    { exam: "RRB_PO", sec: "REASON", q: "कथन: सभी पेन चाक हैं। कोई चाक रबर नहीं है। निष्कर्ष: I. कोई पेन रबर नहीं है। II. कुछ चाक पेन हैं।", opts: ["केवल I सही", "केवल II सही", "दोनों I और II सही", "कोई नहीं"], ans: 2, exp: "चूँकि सभी पेन चाक के अंदर हैं और चाक रबर नहीं है, अतः दोनों निष्कर्ष सत्य हैं।" },
+function applyLanguageUI() {
+    const d = uiDict[currentLang];
+    document.getElementById('lang-btn').innerText = d.langBtn;
+    document.getElementById('desc-rrb').innerText = d.descRRB;
+    document.getElementById('desc-mpesb').innerText = d.descMPESB;
+    document.getElementById('desc-mppsc').innerText = d.descMPPSC;
+    document.getElementById('desc-ssc').innerText = d.descSSC;
+    document.getElementById('lbl-desk-head').innerText = d.deskHead;
+    document.getElementById('lbl-desk-sub').innerText = d.deskSub;
+    document.getElementById('btn-desk-send').innerText = d.deskSend;
+    document.getElementById('btn-back').innerText = d.back;
+    document.getElementById('btn-next').innerText = d.saveNext;
+    document.getElementById('btn-review').innerText = d.review;
+    document.getElementById('btn-clear').innerText = d.clear;
+    document.getElementById('btn-prev').innerText = d.prev;
+    document.getElementById('btn-submit').innerText = d.submit;
+    document.getElementById('lbl-sol-title').innerText = d.solTitle;
+}
 
-    // MPPSC
-    { exam: "MPPSC", sec: "GS", q: "मध्य प्रदेश का पहला बायोस्फीयर रिजर्व (Biosphere Reserve) कौन सा घोषित किया गया था?", opts: ["अमरकंटक", "पचमढ़ी", "पन्ना", "कान्हा"], ans: 1, exp: "पचमढ़ी को 1999 में मध्य प्रदेश का पहला बायोस्फीयर रिजर्व घोषित किया गया था।" },
-
-    // SSC JE
-    { exam: "SSC_JE", sec: "TECH", q: "ओवरहेड ट्रांसमिशन लाइन का सर्ज इम्पीडेंस (Surge Impedance) लगभग कितना होता है?", opts: ["40 Ω", "400 Ω", "100 Ω", "1000 Ω"], ans: 1, exp: "ओवरहेड लाइन के लिए सर्ज इम्पीडेंस लगभग 400 Ω और भूमिगत केबल के लिए लगभग 40 Ω होता है।" }
-];
-
+// Global Exam State
 let selectedExamKey = null;
 let currentExamConfig = null;
 let activeQuestions = [];
 let userStates = [];
 let currentIdx = 0;
-let currentSectionId = null;
 let timerTimer = null;
 let secondsRemaining = 0;
 
@@ -337,48 +678,84 @@ function showScreen(screenId) {
         document.getElementById(id).style.display = (id === screenId) ? (id === 'screen-cbt' ? 'grid' : 'block') : 'none';
     });
     document.getElementById('timer-box').style.display = (screenId === 'screen-cbt') ? 'block' : 'none';
+    document.getElementById('live-clock').style.display = (screenId === 'screen-cbt') ? 'none' : 'block';
 }
 
 function goHome() {
     if (timerTimer) clearInterval(timerTimer);
-    document.getElementById('top-title').innerText = "Universal Examination Portal";
+    isExamActive = false;
     showScreen('screen-exams');
 }
 
-// Step 1 -> Step 2 (Open 50 Sets)
-function openExamSets(examKey) {
+function handleDemandSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('req-name').value;
+    const topic = document.getElementById('req-topic').value;
+    alert(`धन्यवाद ${name}! आपकी मांग (${topic}) दर्ज कर ली गई है।`);
+    e.target.reset();
+}
+
+async function getMasterDatabase() {
+    if (cachedMasterData) return cachedMasterData;
+    try {
+        const res = await fetch('data/master_tests.json');
+        if (res.ok) {
+            cachedMasterData = await res.json();
+            return cachedMasterData;
+        }
+    } catch (e) {
+        console.warn("JSON fetch fallback enabled");
+    }
+    // Fallback safe dummy questions so test never crashes
+    return {
+        "MPESB_SUB_ENG": {
+            examName: "MPESB समूह-03 सब-इंजीनियर",
+            durationMinutes: 180,
+            negativeMarking: 0.0,
+            questions: [
+                {
+                    section: "Technical Core",
+                    q_hi: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध कितना होता है?",
+                    q_en: "What is the internal resistance of an ideal voltage source?",
+                    opts_hi: ["शून्य (0 Ω)", "अनंत (INF)", "100 ओम", "1 ओम"],
+                    opts_en: ["Zero (0 Ω)", "Infinite (INF)", "100 Ohm", "1 Ohm"],
+                    ans: 0,
+                    exp: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है।"
+                },
+                {
+                    section: "MP GK",
+                    q_hi: "मध्य प्रदेश का प्रसिद्ध 'तानसेन समारोह' कहाँ आयोजित होता है?",
+                    q_en: "Where is the famous 'Tansen Samaroh' of MP held?",
+                    opts_hi: ["भोपाल", "ग्वालियर", "उज्जैन", "इंदौर"],
+                    opts_en: ["Bhopal", "Gwalior", "Ujjain", "Indore"],
+                    ans: 1,
+                    exp: "तानसेन समारोह ग्वालियर में आयोजित किया जाता है।"
+                }
+            ]
+        }
+    };
+}
+
+async function openExamSets(examKey) {
     selectedExamKey = examKey;
-    currentExamConfig = examConfigs[examKey];
-    document.getElementById('sets-heading').innerText = `${currentExamConfig.title} - Mock Tests (50 Sets)`;
+    const db = await getMasterDatabase();
+    const config = db && db[examKey] ? db[examKey] : { examName: examKey };
     
+    document.getElementById('sets-heading').innerText = `${config.examName || examKey} - Mock Sets (50 Sets)`;
     const container = document.getElementById('sets-container');
     container.innerHTML = '';
 
-    // Generate 50 Sets: Low -> High Difficulty
     for (let i = 1; i <= 50; i++) {
-        let levelClass = "level-easy";
-        let levelText = "🟢 Easy";
-        let levelBg = "#dcfce7";
-        let levelColor = "#15803d";
-
-        if (i > 15 && i <= 35) {
-            levelClass = "level-mod";
-            levelText = "🟡 Moderate";
-            levelBg = "#fef3c7";
-            levelColor = "#b45309";
-        } else if (i > 35) {
-            levelClass = "level-hard";
-            levelText = "🔴 Hard";
-            levelBg = "#fee2e2";
-            levelColor = "#b91c1c";
-        }
+        let levelText = i <= 15 ? "🟢 Easy" : (i <= 35 ? "🟡 Moderate" : "🔴 Hard");
+        let levelBg = i <= 15 ? "#dcfce7" : (i <= 35 ? "#fef3c7" : "#fee2e2");
+        let levelColor = i <= 15 ? "#15803d" : (i <= 35 ? "#b45309" : "#b91c1c");
 
         const btn = document.createElement('div');
-        btn.className = `set-btn ${levelClass}`;
+        btn.className = 'set-btn';
         btn.innerHTML = `
             <div class="set-num">Set ${i}</div>
-            <span class="set-level-badge" style="background:${levelBg}; color:${levelColor};">${levelText}</span>
-            <div style="font-size:11px; color:#64748b; margin-top:5px;">100 Questions</div>
+            <span class="set-pill" style="background:${levelBg}; color:${levelColor};">${levelText}</span>
+            <div style="font-size:11px; color:#64748b; margin-top:5px;">Standard Test</div>
         `;
         btn.onclick = () => launchExam(i);
         container.appendChild(btn);
@@ -386,45 +763,43 @@ function openExamSets(examKey) {
     showScreen('screen-sets');
 }
 
-// Step 2 -> Step 3 (Launch CBT Exam)
-function launchExam(setNumber) {
-    document.getElementById('top-title').innerText = `${currentExamConfig.title} (Set ${setNumber})`;
-    document.getElementById('marking-info').innerText = `सही: +1.0 | नेगेटिव: ${currentExamConfig.negativeMark > 0 ? '-' + currentExamConfig.negativeMark : '0.00'}`;
+async function launchExam(setNumber) {
+    const db = await getMasterDatabase();
+    const examData = db ? db[selectedExamKey] : null;
 
-    let pool = masterBank.filter(q => q.exam === selectedExamKey);
-    if (pool.length === 0) pool = masterBank;
+    currentExamConfig = {
+        name: examData ? examData.examName : selectedExamKey,
+        duration: examData ? examData.durationMinutes : 60,
+        negative: examData ? examData.negativeMarking : 0.0,
+        questions: examData && examData.questions ? examData.questions : []
+    };
 
-    activeQuestions = [...pool];
+    activeQuestions = currentExamConfig.questions;
     userStates = activeQuestions.map(() => ({ selected: null, status: 'not-visited' }));
 
     const secBox = document.getElementById('sec-tab-box');
     secBox.innerHTML = '';
-    currentExamConfig.sections.forEach((sec, idx) => {
+    const uniqueSecs = [...new Set(activeQuestions.map(q => q.section))];
+    uniqueSecs.forEach((sec, idx) => {
         const btn = document.createElement('button');
-        btn.className = `tab-btn ${idx === 0 ? 'active' : ''}`;
-        btn.id = `tab-sec-${sec.id}`;
-        btn.innerText = sec.name;
-        btn.onclick = () => switchSection(sec.id);
+        btn.className = `tab-pill ${idx === 0 ? 'active' : ''}`;
+        btn.innerText = sec;
+        btn.onclick = () => {
+            document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const target = activeQuestions.findIndex(q => q.section === sec);
+            if (target !== -1) loadQuestion(target);
+        };
         secBox.appendChild(btn);
     });
 
-    currentSectionId = currentExamConfig.sections[0].id;
-    secondsRemaining = currentExamConfig.durationMinutes * 60;
+    secondsRemaining = currentExamConfig.duration * 60;
+    tabWarnings = 0;
+    isExamActive = true;
     startTimer();
-
     buildPalette();
     loadQuestion(0);
     showScreen('screen-cbt');
-}
-
-function switchSection(secId) {
-    currentSectionId = secId;
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    const activeTab = document.getElementById(`tab-sec-${secId}`);
-    if (activeTab) activeTab.classList.add('active');
-
-    const firstMatch = activeQuestions.findIndex(q => q.sec === secId);
-    loadQuestion(firstMatch !== -1 ? firstMatch : 0);
 }
 
 function loadQuestion(idx) {
@@ -433,17 +808,23 @@ function loadQuestion(idx) {
     const st = userStates[idx];
     if (st.status === 'not-visited') st.status = 'not-answered';
 
-    document.getElementById('q-num-label').innerText = `Question No. ${idx + 1} of ${activeQuestions.length}`;
-    document.getElementById('q-sec-label').innerText = `Section: ${q.sec}`;
-    document.getElementById('q-content').innerText = `${idx + 1}. ${q.q}`;
+    document.getElementById('q-num-label').innerText = `Question ${idx + 1} of ${activeQuestions.length}`;
+    document.getElementById('q-sec-label').innerText = `Section: ${q.section}`;
+
+    document.getElementById('q-content-hi').innerText = `${idx + 1}. ${q.q_hi}`;
+    document.getElementById('q-content-en').innerText = `${idx + 1}. ${q.q_en}`;
 
     const optsBox = document.getElementById('opts-list');
     optsBox.innerHTML = '';
 
-    q.opts.forEach((opt, oIdx) => {
+    q.opts_hi.forEach((optHi, oIdx) => {
+        const optEn = q.opts_en[oIdx];
         const row = document.createElement('div');
-        row.className = `opt-item ${st.selected === oIdx ? 'selected' : ''}`;
-        row.innerHTML = `<input type="radio" name="r_opt" ${st.selected === oIdx ? 'checked' : ''}> <span>${opt}</span>`;
+        row.className = `opt-box ${st.selected === oIdx ? 'selected' : ''}`;
+        row.innerHTML = `
+            <div class="opt-hi">${String.fromCharCode(65 + oIdx)}. ${optHi}</div>
+            <div class="opt-en">${String.fromCharCode(65 + oIdx)}. ${optEn}</div>
+        `;
         row.onclick = () => {
             userStates[currentIdx].selected = oIdx;
             loadQuestion(currentIdx);
@@ -482,7 +863,7 @@ function buildPalette() {
     grid.innerHTML = '';
     activeQuestions.forEach((_, idx) => {
         const btn = document.createElement('button');
-        btn.className = 'pal-btn';
+        btn.className = 'p-num';
         btn.id = `pal-${idx}`;
         btn.innerText = idx + 1;
         btn.onclick = () => loadQuestion(idx);
@@ -494,7 +875,7 @@ function updatePalette() {
     activeQuestions.forEach((_, idx) => {
         const btn = document.getElementById(`pal-${idx}`);
         if (!btn) return;
-        btn.className = `pal-btn ${userStates[idx].status}`;
+        btn.className = `p-num ${userStates[idx].status}`;
         if (idx === currentIdx) btn.classList.add('active');
     });
 }
@@ -518,8 +899,9 @@ function startTimer() {
 }
 
 function submitExam(isAuto) {
-    if (!isAuto && !confirm("क्या आप निश्चित रूप से परीक्षा सबमिट करना चाहते हैं?")) return;
+    if (!isAuto && !confirm("क्या आप परीक्षा सबमिट करना चाहते हैं?")) return;
     clearInterval(timerTimer);
+    isExamActive = false;
 
     let correct = 0;
     let wrong = 0;
@@ -537,18 +919,19 @@ function submitExam(isAuto) {
         else wrong++;
 
         const card = document.createElement('div');
-        card.className = 'sol-card';
+        card.className = 'sol-tile';
         card.innerHTML = `
-            <div style="font-size:12px; font-weight:700; color:var(--text-sub); margin-bottom:6px;">Q ${idx + 1} (${q.sec})</div>
-            <p style="font-weight:700; font-size:15px; margin-bottom:8px;">${q.q}</p>
-            <p style="font-size:14px; margin-bottom:4px;"><b>उम्मीदवार का उत्तर:</b> <span style="color:${isRight ? 'var(--green)' : '#dc2626'}; font-weight:bold;">${userChoice !== null ? q.opts[userChoice] : 'छोड़ दिया गया'}</span></p>
-            <p style="font-size:14px; color:var(--green); font-weight:bold; margin-bottom:8px;">वास्तविक सही उत्तर: ${q.opts[q.ans]}</p>
-            <p style="background:#f1f5f9; padding:10px; border-radius:6px; font-size:13px; color:#1e3a8a; line-height:1.5;">💡 <b>हल व व्याख्या:</b> ${q.exp}</p>
+            <div style="font-size:12px; font-weight:700; color:#64748b; margin-bottom:6px;">Q ${idx + 1} (${q.section})</div>
+            <p style="font-weight:700; font-size:15px; color:#0f172a;">${q.q_hi}</p>
+            <p style="font-size:14px; color:#475569; font-style:italic; margin-bottom:8px;">${q.q_en}</p>
+            <p style="font-size:13px; margin-bottom:4px;"><b>उम्मीदवार का उत्तर:</b> <span style="color:${isRight ? '#16a34a' : '#dc2626'}; font-weight:bold;">${userChoice !== null ? q.opts_hi[userChoice] + ' / ' + q.opts_en[userChoice] : 'छोड़ दिया गया'}</span></p>
+            <p style="font-size:13px; color:#16a34a; font-weight:bold; margin-bottom:8px;">सही उत्तर: ${q.opts_hi[q.ans]} / ${q.opts_en[q.ans]}</p>
+            <p style="background:#f8fafc; border-left:3px solid #0284c7; padding:10px; font-size:13px; color:#0f172a;">💡 <b>व्याख्या:</b> ${q.exp}</p>
         `;
         solBox.appendChild(card);
     });
 
-    const totalScore = (correct * 1.0) - (wrong * currentExamConfig.negativeMark);
+    const totalScore = (correct * 1.0) - (wrong * currentExamConfig.negative);
     document.getElementById('r-score').innerText = totalScore.toFixed(2);
     document.getElementById('r-correct').innerText = correct;
     document.getElementById('r-wrong').innerText = wrong;
