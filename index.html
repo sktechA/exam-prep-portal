@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKTech Universal Exam Portal</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #06b6d4;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --border: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        body { background: var(--bg); color: var(--text-main); display: flex; justify-content: center; padding: 15px; }
+        .container { width: 100%; max-width: 820px; }
+
+        /* SKTech Header */
+        .portal-header { background: #0f172a; color: white; padding: 16px 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .brand { display: flex; align-items: center; gap: 10px; }
+        .brand-badge { background: linear-gradient(135deg, #3b82f6, #06b6d4); font-size: 16px; font-weight: 800; padding: 5px 12px; border-radius: 6px; letter-spacing: 0.5px; }
+        .brand-text { font-size: 18px; font-weight: 700; }
+        .stats-badge { background: #1e293b; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; color: #38bdf8; border: 1px solid #334155; }
+
+        /* Controls */
+        .control-panel { background: var(--card-bg); padding: 16px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .select-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; }
+        .select-box { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-weight: 600; outline: none; background: #fff; cursor: pointer; }
+        .select-box:focus { border-color: var(--primary); }
+
+        /* Quiz Card */
+        .quiz-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); padding: 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+        .progress-bar-wrap { width: 100%; height: 6px; background: #f1f5f9; border-radius: 3px; overflow: hidden; margin-bottom: 18px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 0.3s ease; }
+
+        .meta-tags { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .tag-pill { background: #eff6ff; color: var(--primary); font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+        .q-counter { font-size: 13px; color: var(--text-muted); font-weight: 600; }
+
+        .question-title { font-size: 17px; font-weight: 600; line-height: 1.5; margin-bottom: 18px; }
+        .options-grid { display: flex; flex-direction: column; gap: 10px; }
+        .opt-btn { background: #fff; border: 2px solid var(--border); padding: 12px 16px; border-radius: 8px; font-size: 15px; text-align: left; cursor: pointer; transition: all 0.2s; font-weight: 500; color: var(--text-main); }
+        .opt-btn:hover:not([disabled]) { border-color: var(--primary); background: #f8faff; }
+        .opt-btn.correct { background: #f0fdf4; border-color: var(--success); color: #15803d; font-weight: 700; }
+        .opt-btn.wrong { background: #fef2f2; border-color: var(--danger); color: #b91c1c; }
+
+        .explain-box { display: none; margin-top: 16px; padding: 14px; background: #eff6ff; border-left: 4px solid var(--primary); border-radius: 6px; font-size: 14px; line-height: 1.5; color: #1e40af; }
+        .card-footer { margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-next { background: var(--primary); color: white; border: none; padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-next:hover { background: var(--primary-dark); }
+
+        /* Tools */
+        .tools-section { margin-top: 20px; text-align: center; }
+        .tool-btn { background: none; border: none; color: var(--primary); font-size: 13px; font-weight: 700; cursor: pointer; margin: 0 10px; }
+        .drawer-box { display: none; background: #fff; padding: 18px; border-radius: 10px; border: 1px dashed var(--border); margin-top: 15px; text-align: left; }
+        .textarea-json { width: 100%; height: 120px; border: 1px solid var(--border); border-radius: 6px; padding: 10px; font-family: monospace; font-size: 12px; margin-top: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="portal-header">
+        <div class="brand">
+            <span class="brand-badge">⚡ SKTech</span>
+            <span class="brand-text">Multi-Exam Prep Portal</span>
+        </div>
+        <div class="stats-badge" id="live-score">Score: 0 / 0</div>
+    </div>
+
+    <div class="control-panel">
+        <div class="select-group">
+            <label>टारगेट परीक्षा (Exam)</label>
+            <select id="exam-select" class="select-box" onchange="onFilterChange()">
+                <option value="ALL">सभी परीक्षाएं (All Exams)</option>
+                <option value="MPESB">MPESB सब-इंजीनियर</option>
+                <option value="MPPSC">MPPSC (राज्य सेवा)</option>
+                <option value="BANKING">Banking (IBPS / SBI / PO)</option>
+                <option value="SSC_RLY">SSC JE / Railway</option>
+            </select>
+        </div>
+        <div class="select-group">
+            <label>विषय (Subject)</label>
+            <select id="subject-select" class="select-box" onchange="onFilterChange()">
+                <option value="ALL">सभी विषय (All Subjects)</option>
+                <option value="MP_GK">म.प्र. सामान्य ज्ञान (MP GK)</option>
+                <option value="CURRENT">करेंट अफेयर्स (Current Affairs)</option>
+                <option value="MATHS">क्वांटम मैथ्स (Maths / Aptitude)</option>
+                <option value="REASONING">रीजनिंग (Reasoning)</option>
+                <option value="COMPUTER">कंप्यूटर व नेटवर्किंग (IT / HW)</option>
+                <option value="ELECTRICAL">इलेक्ट्रिकल इंजीनियरिंग (Core)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="quiz-card">
+        <div class="progress-bar-wrap">
+            <div class="progress-fill" id="progress-bar"></div>
+        </div>
+
+        <div class="meta-tags">
+            <span class="tag-pill" id="badge-info">Exam • Subject</span>
+            <span class="q-counter" id="q-counter">Q 1 of 50</span>
+        </div>
+
+        <div class="question-title" id="q-title">लोड हो रहा है...</div>
+        <div class="options-grid" id="opt-container"></div>
+        <div class="explain-box" id="explain-box"></div>
+
+        <div class="card-footer">
+            <span id="accuracy-rate" style="font-size: 13px; color: var(--text-muted);">सटीकता: 0%</span>
+            <button class="btn-next" id="btn-next" onclick="nextQuestion()" style="display:none;">अगला सवाल ➔</button>
+        </div>
+    </div>
+
+    <div class="tools-section">
+        <button class="tool-btn" onclick="toggleDrawer('bulk-drawer')">📥 Bulk Import (सवाल जोड़ें)</button>
+        <button class="tool-btn" onclick="resetDatabase()">🔄 रीसेट करें</button>
+    </div>
+
+    <div class="drawer-box" id="bulk-drawer">
+        <h4 style="font-size: 14px; margin-bottom: 5px;">बल्क में प्रश्न लोड करें (JSON Format)</h4>
+        <textarea id="bulk-json-input" class="textarea-json" placeholder='[{"exam":"MPESB","sub":"ELECTRICAL","q":"सवाल?","opts":["A","B","C","D"],"ans":0,"exp":"हल"}]'></textarea>
+        <button class="btn-next" style="margin-top: 10px; width: 100%;" onclick="importBulkQuestions()">डेटाबेस में सेव करें</button>
+    </div>
+</div>
+
+<script>
+const masterQuestions = [
+    { exam: "MPESB", sub: "MP_GK", q: "मध्य प्रदेश की ऊर्जा राजधानी (Energy Capital) किसे कहा जाता है?", opts: ["इंदौर", "सिंगरौली", "जबलपुर", "भोपाल"], ans: 1, exp: "सिंगरौली में विशाल कोयला भंडार एवं एनटीपीसी के थर्मल पावर स्टेशन होने के कारण इसे ऊर्जा राजधानी कहते हैं।" },
+    { exam: "MPPSC", sub: "MP_GK", q: "मध्य प्रदेश का पहला बायोस्फीयर रिजर्व कौन सा है?", opts: ["अमरकंटक", "पचमढ़ी", "पन्ना", "कान्हा"], ans: 1, exp: "पचमढ़ी को 1999 में मध्य प्रदेश का पहला बायोस्फीयर रिजर्व घोषित किया गया था।" },
+    { exam: "MPESB", sub: "MP_GK", q: "मध्य प्रदेश का सबसे पहला ताप विद्युत केंद्र (Thermal Power Station) कौन सा है?", opts: ["चांदनी ताप विद्युत केंद्र", "सतपुड़ा ताप केंद्र", "संजय गांधी केंद्र", "अमरकंटक केंद्र"], ans: 0, exp: "चांदनी ताप विद्युत केंद्र (बुरहानपुर/नेपानगर) 1953 में स्थापित हुआ था।" },
+    { exam: "MPPSC", sub: "MP_GK", q: "तानसेन का मकबरा मध्य प्रदेश में कहाँ स्थित है?", opts: ["उज्जैन", "ग्वालियर", "शिवपुरी", "भोपाल"], ans: 1, exp: "महान संगीतज्ञ तानसेन का मकबरा ग्वालियर में स्थित है।" },
+
+    { exam: "BANKING", sub: "CURRENT", q: "भारतीय रिजर्व बैंक (RBI) द्वारा मुद्रास्फीति (Inflation) लक्ष्यीकरण किस सूचकांक पर आधारित है?", opts: ["WPI", "CPI (Combined)", "IIP", "GDP डिफ्लेटर"], ans: 1, exp: "RBI की मौद्रिक नीति समिति (MPC) उपभोक्ता मूल्य सूचकांक (CPI) पर मुद्रास्फीति को 4% (+/- 2%) पर लक्षित करती है।" },
+    { exam: "MPPSC", sub: "CURRENT", q: "भारत की पहली सेमी-हाई स्पीड रीजनल रैपिड ट्रांजिट सिस्टम (RRTS) ट्रेन का नाम क्या है?", opts: ["वंदे भारत", "नमो भारत", "गतिमान", "तेजस"], ans: 1, exp: "दिल्ली-मेरठ कॉरिडोर पर शुरू हुई भारत की पहली RRTS ट्रेन का नाम 'नमो भारत' रखा गया है।" },
+
+    { exam: "BANKING", sub: "MATHS", q: "A किसी काम को 12 दिन में और B 18 दिन में पूरा करता है। दोनों मिलकर उस काम को कितने दिन में पूरा करेंगे?", opts: ["7.2 दिन", "6.5 दिन", "8 दिन", "7 दिन"], ans: 0, exp: "कुल काम = 36 यूनिट। A की क्षमता = 3, B की क्षमता = 2। दिन = 36 / (3+2) = 36 / 5 = 7.2 दिन।" },
+    { exam: "MPESB", sub: "MATHS", q: "किसी वस्तु पर 20% और 10% की दो लगातार छूट (Successive Discounts) का एकल समतुल्य छूट क्या होगी?", opts: ["30%", "28%", "25%", "27%"], ans: 1, exp: "समतुल्य छूट = 20 + 10 - (20 × 10)/100 = 30 - 2 = 28%।" },
+    { exam: "BANKING", sub: "MATHS", q: "₹5000 की राशि पर 10% प्रति वर्ष की दर से 2 वर्ष का चक्रवृद्धि ब्याज (CI) कितना होगा?", opts: ["₹1000", "₹1050", "₹1100", "₹1025"], ans: 1, exp: "CI = P(1 + r/100)^2 - P = 5000(1.21 - 1) = ₹1050।" },
+
+    { exam: "BANKING", sub: "REASONING", q: "यदि 'LIGHT' को 'MJHIU' लिखा जाता है, तो उसी कूटभाषा में 'FRAME' को क्या लिखा जाएगा?", opts: ["GSBNF", "GQBNF", "GSBMF", "HSBNF"], ans: 0, exp: "प्रत्येक अक्षर में +1 जोड़ा जा रहा है: F+1=G, R+1=S, A+1=B, M+1=N, E+1=F -> GSBNF।" },
+    { exam: "MPESB", sub: "REASONING", q: "श्रृंखला को पूरा करें: 2, 6, 12, 20, 30, ?", opts: ["40", "42", "44", "38"], ans: 1, exp: "अंतर क्रमवार बढ़ रहा है: +4, +6, +8, +10, अगला +12 होगा। 30 + 12 = 42।" },
+
+    { exam: "MPESB", sub: "COMPUTER", q: "LAN नेटवर्क में MAC एड्रेस के आधार पर ट्रैफिक फॉरवर्ड करने वाला लेयर-2 हार्डवेयर कौन सा है?", opts: ["हब", "राउटर", "नेटवर्क स्विच (Switch)", "रिपीटर"], ans: 2, exp: "नेटवर्क स्विच डेटा लिंक लेयर (Layer 2) पर कार्य करता है और MAC टेबल के आधार पर पैकेट रूट करता है।" },
+    { exam: "BANKING", sub: "COMPUTER", q: "IPv4 एड्रेस कितने बिट्स (Bits) का होता है?", opts: ["16 बिट्स", "32 बिट्स", "64 बिट्स", "128 बिट्स"], ans: 1, exp: "IPv4 32-बिट का होता है (उदा. 192.168.1.1), जबकि IPv6 128-बिट का होता है।" },
+    { exam: "MPESB", sub: "COMPUTER", q: "ईथरनेट केबल (Cat6) में उपयोग किए जाने वाले RJ45 कनेक्टर में कुल कितने पिन होते हैं?", opts: ["4 पिन", "6 पिन", "8 पिन", "2 पिन"], ans: 2, exp: "RJ45 कनेक्टर में कुल 8 पिन (4 ट्विस्टेड पेयर) होते हैं।" },
+    { exam: "MPESB", sub: "COMPUTER", q: "AC इनपुट सप्लाई को DC वोल्टेज में बदलकर इलेक्ट्रॉनिक्स व कंट्रोलर चलाने वाली मुख्य यूनिट कौन सी है?", opts: ["इन्वर्टर", "SMPS", "डायोड मात्र", "स्टेबलाइजर"], ans: 1, exp: "SMPS (Switched-Mode Power Supply) उच्च दक्षता के साथ स्थिर DC वोल्टेज प्रदान करता है।" },
+
+    { exam: "MPESB", sub: "ELECTRICAL", q: "एक आदर्श वोल्टेज स्रोत (Ideal Voltage Source) का आंतरिक प्रतिरोध कितना होता है?", opts: ["शून्य (0 Ω)", "अनंत (∞)", "100 ओम", "1 ओम"], ans: 0, exp: "आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध 0 Ω होता है; आदर्श करंट स्रोत का आंतरिक प्रतिरोध अनंत (∞) होता है।" },
+    { exam: "MPESB", sub: "ELECTRICAL", q: "सीरीज R-L-C रेजोनेंस सर्किट में पावर फैक्टर का मान क्या होता है?", opts: ["शून्य", "0.8 लैग", "इकाई (Unity, 1)", "0.5 लीड"], ans: 2, exp: "रेजोनेंस पर XL और XC निरस्त हो जाते हैं, जिससे परिपथ शुद्ध प्रतिरोधी (Resistive) होकर PF = 1 होता है।" },
+    { exam: "MPESB", sub: "ELECTRICAL", q: "50 Hz सप्लाई पर चलने वाली 4-पोल 3-फेज इंडक्शन मोटर की सिंक्रोनस स्पीड क्या होगी?", opts: ["3000 RPM", "1500 RPM", "1000 RPM", "750 RPM"], ans: 1, exp: "Ns = (120 × f) / P = (120 × 50) / 4 = 1500 RPM।" },
+    { exam: "SSC_RLY", sub: "ELECTRICAL", q: "ट्रांसफॉर्मर की अधिकतम दक्षता (Maximum Efficiency) किस शर्त पर प्राप्त होती है?", opts: ["कॉपर लॉस = आयरन लॉस", "कॉपर लॉस शून्य हो", "आयरन लॉस शून्य हो", "फुल लोड पर"], ans: 0, exp: "जब वेरिएबल लॉस (कॉपर लॉस) कांस्टेंट लॉस (कोर/आयरन लॉस) के बराबर हो जाता है।" },
+    { exam: "MPESB", sub: "ELECTRICAL", q: "ओवरहेड ट्रांसमिशन लाइन का सर्ज इम्पीडेंस (Surge Impedance) लगभग कितना होता है?", opts: ["40 Ω", "400 Ω", "100 Ω", "1000 Ω"], ans: 1, exp: "ओवरहेड लाइन के लिए सर्ज इम्पीडेंस लगभग 400 Ω और भूमिगत केबल के लिए लगभग 40 Ω होता है।" }
+];
+
+let allQuestions = [];
+let filteredQueue = [];
+let currentIndex = 0;
+let score = 0;
+let attempted = 0;
+
+function initApp() {
+    const customData = localStorage.getItem('sktech_universal_db');
+    allQuestions = customData ? [...masterQuestions, ...JSON.parse(customData)] : [...masterQuestions];
+    onFilterChange();
+}
+
+function onFilterChange() {
+    const selectedExam = document.getElementById('exam-select').value;
+    const selectedSub = document.getElementById('subject-select').value;
+
+    filteredQueue = allQuestions.filter(item => {
+        const matchExam = (selectedExam === 'ALL' || item.exam === selectedExam);
+        const matchSub = (selectedSub === 'ALL' || item.sub === selectedSub);
+        return matchExam && matchSub;
+    });
+
+    currentIndex = 0;
+    score = 0;
+    attempted = 0;
+    updateStatsUI();
+    renderCurrentQuestion();
+}
+
+function renderCurrentQuestion() {
+    if (filteredQueue.length === 0) {
+        document.getElementById('q-title').innerText = "इस चयन के अंतर्गत अभी कोई प्रश्न उपलब्ध नहीं है।";
+        document.getElementById('opt-container').innerHTML = "<p style='color:#64748b; font-size:14px;'>कृपया दूसरा विषय चुनें या नीचे Bulk Import से सवाल जोड़ें।</p>";
+        document.getElementById('badge-info').innerText = "No Data";
+        document.getElementById('q-counter').innerText = "0 / 0";
+        document.getElementById('progress-bar').style.width = "0%";
+        document.getElementById('explain-box').style.display = 'none';
+        document.getElementById('btn-next').style.display = 'none';
+        return;
+    }
+
+    const q = filteredQueue[currentIndex];
+    document.getElementById('badge-info').innerText = `${q.exam} • ${q.sub}`;
+    document.getElementById('q-title').innerText = `${currentIndex + 1}. ${q.q}`;
+    document.getElementById('q-counter').innerText = `Q ${currentIndex + 1} of ${filteredQueue.length}`;
+
+    const progressPct = ((currentIndex + 1) / filteredQueue.length) * 100;
+    document.getElementById('progress-bar').style.width = `${progressPct}%`;
+
+    const optBox = document.getElementById('opt-container');
+    optBox.innerHTML = '';
+    
+    const expBox = document.getElementById('explain-box');
+    expBox.style.display = 'none';
+    expBox.innerText = '';
+    
+    document.getElementById('btn-next').style.display = 'none';
+
+    q.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => selectAnswer(idx);
+        optBox.appendChild(btn);
+    });
+}
+
+function selectAnswer(chosenIdx) {
+    const q = filteredQueue[currentIndex];
+    const buttons = document.querySelectorAll('.opt-btn');
+    attempted++;
+
+    buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.ans) btn.classList.add('correct');
+        if (idx === chosenIdx && chosenIdx !== q.ans) btn.classList.add('wrong');
+    });
+
+    if (chosenIdx === q.ans) score++;
+    updateStatsUI();
+
+    const expBox = document.getElementById('explain-box');
+    expBox.innerHTML = `<strong>💡 SKTech व्याख्या:</strong> ${q.exp}`;
+    expBox.style.display = 'block';
+
+    if (currentIndex < filteredQueue.length - 1) {
+        document.getElementById('btn-next').style.display = 'block';
+    } else {
+        document.getElementById('q-counter').innerText = `सेट पूरा हुआ! स्कोर: ${score}/${filteredQueue.length}`;
+    }
+}
+
+function nextQuestion() {
+    if (currentIndex < filteredQueue.length - 1) {
+        currentIndex++;
+        renderCurrentQuestion();
+    }
+}
+
+function updateStatsUI() {
+    document.getElementById('live-score').innerText = `Score: ${score} / ${attempted}`;
+    const acc = attempted > 0 ? Math.round((score / attempted) * 100) : 0;
+    document.getElementById('accuracy-rate').innerText = `सटीकता: ${acc}%`;
+}
+
+function toggleDrawer(id) {
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+function importBulkQuestions() {
+    const raw = document.getElementById('bulk-json-input').value.trim();
+    if (!raw) return alert("कृपया JSON डेटा पेस्ट करें!");
+    try {
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) throw new Error("डेटा एक Array ([...]) होना चाहिए!");
+        
+        let existing = JSON.parse(localStorage.getItem('sktech_universal_db') || '[]');
+        existing = [...existing, ...parsed];
+        localStorage.setItem('sktech_universal_db', JSON.stringify(existing));
+        
+        allQuestions = [...masterQuestions, ...existing];
+        alert(`${parsed.length} नए प्रश्न सफलतापूर्वक जुड़ गए!`);
+        document.getElementById('bulk-json-input').value = '';
+        toggleDrawer('bulk-drawer');
+        onFilterChange();
+    } catch(err) {
+        alert("अमान्य JSON फॉर्मेट: " + err.message);
+    }
+}
+
+function resetDatabase() {
+    if (confirm("क्या आप अतिरिक्त जोड़े गए प्रश्नों को हटाकर डिफ़ॉल्ट रीसेट करना चाहते हैं?")) {
+        localStorage.removeItem('sktech_universal_db');
+        allQuestions = [...masterQuestions];
+        onFilterChange();
+    }
+}
+
+initApp();
+</script>
+</body>
+</html>
