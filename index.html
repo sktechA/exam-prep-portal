@@ -327,7 +327,7 @@
         <a class="nav-link" onclick="goHome()">⚙️ Study Tools</a>
     </div>
     <div class="nav-controls">
-        <div class="live-clock-badge" id="live-clock">📅 02 Sep 2026 | ⏰ 11:35 PM</div>
+        <div class="live-clock-badge" id="live-clock">📅 02 Sep 2026 | ⏰ 11:50 PM</div>
         <button class="lang-switch-btn" onclick="toggleGlobalLanguage()" id="lang-btn">🌐 Language: हिंदी</button>
         <div class="timer-badge" id="timer-box">⏳ <span id="time-left">00:45:00</span></div>
     </div>
@@ -363,10 +363,10 @@
                     <span class="card-tag" style="background:#e0f2fe; color:#0284c7;">MP VYAPAM</span>
                 </div>
                 <div class="card-title">MPESB समूह-03 सब-इंजीनियर</div>
-                <div class="card-desc" id="desc-mpesb">इलेक्ट्रिकल व इलेक्ट्रॉनिक पोर्ट + मोटर मैकेनिक (MP GK, ITI, 3 घंटे की अवधि, संवेर्धित नोट्स).</div>
+                <div class="card-desc">इलेक्ट्रिकल व इलेक्ट्रॉनिक पोर्ट + मोटर मैकेनिक (MP GK, ITI, 3 घंटे की अवधि, संवेर्धित नोट्स).</div>
             </div>
             <div class="card-meta">
-                <span id="meta-mpesb">📖 50 Mock Sets (5,000 Q)</span>
+                <span>📖 50 Mock Sets (5,000 Q)</span>
                 <span>➔</span>
             </div>
         </div>
@@ -379,10 +379,10 @@
                     <span class="card-tag" style="background:#dcfce7; color:#15803d;">BANKING (IBPS)</span>
                 </div>
                 <div class="card-title">IBPS RRB PO (Scale-I)</div>
-                <div class="card-desc" id="desc-rrb">रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy), 45 मिनट की अवधि, -0.25 नेगेटिव मार्किंग।</div>
+                <div class="card-desc">रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy), 45 मिनट की अवधि, -0.25 नेगेटिव मार्किंग।</div>
             </div>
             <div class="card-meta">
-                <span id="meta-rrb">📖 50 Mock Sets (4,000 Q)</span>
+                <span>📖 50 Mock Sets (4,000 Q)</span>
                 <span>➔</span>
             </div>
         </div>
@@ -395,10 +395,10 @@
                     <span class="card-tag" style="background:#f3e8ff; color:#7e22ce;">STATE PCS</span>
                 </div>
                 <div class="card-title">MPPSC राज्य सेवा परीक्षा</div>
-                <div class="card-desc" id="desc-mppsc">पेपर-1 सामान्य अध्ययन | इतिहास, राजनीति, भूगोल, विज्ञान • पेपर-2 CSAT • करेंट अफेयर्स</div>
+                <div class="card-desc">पेपर-1 सामान्य अध्ययन | इतिहास, राजनीति, भूगोल, विज्ञान • पेपर-2 CSAT • करेंट अफेयर्स</div>
             </div>
             <div class="card-meta">
-                <span id="meta-mppsc">📖 50 Mock Sets (5,000 Q)</span>
+                <span>📖 50 Mock Sets (5,000 Q)</span>
                 <span>➔</span>
             </div>
         </div>
@@ -411,16 +411,16 @@
                     <span class="card-tag" style="background:#fae8ff; color:#a21caf;">CENTRAL GOVT</span>
                 </div>
                 <div class="card-title">SSC JE / RRB JE (Electrical)</div>
-                <div class="card-desc" id="desc-ssc">इलेक्ट्रिकल इंजीनियरिंग कॉंसेप्ट • टेक्निकल सामान्य जानकारी-2 • कट-ऑफ आधारित, -0.25 नेगेटिव मार्किंग।</div>
+                <div class="card-desc">इलेक्ट्रिकल इंजीनियरिंग कॉंसेप्ट • टेक्निकल सामान्य जानकारी • कट-ऑफ आधारित, -0.25 नेगेटिव मार्किंग।</div>
             </div>
             <div class="card-meta">
-                <span id="meta-ssc">📖 50 Mock Sets (5,000 Q)</span>
+                <span>📖 50 Mock Sets (5,000 Q)</span>
                 <span>➔</span>
             </div>
         </div>
     </div>
 
-    <!-- Features Bottom Strip -->
+    <!-- Features Strip -->
     <div class="features-strip">
         <div class="feat-box">
             <div class="feat-icon">📖</div>
@@ -600,15 +600,10 @@ updateLiveClock();
 
 // Language State
 let currentLang = 'HI';
-let cachedMasterData = null;
 
 const uiDict = {
     HI: {
         langBtn: "🌐 Language: हिंदी",
-        descRRB: "रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy), 45 मिनट की अवधि, -0.25 नेगेटिव मार्किंग।",
-        descMPESB: "इलेक्ट्रिकल व इलेक्ट्रॉनिक पोर्ट + मोटर मैकेनिक (MP GK, ITI, 3 घंटे की अवधि, संवेर्धित नोट्स).",
-        descMPPSC: "पेपर-1 सामान्य अध्ययन | इतिहास, राजनीति, भूगोल, विज्ञान • पेपर-2 CSAT • करेंट अफेयर्स",
-        descSSC: "इलेक्ट्रिकल इंजीनियरिंग कॉंसेप्ट • टेक्निकल सामान्य जानकारी-2 • कट-ऑफ आधारित, -0.25 नेगेटिव मार्किंग।",
         deskHead: "विद्यार्थी सहायता एवं सुझाव केंद्र (Helpdesk & Demand Desk)",
         deskSub: "आपको किस विषय या परीक्षा के अतिरिक्त सेट्स चाहिए? हमें सीधे बताएं, हम तुरंत उपलब्ध कराएंगे।",
         deskSend: "सुझाव सबमिट करें ➔",
@@ -622,10 +617,6 @@ const uiDict = {
     },
     EN: {
         langBtn: "🌐 Language: English",
-        descRRB: "Reasoning + Quantitative Aptitude Speed Test, 45 Mins, -0.25 Negative.",
-        descMPESB: "Electrical Core + Non-Tech (MP GK, Maths, IT). 3 Hours, No Negative.",
-        descMPPSC: "Paper 1 General Studies (MP Special, History, Geography) + CSAT. 2 Hours.",
-        descSSC: "Electrical Engineering Concepts • Technical Core • Cut-off Based, -0.25 Negative.",
         deskHead: "Student Helpdesk & Demand Desk",
         deskSub: "Need more mock sets or specific topics? Submit your request directly to us.",
         deskSend: "Submit Request ➔",
@@ -648,10 +639,6 @@ function toggleGlobalLanguage() {
 function applyLanguageUI() {
     const d = uiDict[currentLang];
     document.getElementById('lang-btn').innerText = d.langBtn;
-    document.getElementById('desc-rrb').innerText = d.descRRB;
-    document.getElementById('desc-mpesb').innerText = d.descMPESB;
-    document.getElementById('desc-mppsc').innerText = d.descMPPSC;
-    document.getElementById('desc-ssc').innerText = d.descSSC;
     document.getElementById('lbl-desk-head').innerText = d.deskHead;
     document.getElementById('lbl-desk-sub').innerText = d.deskSub;
     document.getElementById('btn-desk-send').innerText = d.deskSend;
@@ -663,6 +650,119 @@ function applyLanguageUI() {
     document.getElementById('btn-submit').innerText = d.submit;
     document.getElementById('lbl-sol-title').innerText = d.solTitle;
 }
+
+// Built-in Master Question Database (Directly embedded to ensure zero missing questions)
+const embeddedMasterDatabase = {
+    "MPESB_SUB_ENG": {
+        examName: "MPESB समूह-03 सब-इंजीनियर",
+        durationMinutes: 180,
+        negativeMarking: 0.0,
+        questions: [
+            {
+                section: "Technical Core",
+                q_hi: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध कितना होता है?",
+                q_en: "What is the internal resistance of an ideal voltage source?",
+                opts_hi: ["शून्य (0 Ω)", "अनंत (INF)", "100 ओम", "1 ओम"],
+                opts_en: ["Zero (0 Ω)", "Infinite (INF)", "100 Ohm", "1 Ohm"],
+                ans: 0,
+                exp: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है।"
+            },
+            {
+                section: "MP GK",
+                q_hi: "मध्य प्रदेश का प्रसिद्ध 'तानसेन समारोह' कहाँ आयोजित होता है?",
+                q_en: "Where is the famous 'Tansen Samaroh' of MP held?",
+                opts_hi: ["भोपाल", "ग्वालियर", "उज्जैन", "इंदौर"],
+                opts_en: ["Bhopal", "Gwalior", "Ujjain", "Indore"],
+                ans: 1,
+                exp: "तानसेन समारोह ग्वालियर के बेहट में आयोजित किया जाता है।"
+            },
+            {
+                section: "Technical Core",
+                q_hi: "एक 4-पोल, 50 Hz इंडक्शन मोटर की तुल्यकालिक गति (Synchronous Speed) कितनी होगी?",
+                q_en: "What is the synchronous speed of a 4-pole, 50 Hz induction motor?",
+                opts_hi: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"],
+                opts_en: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"],
+                ans: 1,
+                exp: "Ns = (120 * f) / P = (120 * 50) / 4 = 1500 RPM."
+            },
+            {
+                section: "Technical Core",
+                q_hi: "ट्रांसफॉर्मर कोर में भंवर धारा हानियों (Eddy Current Losses) को कम करने के लिए क्या किया जाता है?",
+                q_en: "To reduce eddy current losses in a transformer core, which of the following is done?",
+                opts_hi: ["उच्च प्रतिरोध वाले लैमिनेशन का उपयोग", "वायु कोर का उपयोग", "ठोस लोहे का उपयोग", "वाइंडिंग बढ़ाना"],
+                opts_en: ["Using thin laminations with high resistance", "Using air core", "Using solid iron", "Increasing turns"],
+                ans: 0,
+                exp: "पतली पत्तियों (Laminations) पर वार्निश इन्सुलेशन करने से करंट पाथ का प्रतिरोध बढ़ जाता है।"
+            },
+            {
+                section: "MP GK",
+                q_hi: "मध्य प्रदेश की सबसे ऊंची चोटी 'धूपगढ़' किस पर्वत श्रेणी में स्थित है?",
+                q_en: "The highest peak of MP, 'Dhupgarh', is situated in which mountain range?",
+                opts_hi: ["विंध्याचल श्रेणी", "महादेव पहाड़ियाँ / सतपुड़ा", "मैकल श्रेणी", "कैमूर श्रेणी"],
+                opts_en: ["Vindhyachal Range", "Mahadeo Hills / Satpura", "Maikal Range", "Kaimur Range"],
+                ans: 1,
+                exp: "धूपगढ़ (1350 मीटर) पचमढ़ी में सतपुड़ा पर्वतमाला की महादेव पहाड़ियों पर स्थित है।"
+            }
+        ]
+    },
+    "IBPS_RRB_PO": {
+        examName: "IBPS RRB PO (Scale-I)",
+        durationMinutes: 45,
+        negativeMarking: 0.25,
+        questions: [
+            {
+                section: "Quantitative Aptitude",
+                q_hi: "A किसी कार्य को 12 दिनों में और B 18 दिनों में पूरा करता है। दोनों मिलकर उस कार्य को कितने दिनों में पूरा करेंगे?",
+                q_en: "A can complete a work in 12 days and B in 18 days. In how many days will they complete together?",
+                opts_hi: ["7.2 दिन", "6.5 दिन", "8 दिन", "7 दिन"],
+                opts_en: ["7.2 days", "6.5 days", "8 days", "7 days"],
+                ans: 0,
+                exp: "कुल कार्य = 36 यूनिट। A = 3, B = 2। कुल समय = 36 / 5 = 7.2 दिन।"
+            },
+            {
+                section: "Reasoning Ability",
+                q_hi: "यदि किसी कूट भाषा में 'BANK' को 'CDOL' लिखा जाता है, तो 'POOL' को क्या लिखा जाएगा?",
+                q_en: "If 'BANK' is coded as 'CDOL', how will 'POOL' be coded?",
+                opts_hi: ["RQPM", "QPPM", "RPPM", "SQQN"],
+                opts_en: ["RQPM", "QPPM", "RPPM", "SQQN"],
+                ans: 0,
+                exp: "क्रमशः +1, +2, +3, +4 का विस्थापन है।"
+            }
+        ]
+    },
+    "MPPSC_PRE": {
+        examName: "MPPSC राज्य सेवा परीक्षा",
+        durationMinutes: 120,
+        negativeMarking: 0.0,
+        questions: [
+            {
+                section: "General Studies",
+                q_hi: "मध्य प्रदेश का राज्य वृक्ष कौन सा है?",
+                q_en: "Which is the state tree of Madhya Pradesh?",
+                opts_hi: ["बरगद", "आम", "पीपल", "नीम"],
+                opts_en: ["Banyan", "Mango", "Peepal", "Neem"],
+                ans: 0,
+                exp: "बरगद (Ficus benghalensis) मध्य प्रदेश का राज्य वृक्ष है।"
+            }
+        ]
+    },
+    "SSC_JE": {
+        examName: "SSC JE / RRB JE (Electrical)",
+        durationMinutes: 120,
+        negativeMarking: 0.25,
+        questions: [
+            {
+                section: "Electrical Engineering",
+                q_hi: "प्रतिरोध का मात्रक क्या होता है?",
+                q_en: "What is the SI unit of resistance?",
+                opts_hi: ["ओम (Ohm)", "एम्पियर", "वाल्ट", "हेनरी"],
+                opts_en: ["Ohm", "Ampere", "Volt", "Henry"],
+                ans: 0,
+                exp: "प्रतिरोध का एसआई मात्रक ओम (Ohm) होता है।"
+            }
+        ]
+    }
+};
 
 // Global Exam State
 let selectedExamKey = null;
@@ -695,51 +795,9 @@ function handleDemandSubmit(e) {
     e.target.reset();
 }
 
-async function getMasterDatabase() {
-    if (cachedMasterData) return cachedMasterData;
-    try {
-        const res = await fetch('data/master_tests.json');
-        if (res.ok) {
-            cachedMasterData = await res.json();
-            return cachedMasterData;
-        }
-    } catch (e) {
-        console.warn("JSON fetch fallback enabled");
-    }
-    // Fallback safe dummy questions so test never crashes
-    return {
-        "MPESB_SUB_ENG": {
-            examName: "MPESB समूह-03 सब-इंजीनियर",
-            durationMinutes: 180,
-            negativeMarking: 0.0,
-            questions: [
-                {
-                    section: "Technical Core",
-                    q_hi: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध कितना होता है?",
-                    q_en: "What is the internal resistance of an ideal voltage source?",
-                    opts_hi: ["शून्य (0 Ω)", "अनंत (INF)", "100 ओम", "1 ओम"],
-                    opts_en: ["Zero (0 Ω)", "Infinite (INF)", "100 Ohm", "1 Ohm"],
-                    ans: 0,
-                    exp: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है।"
-                },
-                {
-                    section: "MP GK",
-                    q_hi: "मध्य प्रदेश का प्रसिद्ध 'तानसेन समारोह' कहाँ आयोजित होता है?",
-                    q_en: "Where is the famous 'Tansen Samaroh' of MP held?",
-                    opts_hi: ["भोपाल", "ग्वालियर", "उज्जैन", "इंदौर"],
-                    opts_en: ["Bhopal", "Gwalior", "Ujjain", "Indore"],
-                    ans: 1,
-                    exp: "तानसेन समारोह ग्वालियर में आयोजित किया जाता है।"
-                }
-            ]
-        }
-    };
-}
-
-async function openExamSets(examKey) {
+function openExamSets(examKey) {
     selectedExamKey = examKey;
-    const db = await getMasterDatabase();
-    const config = db && db[examKey] ? db[examKey] : { examName: examKey };
+    const config = embeddedMasterDatabase[examKey] || { examName: examKey };
     
     document.getElementById('sets-heading').innerText = `${config.examName || examKey} - Mock Sets (50 Sets)`;
     const container = document.getElementById('sets-container');
@@ -763,9 +821,8 @@ async function openExamSets(examKey) {
     showScreen('screen-sets');
 }
 
-async function launchExam(setNumber) {
-    const db = await getMasterDatabase();
-    const examData = db ? db[selectedExamKey] : null;
+function launchExam(setNumber) {
+    const examData = embeddedMasterDatabase[selectedExamKey];
 
     currentExamConfig = {
         name: examData ? examData.examName : selectedExamKey,
