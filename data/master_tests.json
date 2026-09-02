@@ -1,87 +1,60 @@
 {
   "MPESB_SUB_ENG": {
-    "examName": "MPESB Sub-Engineer (Electrical)",
-    "set": 1,
-    "totalMarks": 200,
+    "examName": "MPESB समूह-03 सब-इंजीनियर",
     "durationMinutes": 180,
     "negativeMarking": 0.0,
     "questions": [
       {
-        "id": "MP_SE_001",
         "section": "Technical Core",
-        "q_hi": "एक आदर्श वोल्टेज स्रोत (Ideal Voltage Source) का आंतरिक प्रतिरोध कितना होता है?",
-        "q_en": "What is the internal resistance of an Ideal Voltage Source?",
-        "opts_hi": ["शून्य (0 Ω)", "अनंत (∞)", "100 ओम", "1 ओम"],
-        "opts_en": ["Zero (0 Ω)", "Infinite (∞)", "100 Ohm", "1 Ohm"],
+        "q_hi": "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध कितना होता है?",
+        "q_en": "What is the internal resistance of an ideal voltage source?",
+        "opts_hi": ["शून्य (0 Ω)", "अनंत (INF)", "100 ओम", "1 ओम"],
+        "opts_en": ["Zero (0 Ω)", "Infinite (INF)", "100 Ohm", "1 Ohm"],
         "ans": 0,
-        "exp": "आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है; आदर्श करंट स्रोत का आंतरिक प्रतिरोध अनंत होता है।"
+        "exp": "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है।"
       },
       {
-        "id": "MP_SE_002",
-        "section": "Non-Technical (MP GK)",
-        "q_hi": "मध्य प्रदेश की ऊर्जा राजधानी (Energy Capital) किस जिले को कहा जाता है?",
-        "q_en": "Which district is known as the Energy Capital of Madhya Pradesh?",
-        "opts_hi": ["इंदौर", "सिंगरौली", "जबलपुर", "भोपाल"],
-        "opts_en": ["Indore", "Singrauli", "Jabalpur", "Bhopal"],
+        "section": "MP GK",
+        "q_hi": "मध्य प्रदेश का प्रसिद्ध 'तानसेन समारोह' कहाँ आयोजित होता है?",
+        "q_en": "Where is the famous 'Tansen Samaroh' of MP held?",
+        "opts_hi": ["भोपाल", "ग्वालियर", "उज्जैन", "इंदौर"],
+        "opts_en": ["Bhopal", "Gwalior", "Ujjain", "Indore"],
         "ans": 1,
-        "exp": "सिंगरौली में प्रचुर कोयला भंडार और एनटीपीसी के विशाल ताप विद्युत संयंत्र स्थित हैं।"
-      }
-    ]
-  },
-  "MP_ITI_TO": {
-    "examName": "MP ITI Training Officer",
-    "set": 1,
-    "totalMarks": 100,
-    "durationMinutes": 120,
-    "negativeMarking": 0.0,
-    "questions": [
+        "exp": "तानसेन समारोह ग्वालियर के बेहट में आयोजित किया जाता है।"
+      },
       {
-        "id": "ITI_TO_001",
-        "section": "Trade Theory",
-        "q_hi": "विद्युत तारों में आग लगने पर किस प्रकार के अग्निशामक (Fire Extinguisher) का उपयोग किया जाता है?",
-        "q_en": "Which type of fire extinguisher is used for electrical fires?",
-        "opts_hi": ["जल युक्त अग्निशामक", "हेलॉन / सीटीसी (Halon/CTC)", "फोम टाइप", "गीला रसायन"],
-        "opts_en": ["Water Extinguisher", "Halon / CTC Type", "Foam Type", "Wet Chemical"],
+        "section": "Technical Core",
+        "q_hi": "एक 4-पोल, 50 Hz इंडक्शन मोटर की तुल्यकालिक गति (Synchronous Speed) कितनी होगी?",
+        "q_en": "What is the synchronous speed of a 4-pole, 50 Hz induction motor?",
+        "opts_hi": ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"],
+        "opts_en": ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"],
         "ans": 1,
-        "exp": "विद्युत आग (Class C/E) के लिए सीटीसी (Carbon Tetrachloride) या CO2 शामक का उपयोग किया जाता है।"
-      }
-    ]
-  },
-  "MPPSC_PRE": {
-    "examName": "MPPSC State Services (Paper-1)",
-    "set": 1,
-    "totalMarks": 200,
-    "durationMinutes": 120,
-    "negativeMarking": 0.0,
-    "questions": [
-      {
-        "id": "MPPSC_001",
-        "section": "General Studies",
-        "q_hi": "मध्य प्रदेश का पहला बायोस्फीयर रिजर्व (Biosphere Reserve) कौन सा घोषित किया गया था?",
-        "q_en": "Which was declared as the first Biosphere Reserve of Madhya Pradesh?",
-        "opts_hi": ["अमरकंटक", "पचमढ़ी", "पन्ना", "कान्हा"],
-        "opts_en": ["Amarkantak", "Pachmarhi", "Panna", "Kanha"],
-        "ans": 1,
-        "exp": "पचमढ़ी को 1999 में मध्य प्रदेश का पहला बायोस्फीयर रिजर्व घोषित किया गया था।"
+        "exp": "Ns = (120 * f) / P = (120 * 50) / 4 = 1500 RPM."
       }
     ]
   },
   "IBPS_RRB_PO": {
-    "examName": "IBPS RRB PO / Clerk Prelims",
-    "set": 1,
-    "totalMarks": 80,
+    "examName": "IBPS RRB PO (Scale-I)",
     "durationMinutes": 45,
     "negativeMarking": 0.25,
     "questions": [
       {
-        "id": "RRB_PO_001",
         "section": "Quantitative Aptitude",
         "q_hi": "A किसी कार्य को 12 दिनों में और B 18 दिनों में पूरा करता है। दोनों मिलकर उस कार्य को कितने दिनों में पूरा करेंगे?",
         "q_en": "A can complete a work in 12 days and B can complete it in 18 days. In how many days will they complete the work together?",
         "opts_hi": ["7.2 दिन", "6.5 दिन", "8 दिन", "7 दिन"],
         "opts_en": ["7.2 days", "6.5 days", "8 days", "7 days"],
         "ans": 0,
-        "exp": "कुल कार्य = LCM(12, 18) = 36। दक्षता: A = 3, B = 2। दिन = 36 / 5 = 7.2 दिन।"
+        "exp": "कुल कार्य = 36 यूनिट। A की क्षमता = 3, B की क्षमता = 2। कुल समय = 36 / 5 = 7.2 दिन।"
+      },
+      {
+        "section": "Reasoning Ability",
+        "q_hi": "यदि किसी कूट भाषा में 'BANK' को 'CDOL' लिखा जाता है, तो 'POOL' को क्या लिखा जाएगा?",
+        "q_en": "If in a code language 'BANK' is written as 'CDOL', how will 'POOL' be written?",
+        "opts_hi": ["RQPM", "QPPM", "RPPM", "SQQN"],
+        "opts_en": ["RQPM", "QPPM", "RPPM", "SQQN"],
+        "ans": 0,
+        "exp": "प्रत्येक अक्षर में क्रमशः +1, +2, +3, +4 का क्रम जुड़ा है। P(+1)=R, O(+2)=Q, O(+3)=P, L(+4)=M."
       }
     ]
   }
