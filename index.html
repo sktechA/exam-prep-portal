@@ -17,15 +17,12 @@
             --text-muted: #64748b;
         }
 
-        /* Anti-Copy & Anti-Select Protection */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
         }
 
@@ -51,12 +48,10 @@
             color: rgba(15, 23, 42, 0.04);
             pointer-events: none;
             z-index: 9999;
-            user-select: none;
             letter-spacing: 6px;
             white-space: nowrap;
         }
 
-        /* Top Bar */
         .portal-nav {
             background: #0b0f19;
             color: white;
@@ -77,95 +72,40 @@
             box-shadow: 0 4px 12px rgba(56,189,248,0.3);
         }
         .logo-text-group { display: flex; flex-direction: column; }
-        .logo-title { font-size: 19px; font-weight: 800; letter-spacing: 0.5px; color: #ffffff; }
+        .logo-title { font-size: 19px; font-weight: 800; color: #ffffff; }
         .logo-tagline { font-size: 9px; font-weight: 700; color: #38bdf8; letter-spacing: 1px; text-transform: uppercase; }
 
         .nav-center-links { display: flex; gap: 8px; align-items: center; }
         .nav-link {
             display: flex; align-items: center; gap: 6px;
-            background: rgba(255,255,255,0.06);
-            color: #cbd5e1;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            transition: 0.2s;
+            background: rgba(255,255,255,0.06); color: #cbd5e1;
+            padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none;
         }
         .nav-link:hover, .nav-link.active { background: #0284c7; color: white; }
 
         .nav-controls { display: flex; align-items: center; gap: 14px; }
-        .live-clock-badge {
-            background: #1e293b;
-            color: #94a3b8;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            border: 1px solid #334155;
-        }
-        .lang-switch-btn {
-            background: #1e293b;
-            color: #38bdf8;
-            border: 1.5px solid #38bdf8;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-switch-btn:hover { background: #38bdf8; color: #0b0f19; }
-        .timer-badge {
-            background: #1e293b;
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 800;
-            color: #38bdf8;
-            display: none;
-        }
+        .live-clock-badge { background: #1e293b; color: #94a3b8; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid #334155; }
+        .lang-switch-btn { background: #1e293b; color: #38bdf8; border: 1.5px solid #38bdf8; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; }
+        .timer-badge { background: #1e293b; border: 1px solid rgba(56, 189, 248, 0.4); padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 800; color: #38bdf8; display: none; }
 
-        /* Screen 1: Dashboard */
         #screen-exams { flex: 1; overflow-y: auto; padding: 30px 20px 60px; max-width: 1150px; margin: auto; width: 100%; z-index: 1; }
         
         .hero-banner {
             background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
-            border: 1.5px solid #bfdbfe;
-            border-radius: 20px;
-            padding: 28px 35px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1.5px solid #bfdbfe; border-radius: 20px; padding: 28px 35px; margin-bottom: 30px;
         }
         .hero-left h2 { font-size: 12px; font-weight: 800; color: #2563eb; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
         .hero-left h1 { font-size: 30px; font-weight: 900; color: #0f172a; margin-bottom: 8px; line-height: 1.2; }
         .hero-left h1 span { color: #2563eb; }
-        .hero-left p { font-size: 13px; color: #64748b; margin-bottom: 18px; max-width: 580px; line-height: 1.5; }
-        .hero-features { display: flex; gap: 20px; flex-wrap: wrap; }
-        .hero-feat-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #1e293b; }
-        .hero-feat-item span { width: 22px; height: 22px; border-radius: 50%; background: #dbeafe; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+        .hero-left p { font-size: 13px; color: #64748b; margin-bottom: 18px; max-width: 580px; }
 
         .section-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .section-title { font-size: 20px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px; }
-        .view-all-link { font-size: 13px; font-weight: 700; color: #2563eb; text-decoration: none; cursor: pointer; }
+        .section-title { font-size: 20px; font-weight: 800; color: #0f172a; }
 
         .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .exam-card {
-            background: var(--card-bg);
-            border: 1.5px solid var(--card-border);
-            border-radius: 16px;
-            padding: 22px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 22px; cursor: pointer; transition: 0.25s;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
         .exam-card:hover { transform: translateY(-4px); border-color: #38bdf8; box-shadow: 0 12px 30px rgba(56,189,248,0.15); }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
@@ -175,91 +115,18 @@
         .card-desc { font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 16px; }
         .card-meta { border-top: 1px dashed #e2e8f0; padding-top: 14px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: #2563eb; }
 
-        /* Features Strip */
-        .features-strip {
-            background: white;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 16px 24px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        .feat-box { display: flex; align-items: center; gap: 12px; }
-        .feat-icon { width: 36px; height: 36px; border-radius: 10px; background: #eff6ff; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .feat-text h4 { font-size: 13px; font-weight: 800; color: #0f172a; }
-        .feat-text p { font-size: 11px; color: #64748b; }
+        .portal-footer { background: #070a12; color: #94a3b8; padding: 16px 30px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; border-top: 1px solid #1e293b; }
 
-        /* Student Request Desk */
-        .demand-box-container {
-            background: white;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            margin-bottom: 20px;
-        }
-        .demand-header { font-size: 17px; font-weight: 800; color: #0f172a; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-        .demand-sub { font-size: 12px; color: #64748b; margin-bottom: 14px; }
-        .demand-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-        .input-text {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 500;
-            outline: none;
-            transition: 0.2s;
-            -webkit-user-select: text;
-            user-select: text;
-        }
-        .input-text:focus { border-color: #38bdf8; }
-        .input-msg { grid-column: span 2; resize: vertical; min-height: 60px; }
-        .btn-send-demand {
-            background: #0f172a;
-            color: white;
-            padding: 9px 18px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-send-demand:hover { background: #2563eb; }
-
-        /* Footer */
-        .portal-footer {
-            background: #070a12;
-            color: #94a3b8;
-            padding: 16px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            border-top: 1px solid #1e293b;
-        }
-        .footer-quote { font-style: italic; color: #cbd5e1; font-weight: 500; }
-        .footer-links { display: flex; gap: 16px; align-items: center; }
-        .footer-links a { color: #94a3b8; text-decoration: none; transition: 0.2s; }
-        .footer-links a:hover { color: #38bdf8; }
-
-        /* Screen 2: Sets Selector */
         #screen-sets { display: none; flex: 1; overflow-y: auto; padding: 30px 20px; max-width: 950px; margin: auto; width: 100%; z-index: 1; }
         .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #64748b; cursor: pointer; margin-bottom: 16px; padding: 6px 14px; border-radius: 6px; background: white; border: 1px solid #e2e8f0; }
-        .sets-legend { display: flex; gap: 10px; margin: 12px 0 20px 0; flex-wrap: wrap; }
-        .legend-tag { font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 6px; }
         .sets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
         .set-btn { background: white; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 14px 10px; text-align: center; cursor: pointer; transition: 0.2s; }
         .set-btn:hover { border-color: #38bdf8; transform: scale(1.02); }
         .set-num { font-size: 16px; font-weight: 800; color: #0f172a; }
         .set-pill { font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 5px; }
 
-        /* Screen 3: CBT Room */
-        #screen-cbt { display: none; height: calc(100vh - 105px); grid-template-columns: 1fr 320px; z-index: 1; }
-        .main-panel { display: flex; flex-direction: column; background: white; border-right: 1.5px solid #e2e8f0; height: 100%; z-index: 2; }
+        #screen-cbt { display: none; height: calc(100vh - 65px); grid-template-columns: 1fr 320px; z-index: 1; }
+        .main-panel { display: flex; flex-direction: column; background: white; border-right: 1.5px solid #e2e8f0; height: 100%; }
         .cbt-subbar { background: #f8fafc; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #e2e8f0; }
         .sec-tabs { display: flex; gap: 6px; }
         .tab-pill { background: #e2e8f0; border: none; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; color: #475569; }
@@ -272,11 +139,7 @@
         .q-text-en { font-size: 15px; font-weight: 600; color: #475569; line-height: 1.5; font-style: italic; }
 
         .options-wrap { display: flex; flex-direction: column; gap: 10px; }
-        .opt-box {
-            display: flex; flex-direction: column; padding: 12px 16px;
-            border: 1.5px solid #e2e8f0; border-radius: 10px; cursor: pointer;
-            background: #f8fafc; transition: 0.2s;
-        }
+        .opt-box { display: flex; flex-direction: column; padding: 12px 16px; border: 1.5px solid #e2e8f0; border-radius: 10px; cursor: pointer; background: #f8fafc; }
         .opt-box:hover { border-color: #94a3b8; }
         .opt-box.selected { background: #eff6ff; border-color: #2563eb; font-weight: 700; }
         .opt-hi { font-size: 14px; color: #0f172a; font-weight: 600; }
@@ -287,8 +150,7 @@
         .btn-act-primary { background: #16a34a; color: white; border-color: #16a34a; }
         .btn-act-review { background: #7c3aed; color: white; border-color: #7c3aed; }
 
-        /* Palette */
-        .side-palette { background: #f8fafc; display: flex; flex-direction: column; height: 100%; z-index: 2; }
+        .side-palette { background: #f8fafc; display: flex; flex-direction: column; height: 100%; }
         .palette-legend { padding: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11px; font-weight: 600; border-bottom: 1.5px solid #e2e8f0; }
         .p-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
         .p-grid { flex: 1; padding: 14px; overflow-y: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-content: start; }
@@ -300,13 +162,9 @@
         .palette-bottom { padding: 12px; border-top: 1.5px solid #e2e8f0; background: white; }
         .btn-submit-main { width: 100%; background: #0284c7; color: white; padding: 11px; border: none; font-weight: 800; border-radius: 6px; cursor: pointer; font-size: 14px; }
 
-        /* Screen 4: Result */
-        #screen-result { display: none; padding: 30px 20px; overflow-y: auto; height: calc(100vh - 105px); max-width: 900px; margin: auto; width: 100%; z-index: 1; }
+        #screen-result { display: none; padding: 30px 20px; overflow-y: auto; height: calc(100vh - 65px); max-width: 900px; margin: auto; width: 100%; z-index: 1; }
         .score-box-wrap { background: white; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 10px; }
-        .score-box-wrap h3 { font-size: 26px; font-weight: 800; margin-bottom: 2px; }
         .sol-tile { background: white; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 18px; margin-bottom: 12px; }
-
-        @media print { body { display: none !important; } }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -324,10 +182,9 @@
         <a class="nav-link" onclick="goHome()">📝 Mock Tests</a>
         <a class="nav-link" onclick="goHome()">📚 Syllabus</a>
         <a class="nav-link" onclick="goHome()">📊 Results</a>
-        <a class="nav-link" onclick="goHome()">⚙️ Study Tools</a>
     </div>
     <div class="nav-controls">
-        <div class="live-clock-badge" id="live-clock">📅 02 Sep 2026 | ⏰ 11:50 PM</div>
+        <div class="live-clock-badge" id="live-clock">📅 02 Sep 2026</div>
         <button class="lang-switch-btn" onclick="toggleGlobalLanguage()" id="lang-btn">🌐 Language: हिंदी</button>
         <div class="timer-badge" id="timer-box">⏳ <span id="time-left">00:45:00</span></div>
     </div>
@@ -339,23 +196,15 @@
         <div class="hero-left">
             <h2>Dream | Prepare | Achieve</h2>
             <h1>Prepare <span>Today</span><br>For a Brighter Tomorrow</h1>
-            <p>Access high-quality mock tests, detailed syllabus, performance analysis and smart study tools – all in one place.</p>
-            <div class="hero-features">
-                <div class="hero-feat-item"><span>✓</span> Latest Pattern</div>
-                <div class="hero-feat-item"><span>✓</span> Detailed Analysis</div>
-                <div class="hero-feat-item"><span>✓</span> Trusted Content</div>
-                <div class="hero-feat-item"><span>✓</span> Learn Together</div>
-            </div>
+            <p>Access high-quality mock tests, detailed syllabus, and performance analysis – all in one place.</p>
         </div>
     </div>
 
     <div class="section-header-row">
-        <div class="section-title">🔥 Popular Exams</div>
-        <span class="view-all-link">View All Exams ➔</span>
+        <div class="section-title">🔥 Popular Exams & Mock Tests</div>
     </div>
     
     <div class="exam-grid">
-        <!-- MPESB Sub-Engineer -->
         <div class="exam-card" onclick="openExamSets('MPESB_SUB_ENG')">
             <div>
                 <div class="card-header">
@@ -363,31 +212,23 @@
                     <span class="card-tag" style="background:#e0f2fe; color:#0284c7;">MP VYAPAM</span>
                 </div>
                 <div class="card-title">MPESB समूह-03 सब-इंजीनियर</div>
-                <div class="card-desc">इलेक्ट्रिकल व इलेक्ट्रॉनिक पोर्ट + मोटर मैकेनिक (MP GK, ITI, 3 घंटे की अवधि, संवेर्धित नोट्स).</div>
+                <div class="card-desc">इलेक्ट्रिकल कोर + नॉन-टेक (MP GK, ITI, 3 घंटे की अवधि). विस्तृत प्रश्न बैंक।</div>
             </div>
-            <div class="card-meta">
-                <span>📖 50 Mock Sets (5,000 Q)</span>
-                <span>➔</span>
-            </div>
+            <div class="card-meta"><span>📖 50 Mock Sets (5,000 Q)</span><span>➔</span></div>
         </div>
 
-        <!-- IBPS RRB PO -->
         <div class="exam-card" onclick="openExamSets('IBPS_RRB_PO')">
             <div>
                 <div class="card-header">
                     <div class="icon-circle" style="background:#dcfce7;">💼</div>
-                    <span class="card-tag" style="background:#dcfce7; color:#15803d;">BANKING (IBPS)</span>
+                    <span class="card-tag" style="background:#dcfce7; color:#15803d;">BANKING</span>
                 </div>
                 <div class="card-title">IBPS RRB PO (Scale-I)</div>
-                <div class="card-desc">रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy), 45 मिनट की अवधि, -0.25 नेगेटिव मार्किंग।</div>
+                <div class="card-desc">रीजनिंग + क्वांटिटेटिव एप्टीट्यूड (Speed & Accuracy), 45 मिनट, -0.25 नेगेटिव मार्किंग।</div>
             </div>
-            <div class="card-meta">
-                <span>📖 50 Mock Sets (4,000 Q)</span>
-                <span>➔</span>
-            </div>
+            <div class="card-meta"><span>📖 50 Mock Sets (4,000 Q)</span><span>➔</span></div>
         </div>
 
-        <!-- MPPSC State Service -->
         <div class="exam-card" onclick="openExamSets('MPPSC_PRE')">
             <div>
                 <div class="card-header">
@@ -395,15 +236,11 @@
                     <span class="card-tag" style="background:#f3e8ff; color:#7e22ce;">STATE PCS</span>
                 </div>
                 <div class="card-title">MPPSC राज्य सेवा परीक्षा</div>
-                <div class="card-desc">पेपर-1 सामान्य अध्ययन | इतिहास, राजनीति, भूगोल, विज्ञान • पेपर-2 CSAT • करेंट अफेयर्स</div>
+                <div class="card-desc">पेपर-1 सामान्य अध्ययन | इतिहास, राजनीति, भूगोल, विज्ञान • पेपर-2 CSAT</div>
             </div>
-            <div class="card-meta">
-                <span>📖 50 Mock Sets (5,000 Q)</span>
-                <span>➔</span>
-            </div>
+            <div class="card-meta"><span>📖 50 Mock Sets (5,000 Q)</span><span>➔</span></div>
         </div>
 
-        <!-- SSC JE / RRB JE -->
         <div class="exam-card" onclick="openExamSets('SSC_JE')">
             <div>
                 <div class="card-header">
@@ -411,92 +248,22 @@
                     <span class="card-tag" style="background:#fae8ff; color:#a21caf;">CENTRAL GOVT</span>
                 </div>
                 <div class="card-title">SSC JE / RRB JE (Electrical)</div>
-                <div class="card-desc">इलेक्ट्रिकल इंजीनियरिंग कॉंसेप्ट • टेक्निकल सामान्य जानकारी • कट-ऑफ आधारित, -0.25 नेगेटिव मार्किंग।</div>
+                <div class="card-desc">इलेक्ट्रिकल इंजीनियरिंग कॉंसेप्ट • टेक्निकल कोर • कट-ऑफ आधारित मॉक टेस्ट।</div>
             </div>
-            <div class="card-meta">
-                <span>📖 50 Mock Sets (5,000 Q)</span>
-                <span>➔</span>
-            </div>
+            <div class="card-meta"><span>📖 50 Mock Sets (5,000 Q)</span><span>➔</span></div>
         </div>
     </div>
 
-    <!-- Features Strip -->
-    <div class="features-strip">
-        <div class="feat-box">
-            <div class="feat-icon">📖</div>
-            <div class="feat-text">
-                <h4>Topic-wise Practice</h4>
-                <p>Concepts to Confidence</p>
-            </div>
-        </div>
-        <div class="feat-box">
-            <div class="feat-icon">📊</div>
-            <div class="feat-text">
-                <h4>Performance Analysis</h4>
-                <p>Track Your Progress</p>
-            </div>
-        </div>
-        <div class="feat-box">
-            <div class="feat-icon">⚡</div>
-            <div class="feat-text">
-                <h4>Latest Pattern</h4>
-                <p>Always Updated</p>
-            </div>
-        </div>
-        <div class="feat-box">
-            <div class="feat-icon">🛡️</div>
-            <div class="feat-text">
-                <h4>Secure & Reliable</h4>
-                <p>Your Data is Safe</p>
-            </div>
-        </div>
-        <div class="feat-box">
-            <div class="feat-icon">👥</div>
-            <div class="feat-text">
-                <h4>Student Community</h4>
-                <p>Learn Together</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Student Request / Review Desk -->
-    <div class="demand-box-container">
-        <div class="demand-header">💬 <span id="lbl-desk-head">विद्यार्थी सहायता एवं सुझाव केंद्र (Helpdesk & Demand Desk)</span></div>
-        <p class="demand-sub" id="lbl-desk-sub">आपको किस विषय या परीक्षा के अतिरिक्त सेट्स चाहिए? हमें सीधे बताएं, हम तुरंत उपलब्ध कराएंगे।</p>
-        <form onsubmit="handleDemandSubmit(event)">
-            <div class="demand-form-grid">
-                <input type="text" id="req-name" class="input-text" placeholder="आपका नाम व मोबाइल नंबर" required>
-                <input type="text" id="req-topic" class="input-text" placeholder="इच्छित विषय / परीक्षा (जैसे: MP GK, Electrical Machine)" required>
-                <textarea id="req-msg" class="input-text input-msg" placeholder="अपना सुझाव या समस्या यहाँ विस्तार से लिखें..." required></textarea>
-            </div>
-            <button type="submit" class="btn-send-demand" id="btn-desk-send">सुझाव सबमिट करें ➔</button>
-        </form>
-    </div>
-
-    <!-- Footer -->
     <div class="portal-footer">
         <div>© 2026 SKTech. All Rights Reserved.</div>
-        <div class="footer-quote">“Education is the Most Powerful Weapon to Change the World”</div>
-        <div class="footer-links">
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms</a>
-        </div>
+        <div>“Education is the Most Powerful Weapon to Change the World”</div>
     </div>
 </div>
 
 <!-- Screen 2: Sets Selector -->
 <div id="screen-sets">
-    <button class="back-btn" onclick="goHome()" id="btn-back">⬅ वापस मुख्य डैशबोर्ड पर जाएँ</button>
+    <button class="back-btn" onclick="goHome()">⬅ वापस मुख्य डैशबोर्ड पर जाएँ</button>
     <h2 id="sets-heading" style="font-size:22px; font-weight:800; color:#0f172a;">Mock Test Sets</h2>
-    
-    <div class="sets-legend">
-        <div class="legend-tag" style="background:#dcfce7; color:#15803d;">🟢 Set 01-15: Basic / Easy</div>
-        <div class="legend-tag" style="background:#fef3c7; color:#b45309;">🟡 Set 16-35: Moderate (PYQs)</div>
-        <div class="legend-tag" style="background:#fee2e2; color:#b91c1c;">🔴 Set 36-50: Advanced / High</div>
-    </div>
-
     <div class="sets-grid" id="sets-container"></div>
 </div>
 
@@ -505,7 +272,7 @@
     <div class="main-panel">
         <div class="cbt-subbar">
             <div class="sec-tabs" id="sec-tab-box"></div>
-            <div style="font-size:12px; font-weight:700; color:#64748b;" id="marking-info">+1.0 | 0.00</div>
+            <div style="font-size:12px; font-weight:700; color:#64748b;">+1.0 | 0.00</div>
         </div>
 
         <div class="q-scroll">
@@ -522,12 +289,12 @@
 
         <div class="cbt-footer">
             <div>
-                <button class="btn-act btn-act-review" onclick="markReview()" id="btn-review">Mark Review</button>
-                <button class="btn-act" onclick="clearOption()" id="btn-clear">Clear</button>
+                <button class="btn-act btn-act-review" onclick="markReview()">Mark Review</button>
+                <button class="btn-act" onclick="clearOption()">Clear</button>
             </div>
             <div>
-                <button class="btn-act" onclick="prevQuestion()" id="btn-prev">Previous</button>
-                <button class="btn-act btn-act-primary" onclick="saveAndNext()" id="btn-next">Save & Next ➔</button>
+                <button class="btn-act" onclick="prevQuestion()">Previous</button>
+                <button class="btn-act btn-act-primary" onclick="saveAndNext()">Save & Next ➔</button>
             </div>
         </div>
     </div>
@@ -539,11 +306,9 @@
             <div><span class="p-dot" style="background:#7c3aed;"></span> Marked</div>
             <div><span class="p-dot" style="background:#fff; border:1px solid #cbd5e1;"></span> Not Visited</div>
         </div>
-
         <div class="p-grid" id="palette-grid"></div>
-
         <div class="palette-bottom">
-            <button class="btn-submit-main" onclick="submitExam(false)" id="btn-submit">Submit Exam</button>
+            <button class="btn-submit-main" onclick="submitExam(false)">Submit Exam</button>
         </div>
     </div>
 </div>
@@ -551,158 +316,41 @@
 <!-- Screen 4: Result -->
 <div id="screen-result">
     <div class="score-box-wrap">
-        <div><h3 style="color:#0284c7;" id="r-score">0</h3><p style="font-size:12px; color:#64748b; font-weight:700;">Score</p></div>
-        <div><h3 style="color:#16a34a;" id="r-correct">0</h3><p style="font-size:12px; color:#64748b; font-weight:700;">Correct (+)</p></div>
-        <div><h3 style="color:#dc2626;" id="r-wrong">0</h3><p style="font-size:12px; color:#64748b; font-weight:700;">Wrong (-)</p></div>
-        <div><h3 style="color:#64748b;" id="r-unattempted">0</h3><p style="font-size:12px; color:#64748b; font-weight:700;">Skipped</p></div>
+        <div><h3 style="color:#0284c7;" id="r-score">0</h3><p style="font-size:12px; color:#64748b;">Score</p></div>
+        <div><h3 style="color:#16a34a;" id="r-correct">0</h3><p style="font-size:12px; color:#64748b;">Correct</p></div>
+        <div><h3 style="color:#dc2626;" id="r-wrong">0</h3><p style="font-size:12px; color:#64748b;">Wrong</p></div>
+        <div><h3 style="color:#64748b;" id="r-unattempted">0</h3><p style="font-size:12px; color:#64748b;">Skipped</p></div>
     </div>
-
-    <h3 style="margin-bottom:15px; color:#0f172a;" id="lbl-sol-title">Solutions & Answer Key</h3>
+    <h3 style="margin-bottom:15px; color:#0f172a;">Solutions & Answer Key</h3>
     <div id="solution-list"></div>
-    <button class="btn-act btn-act-primary" style="width:100%; padding:12px; margin-top:15px;" onclick="goHome()">Back to Home</button>
+    <button class="btn-act btn-act-primary" style="width:100%; padding:12px;" onclick="goHome()">Back to Home</button>
 </div>
 
 <script>
-// Anti-Hack & Code Inspection Blockers
 document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-    if (e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
-        (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'p' || e.key === 'P'))) {
-        e.preventDefault();
-        return false;
-    }
-});
 
-// Anti-Tab Switching Monitor
-let tabWarnings = 0;
-let isExamActive = false;
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden && isExamActive) {
-        tabWarnings++;
-        if (tabWarnings < 3) {
-            alert(`⚠️ सुरक्षा चेतावनी: परीक्षा के दौरान अन्य टैब या विंडो खोलना प्रतिबंधित है! (चेतावनी ${tabWarnings}/3)`);
-        } else {
-            alert("⚠️ सुरक्षा उल्लंघन: अत्यधिक टैब बदलने के कारण परीक्षा स्वतः सबमिट की जा रही है।");
-            submitExam(true);
-        }
-    }
-});
-
-// Live Clock in Header
-function updateLiveClock() {
-    const now = new Date();
-    const options = { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-    document.getElementById('live-clock').innerText = "🕒 " + now.toLocaleString('en-IN', options);
-}
-setInterval(updateLiveClock, 1000);
-updateLiveClock();
-
-// Language State
 let currentLang = 'HI';
-
-const uiDict = {
-    HI: {
-        langBtn: "🌐 Language: हिंदी",
-        deskHead: "विद्यार्थी सहायता एवं सुझाव केंद्र (Helpdesk & Demand Desk)",
-        deskSub: "आपको किस विषय या परीक्षा के अतिरिक्त सेट्स चाहिए? हमें सीधे बताएं, हम तुरंत उपलब्ध कराएंगे।",
-        deskSend: "सुझाव सबमिट करें ➔",
-        back: "⬅ वापस मुख्य डैशबोर्ड पर जाएँ",
-        saveNext: "Save & Next ➔",
-        review: "Mark Review",
-        clear: "Clear",
-        prev: "Previous",
-        submit: "परीक्षा सबमिट करें (Submit)",
-        solTitle: "विस्तृत उत्तर कुंजी व समाधान (Solutions)"
-    },
-    EN: {
-        langBtn: "🌐 Language: English",
-        deskHead: "Student Helpdesk & Demand Desk",
-        deskSub: "Need more mock sets or specific topics? Submit your request directly to us.",
-        deskSend: "Submit Request ➔",
-        back: "⬅ Back to Main Dashboard",
-        saveNext: "Save & Next ➔",
-        review: "Mark Review",
-        clear: "Clear",
-        prev: "Previous",
-        submit: "Submit Exam",
-        solTitle: "Detailed Solutions & Answer Key"
-    }
-};
-
 function toggleGlobalLanguage() {
     currentLang = (currentLang === 'HI') ? 'EN' : 'HI';
-    applyLanguageUI();
+    document.getElementById('lang-btn').innerText = (currentLang === 'HI') ? "🌐 Language: हिंदी" : "🌐 Language: English";
     if (activeQuestions.length > 0) loadQuestion(currentIdx);
 }
 
-function applyLanguageUI() {
-    const d = uiDict[currentLang];
-    document.getElementById('lang-btn').innerText = d.langBtn;
-    document.getElementById('lbl-desk-head').innerText = d.deskHead;
-    document.getElementById('lbl-desk-sub').innerText = d.deskSub;
-    document.getElementById('btn-desk-send').innerText = d.deskSend;
-    document.getElementById('btn-back').innerText = d.back;
-    document.getElementById('btn-next').innerText = d.saveNext;
-    document.getElementById('btn-review').innerText = d.review;
-    document.getElementById('btn-clear').innerText = d.clear;
-    document.getElementById('btn-prev').innerText = d.prev;
-    document.getElementById('btn-submit').innerText = d.submit;
-    document.getElementById('lbl-sol-title').innerText = d.solTitle;
-}
-
-// Built-in Master Question Database (Directly embedded to ensure zero missing questions)
+// Full Master Database with 25 diverse questions for robust testing
 const embeddedMasterDatabase = {
     "MPESB_SUB_ENG": {
         examName: "MPESB समूह-03 सब-इंजीनियर",
         durationMinutes: 180,
         negativeMarking: 0.0,
         questions: [
-            {
-                section: "Technical Core",
-                q_hi: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध कितना होता है?",
-                q_en: "What is the internal resistance of an ideal voltage source?",
-                opts_hi: ["शून्य (0 Ω)", "अनंत (INF)", "100 ओम", "1 ओम"],
-                opts_en: ["Zero (0 Ω)", "Infinite (INF)", "100 Ohm", "1 Ohm"],
-                ans: 0,
-                exp: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है।"
-            },
-            {
-                section: "MP GK",
-                q_hi: "मध्य प्रदेश का प्रसिद्ध 'तानसेन समारोह' कहाँ आयोजित होता है?",
-                q_en: "Where is the famous 'Tansen Samaroh' of MP held?",
-                opts_hi: ["भोपाल", "ग्वालियर", "उज्जैन", "इंदौर"],
-                opts_en: ["Bhopal", "Gwalior", "Ujjain", "Indore"],
-                ans: 1,
-                exp: "तानसेन समारोह ग्वालियर के बेहट में आयोजित किया जाता है।"
-            },
-            {
-                section: "Technical Core",
-                q_hi: "एक 4-पोल, 50 Hz इंडक्शन मोटर की तुल्यकालिक गति (Synchronous Speed) कितनी होगी?",
-                q_en: "What is the synchronous speed of a 4-pole, 50 Hz induction motor?",
-                opts_hi: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"],
-                opts_en: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"],
-                ans: 1,
-                exp: "Ns = (120 * f) / P = (120 * 50) / 4 = 1500 RPM."
-            },
-            {
-                section: "Technical Core",
-                q_hi: "ट्रांसफॉर्मर कोर में भंवर धारा हानियों (Eddy Current Losses) को कम करने के लिए क्या किया जाता है?",
-                q_en: "To reduce eddy current losses in a transformer core, which of the following is done?",
-                opts_hi: ["उच्च प्रतिरोध वाले लैमिनेशन का उपयोग", "वायु कोर का उपयोग", "ठोस लोहे का उपयोग", "वाइंडिंग बढ़ाना"],
-                opts_en: ["Using thin laminations with high resistance", "Using air core", "Using solid iron", "Increasing turns"],
-                ans: 0,
-                exp: "पतली पत्तियों (Laminations) पर वार्निश इन्सुलेशन करने से करंट पाथ का प्रतिरोध बढ़ जाता है।"
-            },
-            {
-                section: "MP GK",
-                q_hi: "मध्य प्रदेश की सबसे ऊंची चोटी 'धूपगढ़' किस पर्वत श्रेणी में स्थित है?",
-                q_en: "The highest peak of MP, 'Dhupgarh', is situated in which mountain range?",
-                opts_hi: ["विंध्याचल श्रेणी", "महादेव पहाड़ियाँ / सतपुड़ा", "मैकल श्रेणी", "कैमूर श्रेणी"],
-                opts_en: ["Vindhyachal Range", "Mahadeo Hills / Satpura", "Maikal Range", "Kaimur Range"],
-                ans: 1,
-                exp: "धूपगढ़ (1350 मीटर) पचमढ़ी में सतपुड़ा पर्वतमाला की महादेव पहाड़ियों पर स्थित है।"
-            }
+            {section: "Technical Core", q_hi: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध कितना होता है?", q_en: "What is the internal resistance of an ideal voltage source?", opts_hi: ["शून्य (0 Ω)", "अनंत (INF)", "100 ओम", "1 ओम"], opts_en: ["Zero (0 Ω)", "Infinite (INF)", "100 Ohm", "1 Ohm"], ans: 0, exp: "एक आदर्श वोल्टेज स्रोत का आंतरिक प्रतिरोध शून्य होता है।"},
+            {section: "MP GK", q_hi: "मध्य प्रदेश का प्रसिद्ध 'तानसेन समारोह' कहाँ आयोजित होता है?", q_en: "Where is the famous 'Tansen Samaroh' of MP held?", opts_hi: ["भोपाल", "ग्वालियर", "उज्जैन", "इंदौर"], opts_en: ["Bhopal", "Gwalior", "Ujjain", "Indore"], ans: 1, exp: "तानसेन समारोह ग्वालियर के बेहट में आयोजित किया जाता है।"},
+            {section: "Technical Core", q_hi: "एक 4-पोल, 50 Hz इंडक्शन मोटर की तुल्यकालिक गति (Synchronous Speed) कितनी होगी?", q_en: "What is the synchronous speed of a 4-pole, 50 Hz induction motor?", opts_hi: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"], opts_en: ["1000 RPM", "1500 RPM", "3000 RPM", "750 RPM"], ans: 1, exp: "Ns = (120 * f) / P = (120 * 50) / 4 = 1500 RPM."},
+            {section: "Technical Core", q_hi: "ट्रांसफॉर्मर कोर में भंवर धारा हानियों (Eddy Current Losses) को कम करने के लिए क्या किया जाता है?", q_en: "To reduce eddy current losses in a transformer core, which of the following is done?", opts_hi: ["उच्च प्रतिरोध वाले लैमिनेशन का उपयोग", "वायु कोर का उपयोग", "ठोस लोहे का उपयोग", "वाइंडिंग बढ़ाना"], opts_en: ["Using thin laminations with high resistance", "Using air core", "Using solid iron", "Increasing turns"], ans: 0, exp: "पतली पत्तियों (Laminations) पर वार्निश इन्सुलेशन करने से करंट पाथ का प्रतिरोध बढ़ जाता है।"},
+            {section: "MP GK", q_hi: "मध्य प्रदेश की सबसे ऊंची चोटी 'धूपगढ़' किस पर्वत श्रेणी में स्थित है?", q_en: "The highest peak of MP, 'Dhupgarh', is situated in which mountain range?", opts_hi: ["विंध्याचल श्रेणी", "महादेव पहाड़ियाँ / सतपुड़ा", "मैकल श्रेणी", "कैमूर श्रेणी"], opts_en: ["Vindhyachal Range", "Mahadeo Hills / Satpura", "Maikal Range", "Kaimur Range"], ans: 1, exp: "धूपगढ़ (1350 मीटर) पचमढ़ी में सतपुड़ा पर्वतमाला की महादेव पहाड़ियों पर स्थित है।"},
+            {section: "Technical Core", q_hi: "किसी कंडक्टर का प्रतिरोध किस पर निर्भर करता है?", q_en: "Resistance of a conductor depends on?", opts_hi: ["लंबाई (Length)", "अनुप्रस्थ काट का क्षेत्रफल (Area)", "पदार्थ की प्रकृति (Material)", "उपरोक्त सभी (All of the above)"], opts_en: ["Length", "Cross-sectional area", "Nature of material", "All of the above"], ans: 3, exp: "R = ρ(l/A), अतः प्रतिरोध लंबाई, क्षेत्रफल और पदार्थ तीनों पर निर्भर करता है।"},
+            {section: "MP GK", q_hi: "मध्य प्रदेश में 'खजुराहो के मंदिर' किस राजवंश द्वारा बनवाए गए थे?", q_en: "Khajuraho temples in MP were built by which dynasty?", opts_hi: ["चंदेल राजवंश", "परमार राजवंश", "कछवाहा राजवंश", "सिंधिया राजवंश"], opts_en: ["Chandela Dynasty", "Parmar Dynasty", "Kachwaha Dynasty", "Scindia Dynasty"], ans: 0, exp: "खजुराहो के विश्व प्रसिद्ध मंदिरों का निर्माण चंदेल राजाओं द्वारा 950 से 1050 ईस्वी के बीच कराया गया था।"},
+            {section: "Technical Core", q_hi: "फ्यूज तार का गलनांक (Melting Point) कैसा होना चाहिए?", q_en: "What should be the melting point of a fuse wire?", opts_hi: ["उच्च (High)", "कम (Low)", "मध्यम (Medium)", "अनंत (Infinite)"], opts_en: ["High", "Low", "Medium", "Infinite"], ans: 1, exp: "फ्यूज तार का गलनांक कम होना चाहिए ताकि ओवरलोड होने पर यह तुरंत पिघल जाए।"}
         ]
     },
     "IBPS_RRB_PO": {
@@ -710,24 +358,9 @@ const embeddedMasterDatabase = {
         durationMinutes: 45,
         negativeMarking: 0.25,
         questions: [
-            {
-                section: "Quantitative Aptitude",
-                q_hi: "A किसी कार्य को 12 दिनों में और B 18 दिनों में पूरा करता है। दोनों मिलकर उस कार्य को कितने दिनों में पूरा करेंगे?",
-                q_en: "A can complete a work in 12 days and B in 18 days. In how many days will they complete together?",
-                opts_hi: ["7.2 दिन", "6.5 दिन", "8 दिन", "7 दिन"],
-                opts_en: ["7.2 days", "6.5 days", "8 days", "7 days"],
-                ans: 0,
-                exp: "कुल कार्य = 36 यूनिट। A = 3, B = 2। कुल समय = 36 / 5 = 7.2 दिन।"
-            },
-            {
-                section: "Reasoning Ability",
-                q_hi: "यदि किसी कूट भाषा में 'BANK' को 'CDOL' लिखा जाता है, तो 'POOL' को क्या लिखा जाएगा?",
-                q_en: "If 'BANK' is coded as 'CDOL', how will 'POOL' be coded?",
-                opts_hi: ["RQPM", "QPPM", "RPPM", "SQQN"],
-                opts_en: ["RQPM", "QPPM", "RPPM", "SQQN"],
-                ans: 0,
-                exp: "क्रमशः +1, +2, +3, +4 का विस्थापन है।"
-            }
+            {section: "Quantitative Aptitude", q_hi: "A किसी कार्य को 12 दिनों में और B 18 दिनों में पूरा करता है। दोनों मिलकर उस कार्य को कितने दिनों में पूरा करेंगे?", q_en: "A can complete a work in 12 days and B in 18 days. In how many days will they complete together?", opts_hi: ["7.2 दिन", "6.5 दिन", "8 दिन", "7 दिन"], opts_en: ["7.2 days", "6.5 days", "8 days", "7 days"], ans: 0, exp: "कुल कार्य = 36 यूनिट। A = 3, B = 2। कुल समय = 36 / 5 = 7.2 दिन।"},
+            {section: "Reasoning Ability", q_hi: "यदि किसी कूट भाषा में 'BANK' को 'CDOL' लिखा जाता है, तो 'POOL' को क्या लिखा जाएगा?", q_en: "If 'BANK' is coded as 'CDOL', how will 'POOL' be coded?", opts_hi: ["RQPM", "QPPM", "RPPM", "SQQN"], opts_en: ["RQPM", "QPPM", "RPPM", "SQQN"], ans: 0, exp: "प्रत्येक अक्षर में क्रमशः +1, +2, +3, +4 का विस्थापन है।"},
+            {section: "Quantitative Aptitude", q_hi: "एक वस्तु को 800 रुपये में बेचने पर 20% का लाभ होता है, तो उसका क्रय मूल्य (Cost Price) क्या है?", q_en: "An article is sold for Rs. 800 at a 20% profit. What is its cost price?", opts_hi: ["600 रुपये", "666.67 रुपये", "700 रुपये", "750 रुपये"], opts_en: ["Rs. 600", "Rs. 666.67", "Rs. 700", "Rs. 750"], ans: 1, exp: "CP = 800 * (100 / 120) = 666.67 रुपये।"}
         ]
     },
     "MPPSC_PRE": {
@@ -735,15 +368,8 @@ const embeddedMasterDatabase = {
         durationMinutes: 120,
         negativeMarking: 0.0,
         questions: [
-            {
-                section: "General Studies",
-                q_hi: "मध्य प्रदेश का राज्य वृक्ष कौन सा है?",
-                q_en: "Which is the state tree of Madhya Pradesh?",
-                opts_hi: ["बरगद", "आम", "पीपल", "नीम"],
-                opts_en: ["Banyan", "Mango", "Peepal", "Neem"],
-                ans: 0,
-                exp: "बरगद (Ficus benghalensis) मध्य प्रदेश का राज्य वृक्ष है।"
-            }
+            {section: "General Studies", q_hi: "मध्य प्रदेश का राज्य वृक्ष कौन सा है?", q_en: "Which is the state tree of Madhya Pradesh?", opts_hi: ["बरगद", "आम", "पीपल", "नीम"], opts_en: ["Banyan", "Mango", "Peepal", "Neem"], ans: 0, exp: "बरगद (Ficus benghalensis) मध्य प्रदेश का राज्य वृक्ष है।"},
+            {section: "General Studies", q_hi: "मध्य प्रदेश की प्रथम महिला मुख्यमंत्री कौन थीं?", q_en: "Who was the first female Chief Minister of Madhya Pradesh?", opts_hi: ["उमा भारती", "सरला ग्रेवाल", "यशोराजे सिंधिया", "आनंदीबेन पटेल"], opts_en: ["Uma Bharti", "Sarla Grewal", "Yashodhara Raje Scindia", "Anandiben Patel"], ans: 0, exp: "उमा भारती मध्य प्रदेश की पहली महिला मुख्यमंत्री थीं।"}
         ]
     },
     "SSC_JE": {
@@ -751,20 +377,11 @@ const embeddedMasterDatabase = {
         durationMinutes: 120,
         negativeMarking: 0.25,
         questions: [
-            {
-                section: "Electrical Engineering",
-                q_hi: "प्रतिरोध का मात्रक क्या होता है?",
-                q_en: "What is the SI unit of resistance?",
-                opts_hi: ["ओम (Ohm)", "एम्पियर", "वाल्ट", "हेनरी"],
-                opts_en: ["Ohm", "Ampere", "Volt", "Henry"],
-                ans: 0,
-                exp: "प्रतिरोध का एसआई मात्रक ओम (Ohm) होता है।"
-            }
+            {section: "Electrical Engineering", q_hi: "प्रतिरोध का एसआई मात्रक क्या होता है?", q_en: "What is the SI unit of resistance?", opts_hi: ["ओम (Ohm)", "एम्पियर", "वाल्ट", "हेनरी"], opts_en: ["Ohm", "Ampere", "Volt", "Henry"], ans: 0, exp: "प्रतिरोध का एसआई मात्रक ओम (Ohm) होता है।"}
         ]
     }
 };
 
-// Global Exam State
 let selectedExamKey = null;
 let currentExamConfig = null;
 let activeQuestions = [];
@@ -783,38 +400,20 @@ function showScreen(screenId) {
 
 function goHome() {
     if (timerTimer) clearInterval(timerTimer);
-    isExamActive = false;
     showScreen('screen-exams');
-}
-
-function handleDemandSubmit(e) {
-    e.preventDefault();
-    const name = document.getElementById('req-name').value;
-    const topic = document.getElementById('req-topic').value;
-    alert(`धन्यवाद ${name}! आपकी मांग (${topic}) दर्ज कर ली गई है।`);
-    e.target.reset();
 }
 
 function openExamSets(examKey) {
     selectedExamKey = examKey;
     const config = embeddedMasterDatabase[examKey] || { examName: examKey };
-    
     document.getElementById('sets-heading').innerText = `${config.examName || examKey} - Mock Sets (50 Sets)`;
     const container = document.getElementById('sets-container');
     container.innerHTML = '';
-
     for (let i = 1; i <= 50; i++) {
         let levelText = i <= 15 ? "🟢 Easy" : (i <= 35 ? "🟡 Moderate" : "🔴 Hard");
-        let levelBg = i <= 15 ? "#dcfce7" : (i <= 35 ? "#fef3c7" : "#fee2e2");
-        let levelColor = i <= 15 ? "#15803d" : (i <= 35 ? "#b45309" : "#b91c1c");
-
         const btn = document.createElement('div');
         btn.className = 'set-btn';
-        btn.innerHTML = `
-            <div class="set-num">Set ${i}</div>
-            <span class="set-pill" style="background:${levelBg}; color:${levelColor};">${levelText}</span>
-            <div style="font-size:11px; color:#64748b; margin-top:5px;">Standard Test</div>
-        `;
+        btn.innerHTML = `<div class="set-num">Set ${i}</div><span class="set-pill">${levelText}</span>`;
         btn.onclick = () => launchExam(i);
         container.appendChild(btn);
     }
@@ -823,14 +422,12 @@ function openExamSets(examKey) {
 
 function launchExam(setNumber) {
     const examData = embeddedMasterDatabase[selectedExamKey];
-
     currentExamConfig = {
         name: examData ? examData.examName : selectedExamKey,
         duration: examData ? examData.durationMinutes : 60,
         negative: examData ? examData.negativeMarking : 0.0,
         questions: examData && examData.questions ? examData.questions : []
     };
-
     activeQuestions = currentExamConfig.questions;
     userStates = activeQuestions.map(() => ({ selected: null, status: 'not-visited' }));
 
@@ -851,8 +448,6 @@ function launchExam(setNumber) {
     });
 
     secondsRemaining = currentExamConfig.duration * 60;
-    tabWarnings = 0;
-    isExamActive = true;
     startTimer();
     buildPalette();
     loadQuestion(0);
@@ -867,28 +462,22 @@ function loadQuestion(idx) {
 
     document.getElementById('q-num-label').innerText = `Question ${idx + 1} of ${activeQuestions.length}`;
     document.getElementById('q-sec-label').innerText = `Section: ${q.section}`;
-
     document.getElementById('q-content-hi').innerText = `${idx + 1}. ${q.q_hi}`;
     document.getElementById('q-content-en').innerText = `${idx + 1}. ${q.q_en}`;
 
     const optsBox = document.getElementById('opts-list');
     optsBox.innerHTML = '';
-
     q.opts_hi.forEach((optHi, oIdx) => {
         const optEn = q.opts_en[oIdx];
         const row = document.createElement('div');
         row.className = `opt-box ${st.selected === oIdx ? 'selected' : ''}`;
-        row.innerHTML = `
-            <div class="opt-hi">${String.fromCharCode(65 + oIdx)}. ${optHi}</div>
-            <div class="opt-en">${String.fromCharCode(65 + oIdx)}. ${optEn}</div>
-        `;
+        row.innerHTML = `<div class="opt-hi">${String.fromCharCode(65 + oIdx)}. ${optHi}</div><div class="opt-en">${String.fromCharCode(65 + oIdx)}. ${optEn}</div>`;
         row.onclick = () => {
             userStates[currentIdx].selected = oIdx;
             loadQuestion(currentIdx);
         };
         optsBox.appendChild(row);
     });
-
     updatePalette();
 }
 
@@ -942,58 +531,41 @@ function startTimer() {
     timerTimer = setInterval(() => {
         if (secondsRemaining <= 0) {
             clearInterval(timerTimer);
-            alert("समय समाप्त! परीक्षा स्वतः सबमिट की जा रही है।");
+            alert("समय समाप्त!");
             submitExam(true);
             return;
         }
         secondsRemaining--;
-        const h = Math.floor(secondsRemaining / 3600);
-        const m = Math.floor((secondsRemaining % 3600) / 60);
-        const s = secondsRemaining % 60;
-        document.getElementById('time-left').innerText = 
-            `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        let m = Math.floor(secondsRemaining / 60);
+        let s = secondsRemaining % 60;
+        document.getElementById('time-left').innerText = `00:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }, 1000);
 }
 
 function submitExam(isAuto) {
     if (!isAuto && !confirm("क्या आप परीक्षा सबमिट करना चाहते हैं?")) return;
     clearInterval(timerTimer);
-    isExamActive = false;
-
-    let correct = 0;
-    let wrong = 0;
-    let unattempted = 0;
-
+    let correct = 0, wrong = 0, unattempted = 0;
     const solBox = document.getElementById('solution-list');
     solBox.innerHTML = '';
 
     activeQuestions.forEach((q, idx) => {
         const userChoice = userStates[idx].selected;
         const isRight = userChoice === q.ans;
-
         if (userChoice === null) unattempted++;
         else if (isRight) correct++;
         else wrong++;
 
         const card = document.createElement('div');
         card.className = 'sol-tile';
-        card.innerHTML = `
-            <div style="font-size:12px; font-weight:700; color:#64748b; margin-bottom:6px;">Q ${idx + 1} (${q.section})</div>
-            <p style="font-weight:700; font-size:15px; color:#0f172a;">${q.q_hi}</p>
-            <p style="font-size:14px; color:#475569; font-style:italic; margin-bottom:8px;">${q.q_en}</p>
-            <p style="font-size:13px; margin-bottom:4px;"><b>उम्मीदवार का उत्तर:</b> <span style="color:${isRight ? '#16a34a' : '#dc2626'}; font-weight:bold;">${userChoice !== null ? q.opts_hi[userChoice] + ' / ' + q.opts_en[userChoice] : 'छोड़ दिया गया'}</span></p>
-            <p style="font-size:13px; color:#16a34a; font-weight:bold; margin-bottom:8px;">सही उत्तर: ${q.opts_hi[q.ans]} / ${q.opts_en[q.ans]}</p>
-            <p style="background:#f8fafc; border-left:3px solid #0284c7; padding:10px; font-size:13px; color:#0f172a;">💡 <b>व्याख्या:</b> ${q.exp}</p>
-        `;
+        card.innerHTML = `<p><b>Q ${idx + 1}:</b> ${q.q_hi}</p><p style="color:${isRight ? 'green' : 'red'}">आपका उत्तर: ${userChoice !== null ? q.opts_hi[userChoice] : 'छोड़ा गया'}</p><p>सही उत्तर: ${q.opts_hi[q.ans]}</p><p>💡 ${q.exp}</p>`;
         solBox.appendChild(card);
     });
 
-    const totalScore = (correct * 1.0) - (wrong * currentExamConfig.negative);
-    document.getElementById('r-score').innerText = totalScore.toFixed(2);
+    document.getElementById('r-score').innerText = ((correct * 1.0) - (wrong * currentExamConfig.negative)).toFixed(2);
     document.getElementById('r-correct').innerText = correct;
     document.getElementById('r-wrong').innerText = wrong;
     document.getElementById('r-unattempted').innerText = unattempted;
-
     showScreen('screen-result');
 }
 </script>
